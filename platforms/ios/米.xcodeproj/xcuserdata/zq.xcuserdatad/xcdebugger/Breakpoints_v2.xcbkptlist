@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x7c73;/Plugins/cordova-plugin-barcodescanner/CDVBarcodeScanner.mm"
-            timestampString = "505121871.571094"
+            timestampString = "505122499.284292"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "392"
-            endingLineNumber = "392"
+            startingLineNumber = "427"
+            endingLineNumber = "427"
             landmarkName = "-captureOutput:didOutputSampleBuffer:fromConnection:"
             landmarkType = "7">
          </BreakpointContent>

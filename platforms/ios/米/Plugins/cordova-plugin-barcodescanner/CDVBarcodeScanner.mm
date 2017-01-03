@@ -316,7 +316,7 @@ parentViewController:(UIViewController*)parentViewController
     NSError* error = nil;
     
     AVCaptureSession* captureSession = [[[AVCaptureSession alloc] init] autorelease];
-     captureSession.sessionPreset = AVCaptureSessionPresetMedium;
+     
     
     self.captureSession = captureSession;
     
@@ -349,11 +349,11 @@ parentViewController:(UIViewController*)parentViewController
     CGRect scanCrop=[self getScanCrop:self.parentViewController.view.bounds readerViewBounds:self.parentViewController.view.frame];
     output.rectOfInterest = scanCrop;
     
-    if (![captureSession canSetSessionPreset:AVCaptureSessionPresetMedium]) {
+    if (![captureSession canSetSessionPreset:AVCaptureSessionPresetHigh]) {
         return @"unable to preset medium quality video capture";
     }
     
-    captureSession.sessionPreset = AVCaptureSessionPresetMedium;
+    captureSession.sessionPreset = AVCaptureSessionPresetHigh;
     
     if ([captureSession canAddInput:input]) {
         [captureSession addInput:input];
