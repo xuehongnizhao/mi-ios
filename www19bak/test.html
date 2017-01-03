@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+<script src="comm/amazeui/js/jquery.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Amaze UI 1.0.1</title>
+  <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.0.0-beta1/css/amazeui.min.css
+">
+  <script src="http://cdn.amazeui.org/amazeui/2.0.0-beta1/js/amazeui.min.js
+"></script>
+</head>
+<body>
+  <ul id="list">
+    <li id="li-1"><a href="">ss-1</a></li>
+    <li id="li-2"><a href="">ss-2</a></li>
+    <li id="li-3"><a href="">ss-3</a></li>
+    <li id="li-4"><a href="">ss-4</a></li>
+    <li id="li-5"><a href="">ss-5</a></li>
+  </ul>
+  
+  <div class="am-modal am-modal-confirm" tabindex="-1" id="my-confirm">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">Amaze UI</div>
+    <div class="am-modal-bd">
+      确定删除吗？
+    </div>
+    <div id="content" class="am-modal-footer">
+      <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+      <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+    </div>
+  </div>
+</div>
+  <button id='test'>test</button>
+  <script>
+    $(function() {
+      $('#test').on('click',function(e){
+        var html = '';
+        html +='<span class="am-modal-btn" areaid="1" data-am-modal-confirm>1</span>';
+        html +='<span  class="am-modal-btn" areaid="2" data-am-modal-confirm>2</span>';
+        html +='<span class="am-modal-btn" areaid="3" data-am-modal-cancel>取消</span>';
+        $('#content').html(html);
+      });
+      var xxid='';
+	  $('#content').on('click',function(e){
+          var id= xxid;
+ 
+ 		  if(e.target.getAttribute('areaid') == '2'){
+			  alert('2 clicked--'+id);
+			  $('#my-confirm').modal('close');
+		  }else if(e.target.getAttribute('areaid') == '1'){
+		  	alert('1 clicked--'+id);
+			$('#my-confirm').modal('close');
+						  
+		  }else if(e.target.getAttribute('areaid') == '3'){
+		  	alert('3 clicked--'+id);
+			$('#my-confirm').modal('close');
+		  }else{
+		  	
+		  }
+		  
+	  });
+	  
+	  
+	  
+      $('#list').find('a').on('click', function(e) {
+        e.preventDefault();
+        var id= $(this).parent('li').attr('id');
+		xxid = id;
+        var $confirm = $('#my-confirm');
+        var confirm = $confirm.data('am.modal');
+        var onConfirm = function() {
+            alert('你确定删除 ' + id);
+            alert('hh'+$(this).attr(areaid));
+          
+          };
+        var onCancel = function() {
+            alert('你不想删除 ' + id);
+          }
+        
+        if (confirm) {
+          confirm.options.onConfirm =  onConfirm;
+          confirm.options.onCancel =  onCancel;
+          confirm.toggle(this);
+        } else {
+          $confirm.modal({
+            relatedElement: this,
+            onConfirm: onConfirm,
+            onCancel: onCancel
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

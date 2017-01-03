@@ -1,0 +1,560 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>Insert title here</title>
+<script src="js/include.js"></script>
+<link rel="stylesheet" href="css/basestyle.css">
+<link>
+<style type="text/css">
+.am-header .am-header-title {
+margin: 0 15%;
+}
+
+.mi-black {
+	color: white;
+	background: #968976;
+	outline: none;
+	border: #968976 1px solid;
+	
+}
+
+.bk {
+	border-bottom: 1px solid #eeeeee;
+}
+
+.row_height {
+	height: 3.6em;
+	line-height: 3.6em;
+}
+
+.honor, .item {
+	padding-left: 1em;
+	padding-right: 1em;
+	padding-bottom: 0.5em;
+}
+
+.bcolor {
+	background-color: #ffffff;
+}
+
+label {
+	
+}
+
+.am-form-group {
+	margin-bottom: 0em;
+	padding-top: 0.0em;
+	padding-bottom: 0.0em;
+	background: white;
+	padding-bottom: 0.0em;
+	line-height: 2.5em;
+	border-color: transparent;
+	
+}
+
+.am-form-group .am-u-sm-9 {
+	margin: 0em;
+	padding:0.5em 0;
+}
+
+.am-form-group .am-u-sm-3 {
+	padding-left: 0.5em;
+	padding-right: 0em;
+	padding-top: 0.5em;
+	padding-bottom:0.5em; 
+}
+
+.am-form-group .am-u-sm-3 input {
+	border: none;
+	outline: none;
+}
+
+.am-form-group .am-u-sm-3 input[readonly] {
+	background-color: white;
+}
+
+.am-form-group .am-u-sm-9 input {
+	border: 0px;
+	outline: none;
+	padding-left: 0em;
+	border-color: #aaaaaa;
+}
+
+.am-form-group .am-u-sm-9 input:focus {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.am-form-group  textarea:focus {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.am-form-group .am-u-sm-9 input[readonly] {
+	background-color: white;
+}
+
+hr {
+	margin: 0em;
+	padding: 0em;
+	border-top: 1px solid #dddddd;
+}
+
+.hr-left {
+	margin-left: 1em;
+}
+body, html {
+	width: 100%;
+	background-image: url('img/mi_bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.greenbg{
+	background-color: #e1e6d2; 
+}
+.light-greenbg{
+	background-color: #fbfef1; 
+}
+.mt10{
+	margin-top: 10px;
+}
+.sale-using-num{
+	background: #e74b59;
+	color:white;
+	font-size: 12px;
+	padding: 2px;
+}
+.total_price_div {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	color: white;
+	height: 60px;
+	line-height: 60px;
+	color: #333;
+	z-index: 1000;
+	font-family: sumsun;
+}
+.build-order {
+	float: right;
+	background: #ff9402;
+	color: #fff;
+	padding: 0 10px;
+	font-size: 1.2em
+}
+</style>
+</head>
+<body style="" >
+
+	<!-- Header -->
+	<header data-am-widget="header" style=""
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title"
+			style="font-size: 18px; text-align: left; margin: 0 10%;">确认订单</h1>
+	</header>
+	<div class="am-g default-addr-div greenbg" style="font-size:1em" onclick="selectAddr()">
+		<input class="default-addr-id" name="default-addr-id" hidden>
+		<div class="am-u-sm-6" style="margin:5px 0;color:#353535;">收货人:<span class='default-addr-contact'></span></div>
+		<div class="am-u-sm-6" style="margin:5px 0;color:#353535;"><span class="default-addr-phone"></span></div>
+		<div class="am-u-sm-12"  style="margin-bottom: 5px;color:#676767;">
+			<img src="img/addr_icon.png" style="width:20px;height:20px">
+			<i class="am-icon-angle-right" style="color:#888;font-size: 2em;position: fixed;right:5px;line-height:30px;"></i>
+			<span class="default-addr-detail"></span>
+		</div>
+	<img src="img/addr_line.png" style="width:100%;height:5px;float:left">	
+	</div>
+	<div id="goods-list" class="goods-list am-g">
+	</div>
+	<div id="" class="am-g light-greenbg mt10" style="font-size:1em;padding:10px 0">
+		<div class="am-u-sm-6" style="color:#353535;">支付配送</div>
+		<div class="am-u-sm-6" style="color:#353535;">
+			<span style="float:right;">在线支付<br>商家配送</span>
+		</div>
+		<div class="am-u-sm-12" style="margin:0;color:#353535;">
+			<span style="color:#969696;font-size:14px;float:right;">由商家选择合作快递为您配送</span>
+		</div>
+	</div>
+	<div class="sale-div am-g light-greenbg mt10" >
+		<div class="am-u-sm-12" style="line-height: 3em;height: 3em;">
+			<span>优惠券</span>
+			<span class="sale-using-num">0张可用</span>
+			<i class="am-icon-angle-right" style="float:right;font-size:1.5em;color:#999;"></i>
+			<span class="sale-using-price" style="float:right;color:#e74b59;padding-right:5px">-¥0</span>
+		</div>
+	</div>
+	<div class="sale-div am-g light-greenbg mt10" >
+		<div class="am-u-sm-12" style="line-height: 3em;height: 3em;">
+			<span>商品金额</span>
+			<span class="goods-total-price" style="float:right;color:#e74b59;padding-right:5px">-¥123</span>
+		</div>
+		<div class="am-u-sm-12"><hr></div>
+		<div class="am-u-sm-12" style="line-height: 3em;height: 3em;">
+			<span>运费</span>
+			<span class="goods-freight" style="float:right;color:#e74b59;padding-right:5px">+¥0</span>
+		</div>
+		<div class="am-u-sm-12"><hr></div>
+		<div class="am-u-sm-12" style="line-height: 3em;height: 3em;">
+			<span>优惠券</span>
+			<span class="sale-total-price" style="float:right;color:#e74b59;padding-right:5px">-¥0</span>
+		</div>
+	</div>
+	<div class="am-g" style="height:65px;"></div>
+	<div class="total_price_div light-greenbg">
+		<div class="build-order">
+			提交订单
+		</div>
+		<div class="div-price" style="float: right; padding: 0 12px 0 0;">
+			<div class="total-price-div" style="">
+				合计：<span style="color: #e74b59; font-size: 1.5em"
+					class="total-price">¥0</span>
+			</div>
+		</div>
+	</div>
+	
+	<div class="am-modal-actions" id="paytype-modal">
+		<div class="am-modal-actions-group " style="margin:0;">
+			<ul class="am-list">
+				<li style = "height:3em;line-height:3em;" val="alipay" data-am-modal-confirm><span>支付宝</span></li>
+				<li style = "height:3em;line-height:3em;" val="weixin" data-am-modal-confirm><span>微信</span></li>
+				<li style = "height:3em;line-height:3em;" data-am-modal-cancel>取消</li>
+			</ul>
+		</div>
+	</div>
+</body>
+<script id="s-goods-list" type="text/html">
+{{each prelist as val i}}				
+	<div class="am-u-sm-12 greenbg mt10" style="font-family: sumsun;" onclick="gotoRiceDetail('{{val.id}}')">
+		<div class="am-u-sm-4"  style="padding:0;">
+			<img style="width:100%;height: auto;" src ="{{val.image}}" >
+		</div>
+		<div class="am-u-sm-8" style="padding: 0em;">
+			<div style="color:#676767;font-size: 1em; height: 1.5em;padding-left: 0.6em;">{{val.name}}</div>
+			<div style="color:#969696;font-size: 0.8em; padding-left: 0.8em;overflow: hidden; text-overflow: ellipsis;white-space: nowrap;width: 95%;">{{val.introduce}}</div>
+			<div style="margin-left: 8px;">
+				<span style="text-align: right;font-size: 1em;color:#e74b59;">￥</span><span style="font-size: 1.3em;color:#e74b59;">{{val.price}}</sapn>
+                <span style="font-size: 0.8em;color:#2c2b31;">原价：<s>￥{{val.origin}}</s></span>             
+			</div>
+			<div class ="am-u-sm-8" style="font-size: 0.8em;padding-left: 0.3em;">
+				<div style="font-size: 1em;color:#92bf64;margin-left:3px;">规格：{{val.standard}}/{{val.unit}}</div>													
+			</div>
+			<div class ="am-u-sm-4" style="text-align:right;line-height:2em;">X{{val.gnum}}
+			</div>
+		</div>
+	</div>
+{{ /each }}	
+</script>
+<script type="text/javascript">
+	var userid = window.localStorage.getItem('userid');
+	var token = window.localStorage.getItem('token');
+	var cart_id = getParameter("cart_id");
+	var selectsaleid = window.localStorage.getItem('selectsaleid');
+	var selectaddrid = window.localStorage.getItem('selectaddrid');
+	var docid = "";
+	var totalprice = '0';
+	var saleprice ='0';
+	jQuery(document).ready(function (){
+		getDefaultAddr();
+		getGoodsList();
+	});
+	
+	function initBuyGoodsInfo(){
+		$('.build-order').on('click',buildOrder);
+	}
+	function getDefaultAddr(){
+		$.ajax({
+			type : "post",
+			url : url("Order.getDefaultAddr"),
+			dataType : "jsonp",
+			data:{
+				u:userid,
+				t:token,
+			},
+			jsonp : "callback",
+			jsonpCallback : "daddr",
+			success : function(json) {
+				if(json.defaultaddr.length > 0){
+					var daddr = json.defaultaddr[0];
+					$('.default-addr-id').attr('addrid',daddr.addrId);
+					$('.default-addr-contact').html(daddr.contact);
+					$('.default-addr-phone').html(daddr.phone);
+					$('.default-addr-detail').html(daddr.prov+daddr.city+daddr.dist+daddr.addrdetails);
+				}else{
+					
+				}
+
+			},
+			error : function() {
+			}
+		});
+	}
+	
+	function getGoodsList(){
+		$.ajax({
+			type : "post",
+			url : url("Order.getPreList"),
+			dataType : "jsonp",
+			data:{
+				u:userid,
+				t:token,
+				cart_id:cart_id,
+				selectsaleid:selectsaleid,
+				selectaddrid:selectaddrid
+			},
+			jsonp : "callback",
+			jsonpCallback : "glist",
+			success : function(json) {
+				if(!checktoken(json)){
+					return;
+				}
+				for (var i = 0; i < json.prelist.length; i++) {
+					var num = window.localStorage.getItem(json.prelist[i].id);
+					json.prelist[i].num = num;
+				}
+				var html = template('s-goods-list', json);
+				$("#goods-list").html(html);
+				var sn = json.salenum;
+				$('.sale-using-num').html(sn+'张可用');
+				if(sn > 0 ){
+					$('.sale-div').on('click',selectUsingSale);
+				}
+				totalprice = json.total;
+				saleprice = json.saletotal;
+				if(saleprice > 0 ){
+					var m = totalprice>saleprice?saleprice:totalprice;
+					$('.sale-using-price').html("-¥"+m);
+					$('.sale-total-price').html("-¥"+m);
+				}
+				var p = totalprice>saleprice?totalprice-saleprice:0;
+				$('.total-price').html("¥"+p);
+				$('.goods-total-price').html("¥"+totalprice);
+				
+				if(json.addrinfo.length > 0){
+					var daddr = json.addrinfo[0];
+					$('.default-addr-id').attr('addrid',daddr.addrId);
+					$('.default-addr-contact').html(daddr.contact);
+					$('.default-addr-phone').html(daddr.phone);
+					$('.default-addr-detail').html(daddr.prov+daddr.city+daddr.dist+daddr.addrdetails);
+					
+				}
+				initBuyGoodsInfo();
+			},
+			error : function() {
+			}
+		});
+		
+	}
+	function selectUsingSale(){
+		window.location.href = 'selectsale.html?cart_id='+cart_id;
+	}
+	
+	function buildOrder(){
+		var addrid = $('.default-addr-id').attr('addrid');
+		if(typeof(addrid) == "undefined" || addrid == ""){
+			
+			showToast("请选择地址");
+			return;
+		}
+		var bsaleprice = saleprice;
+		var btotalprice =totalprice ;
+		$.ajax({
+			type : "post",
+			url : url("Order.buildOrder"),
+			dataType : "jsonp",
+			data:{
+				u:userid,
+				t:token,
+				cart_id:cart_id,
+				selectsaleid:selectsaleid,
+				saleprice:bsaleprice,
+				totalprice:btotalprice,
+				addrid:addrid
+			},
+			jsonp : "callback",
+			jsonpCallback : "glist",
+			success : function(json) {
+				if(!checktoken(json)){
+					return;
+				}
+				if(json.ret == 3){
+					alert(json.error);
+					return;
+				}
+				if(json.ret == 0){
+					
+					alert('下单成功');
+					removeShopcarGoods();
+					if(json.docstate == 2){
+						window.history.back();
+					}
+					if(json.docstate == 1){
+						//支付
+						docid = json.docid;
+						showPayTypeDialog();
+						
+					}
+				}
+				
+			},
+			error : function() {
+			}
+		});
+	}
+	
+	function showToast(msg){
+		
+		new Toast({
+			context : $('body'),
+			message : msg
+		}).show();
+	}
+	function removeShopcarGoods(){
+		var array = cart_id.split(',');
+		var a = 0;
+		for (var i = 0; i < array.length; i++) {
+			var id = array[i].split('|')[0];
+			var num = array[i].split('|')[1];
+			a+=parseInt(num);
+			window.localStorage.removeItem(id);
+		}
+		var sc = window.localStorage.getItem("shopcar-count");
+		window.localStorage.setItem("shopcar-count",(parseInt(sc) - a > 0)?parseInt(sc)-a:0);
+	}
+	
+	function selectAddr(){
+		var addrid = $('.default-addr-id').attr('addrid');
+		if(typeof(addrid) == "undefined" || addrid == ""){
+			addrid =""
+		}
+		window.location.href ="selectrecaddr.html?selectaddrid="+addrid;
+	}
+	
+	function showPayTypeDialog(){
+		$('#paytype-modal').modal({
+			relatedTarget : this,
+			onConfirm : function(e) {
+				var type = e.trigger.getAttribute("val");
+				pay(type);
+				$('#paytype-modal').modal('close');
+			},
+			onCancel : function(e) {
+				$('#paytype-modal').modal('close');
+				window.history.back();
+			}
+
+		});
+	}
+	function pay(payType) {
+		var bs='0';
+		var token = window.localStorage.getItem('token');
+		$.ajax({
+			type : "post",
+			url : url("PayV2.piwdocV2&u=" + userid + "&d=" + docid + "&pt="+payType+"&bs="+bs+"&t="+token),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "piwdocret",
+			success : function(data) {
+	        	if(!checktoken(data)){
+	        		return; 
+	        	}
+				if(data.ret=='1'){
+					alert("此订单已支付");
+				}else{
+					if(data.ret == '0'){
+						payok('1');
+						
+						return;
+					}
+					if(payType == "alipay"){
+						alipay(data.ret);
+					}else if(payType == "weixin"){
+						weixinpay(data.ret)
+					}
+				}
+			},
+			error : function() {
+				alert("支付请求失败,请稍后重试");
+			}
+		});
+
+	}
+	
+	function alipay(paystr){
+       	Alipay.pay(paystr,function(data){
+    		if(data=="succ"){
+    			payok('2');
+    		}else if(data=="fail"){
+	    		alert("支付失败");
+    		}else{
+    			
+    		}
+    	},
+    	function(data2){
+    		alert("网络错误,请稍后重试!");
+    	});
+	}
+
+	function weixinpay(paystr){
+		
+		if(paystr.prepayid == ""){
+    		alert("调取微信支付失败");
+    		return;
+    	}
+		var params = {
+			appid: paystr.appid,
+			mch_id: paystr.mchid, // merchant id
+			prepay_id: paystr.prepayid, // prepay id returned from server
+			nonce: paystr.noncestr, // nonce string returned from server
+			timestamp: paystr.timestamp, // timestamp
+			sign: paystr.sign // signed string
+		};
+		Wechat.sendPaymentRequest(params, function () {
+    	  			
+					payok('3');
+    		   }, function (reason) {
+    	  			alert("Failed: " + reason);
+    		   });
+	}
+	
+	function payok(paytype){
+		var bs = 0;
+		if(isBuySale){
+			bs=1;
+		}
+		
+	    $.ajax({
+	        type: "post",
+	        url: url("PayV2.paysuccV2&d="+docid+"&paytype="+paytype+""),
+	        dataType: "jsonp",
+	        jsonp: "callback",
+	        jsonpCallback:"paysucc",
+	        success: function(data){
+	        	if(!isBuySale){
+	        	window.localStorage.setItem('orderinfo.docid',docid);
+	        	alert("支付完成,请录入收货地址");
+	        	window.location.href="goodsaddr.html";
+	        	}else{
+	        		window.location.href="saleinfo.html";
+	        	}
+	         },
+	        error: function(){
+	    		alert("网络错误,请稍后重试");
+
+	        }
+	        });
+		
+	}
+</script>
+</html>

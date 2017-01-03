@@ -1,0 +1,709 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<script src="js/include.js"></script>
+
+<script type="text/javascript">
+	var onDeviceReady = function() {
+		cordova.getAppVersion.getVersionCode(function(version) {
+			checkUpdate(version);
+		});
+		console.log("JPushPlugin:Device ready!")
+		initiateUI();
+	}
+	var onGetRegistradionID = function(data) {
+		try {
+			console.log("JPushPlugin:registrationID is " + data)
+			window.localStorage.setItem('pushid', data);
+			insertPushData();
+		} catch (exception) {
+			console.log(exception);
+		}
+	}
+
+	var onTagsWithAlias = function(event) {
+		try {
+			console.log("onTagsWithAlias");
+			var result = "result code:" + event.resultCode + " ";
+			result += "tags:" + event.tags + " ";
+			result += "alias:" + event.alias + " ";
+			$("#tagAliasResult").html(result);
+		} catch (exception) {
+			console.log(exception)
+		}
+	}
+	var onOpenNotification = function(event) {
+		try {
+			var alertContent = "";
+			if (device.platform == "Android") {
+				alertContent = window.plugins.jPushPlugin.openNotification.alert;
+			} else {
+				alertContent = event.aps.alert;
+			}
+
+		} catch (exception) {
+			console.log("JPushPlugin:onOpenNotification" + exception);
+		}
+	}
+	var onReceiveNotification = function(event) {
+		try {
+			var alert
+			if (device.platform == "Android") {
+				alert = window.plugins.jPushPlugin.receiveNotification.alert;
+			} else {
+				alert = event.aps.alert;
+			}
+			$("#notificationResult").html(alert);
+
+		} catch (exeption) {
+			console.log(exception)
+		}
+	}
+	var onReceiveMessage = function(event) {
+		try {
+
+			var message = "";
+			if (device.platform == "Android") {
+				message = window.plugins.jPushPlugin.receiveMessage.message;
+			} else {
+				message = event.content;
+			}
+			//var extras = window.plugins.jPushPlugin.extras
+
+			$("#messageResult").html(message);
+
+		} catch (exception) {
+			console.log("JPushPlugin:onReceiveMessage-->" + exception);
+		}
+	}
+
+	var initiateUI = function() {
+
+		try {
+			window.plugins.jPushPlugin.init();
+			window.plugins.jPushPlugin.getRegistrationID(onGetRegistradionID);
+
+			if (device.platform != "Android") {
+				window.plugins.jPushPlugin.setDebugModeFromIos();
+				window.plugins.jPushPlugin.setApplicationIconBadgeNumber(0);
+			} else {
+				window.plugins.jPushPlugin.setDebugMode(true);
+			}
+		} catch (exception) {
+			console.log(exception);
+		}
+
+	}
+	
+	function insertPushData() {
+		var userid = window.localStorage.getItem('userid');
+		var pushid = window.localStorage.getItem('pushid');
+		if (userid != "" && pushid != "") {
+			$.ajax({
+				type : "post",
+				url : url("User.insertpush"),
+				data : {
+					"userid" : userid,
+					"pushid" : pushid
+				},
+				dataType : "jsonp",
+				jsonp : "callback",
+				jsonpCallback : "ipush",
+				success : function(data) {
+
+				},
+				error : function() {
+
+				}
+
+			});
+		}
+	}
+	
+	document.addEventListener("deviceready", onDeviceReady, false);
+	document.addEventListener("jpush.openNotification", onOpenNotification,
+			false);
+	document.addEventListener("jpush.receiveNotification",
+			onReceiveNotification, false);
+	document.addEventListener("jpush.receiveMessage", onReceiveMessage, false);
+
+	//jpush.receiveMessage
+</script>
+<style type="text/css">
+.am-header .am-header-title {
+margin: 0 15%;
+}
+.mi-title {
+	background-color: #474240;
+}
+
+.mi-black {
+	color: white;
+	background: #474240;
+	outline: none;
+	border: #474240 1px solid;
+	-moz-border-radius: 3px; /* Gecko browsers */
+	-webkit-border-radius: 3px; /* Webkit browsers */
+	border-radius: 3px; /* W3C syntax */
+}
+
+.mi-menu {
+	left: 5px;
+	font-size: 0.8em;
+}
+
+.mi-bg-1>* {
+	color: #ffffff;
+	background-color: #0e90d2;
+	min-height: 3em;
+	line-height: 3em;
+}
+
+.mi-b {
+	color: #ffffff;
+	background-color: #474240;
+	height: 7em;
+}
+
+body,html {
+	width: 100%;
+	height: 100%;
+}
+
+.line {
+	border: none;
+	border-top: 1px solid #b8b1a4;
+	height: 1px;
+	width: 100%;
+	margin: 0em
+}
+
+
+#tcColor{
+	color:#333333;
+	}
+#testColor{
+	color:#333333;
+	font-size:15px;
+	}
+.am-offcanvas-bar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right:0;
+  z-index: 1091;
+  width:75%;	
+  max-width: 100%;
+  background: #f8f8f8;
+  
+  border:none;
+  overflow-y: auto;
+  /* scrollable */
+  -webkit-overflow-scrolling: touch;
+  /* scrollable */
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+          transition: transform 0.3s ease-in-out;
+  -webkit-transform: translateX(-100%);
+      -ms-transform: translateX(-100%);
+          transform: translateX(-100%);
+}
+
+.am-offcanvas-bar:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 1px;
+    background: transparent; 
+}
+
+
+
+</style>
+</head>
+
+<body
+	style="background: url(img/mainlb1_02.jpg) no-repeat 0 49px; background-size: 100% auto">
+
+	<!-- Header -->
+
+   <header data-am-widget="header"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<img id="menu-img" style="height: 1.4em; width: 1.4em"
+				src="img/menu.png"
+				>
+
+
+			<!-- 侧边栏内容 -->
+			<div id="doc-oc-demo2" class="am-offcanvas" style="border: none;">
+				<div class="am-offcanvas-bar">
+					<div class="am-offcanvas-content">
+						<a href="edituserinfo.html" id="testColor">
+							<div
+								style="float: left; height: 100%; width: 30%; margin-top: 1em;">
+								<img style="height: auto; width: 70%; float:right " src="img/userinfo10.png">
+
+							</div>
+							<div
+								style="float: left; width: 55%; line-height: 2em; height: 5em;">
+								<div style="margin-top: 0.5em; width: 100%;">
+									&nbsp;&nbsp;&nbsp;&nbsp;<span id="mspan1" style="width: 100%;"></span><br> 
+									&nbsp;&nbsp;&nbsp;&nbsp;<span id="mspan2" style="width: 100%;"></span>
+
+								</div>
+							</div> <i class="am-icon-angle-right am-fr"
+							style="width: 10%; text-align: right; margin-top: 0.5em; font-size: 2.0em; color: #cccccc;"></i>
+						</a>
+						<div class="line am-u-sm-12"></div>
+						<ul id= "yaoColor"
+							style="list-style-type: none; width: 100%; float: left; margin: 0; padding: 0">
+
+							<li class=""><a href="addrList.html" id="testColor"><img
+									style="width: 10%; height: 10%" src="img/userinfo11.png">
+									&nbsp;&nbsp;我的地址</a></li>
+							<li class=""><a href="saleinfo.html" id="testColor"><img
+									style="width: 10%; height: 10%;" src="img/userinfo12.png">&nbsp;&nbsp;&nbsp;我的优惠券</a></li>
+							<li class=""><a href="giftinfo.html" id="testColor"><img
+									style="width: 10%; height: 10%" src="img/userinfo13.png">&nbsp;&nbsp;&nbsp;我的礼包</a></li>
+							<li class=""><a href="recomlist.html" id="testColor"><img
+									style="width: 10%; height: 10%" src="img/userinfo14.png">&nbsp;&nbsp;&nbsp;推荐有奖</a></li>
+                            
+
+						</ul>
+						<div
+							style="position: fixed; bottom: 1em; width: 100%; float: left; margin: 0; padding: 0">
+							<a href="javascript:void(0)" onclick="quitlogin();" id="tcColor"><img
+								style="width: 9%; height: 10%" src="img/userinfo15.png">&nbsp;&nbsp;&nbsp;退出登录</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<h1 class="am-header-title">
+			<a href="#title-link">知米</a>
+		</h1>
+		<div class="am-header-right am-header-nav">
+			<a href="javascript:void(0);" onclick="gotomessage();" class="">
+				<img style="height: 1.4em; width: 1.4em" src="img/dadz_03.png">
+			</a>
+
+		</div>		
+	</header>
+	
+	<div data-am-widget="slider" class="am-slider " id="my-slider" data-am-flexslider="{playAfterPaused: 1000}">
+		<ul id="l_gg" class="am-slides">
+		
+		</ul>
+	</div>
+	<div class="am-g"
+		style="position: absolute; bottom: 0px; background: transparent;">
+		<input id="l_userid" type="hidden" value="" /> <input id="l_username"
+			type="hidden" value="" /> <input id="l_usermobile" type="hidden"
+			value="" />
+		<div class="am-u-sm-12">
+			<a class="am-u-sm-12" id="v_login" href="userinfo.html"
+				style="line-height: 3.3em; font-size: 1em; color: #333333; padding: 0em;">
+				<div class="am-u-sm-12" align="center">
+					<img src="img/login_user.png" width="8%"> <span
+						id="l_nickname" style="color: #333333; margin-left: 0.5em"></span>
+				</div>
+				<div style = "margin: 0 auto;height:1px;width:85%;background:#b8b1a4;overflow:hidden"></div>
+				<!-- <div class="line am-u-sm-12"></div> -->
+				<div class="am-u-sm-6" align="center">
+					余额: <span id="l_money"></span> 元
+				</div>
+				<div class="am-u-sm-6" align="center">
+					积分: <span id="l_integral"></span> &nbsp;&nbsp;
+				</div>
+			</a> <a class="am-u-sm-12" id="v_unlogin" href="login.html"
+				style="line-height: 3.3em; font-size: 1em; color: #333333;">
+				<div class="am-u-sm-12" align="center">
+					<img src="img/login_user.png" width="8%"> <span
+						style="color: #333333; margin-left: 0.5em">点击登录</span>
+				</div>
+			</a>
+			<div style = "margin: 0 auto;height:1px;width:85%;background:#b8b1a4;overflow:hidden"></div>
+			<!--<div class="line am-u-sm-12" style="width:%20;"></div>-->
+			<a type="button" class="am-u-sm-12" href='orderlist.html'
+				style="line-height: 3.3em; font-size: 1em; color: #333333;">
+				<div class="am-u-sm-12" align="center">
+					<img src="img/main_order.png" width="8%"> <span
+						style="color: #333333; margin-left: 0.5em">订单查询</span>
+				</div>
+			</a>
+
+		</div>
+		<div class="am-u-sm-12"
+			style="margin: 0em; padding: 0em; background: #474240; height: 7em">
+
+			<a href="javascript:void(0);" class="am-u-sm-6" onclick="scanCode()"
+				style="padding-top: 1em">
+				<div style="padding-right: 0;" align="center">
+					<img alt="" src="img/main_scan.png" style="width: 3em;">
+					<div style="color: white; margin-top: 0.5em; font-size: 1.1em;">扫码</div>
+				</div>
+			</a>
+			<div class="am-u-sm-1"
+				style="width: 1px; height: 7em; padding-top: 1em; padding-bottom: 1em; background: #474240; padding-left: 0em; padding-right: 0em;"
+				align="center">
+				<img style="width: 1px; height: 100%;" src="img/line-v.png">
+			</div>
+			<a href="buyricelist.html"
+				style="float: left; position: relative; width: 49%; padding-top: 1em; height: 7em; padding-bottom: 1em;">
+				<div style="padding-right: 0;" align="center">
+					<img alt="" src="img/main_buy.png" style="width: 3em;">
+					<div style="color: white; margin-top: 0.5em; font-size: 1.1em;">订购</div>
+				</div>
+			</a>
+		</div>
+	</div>
+
+
+	<div class="am-modal am-modal-alert" tabindex="-1" id="error-sale">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">提示信息</div>
+			<div class="am-modal-bd" id="dialog-msg" style="text-align: left"
+				align="left"></div>
+			<div class="am-modal-footer">
+				<span class="am-modal-btn">确定</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="am-modal am-modal-confirm" tabindex="-1" id="success-sale">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">
+				提示信息 <a href="javascript: void(0)" class="am-close am-close-spin"
+					data-am-modal-close>&times;</a>
+			</div>
+			<div class="am-modal-bd" id="sale-info" style="text-align: left"
+				align="left"></div>
+			<div class="am-modal-footer">
+				<span class="am-modal-btn" data-am-modal-cancel>取消</span> <span
+					class="am-modal-btn" data-am-modal-confirm>确定</span>
+			</div>
+
+		</div>
+	</div>
+	<div class="am-popup" id="my-popup" data-am-modal-confirm
+			style="width: 60%; height: 40%; left: 20%; top: 30%;border-radius: 5px;background: #f0f0f0;">
+		<div style="margin-top: 0.5em; width: 100%" align="center">
+			<img alt="" src="img/hb_title.png" width="80%" style="margin-top:1em;">
+			<div id="popup-val" align="center"
+				style="background: url('img/hb_img.png'); height: 4.5em; width: auto; background-repeat: round; line-height: 5.5em; font-size: 2.5em; margin-top: -0.5em; margin-left: 0.5em; margin-right: 0.5em; color: red;">10</div>
+			<div id="popup-content" style="font-size: 0.8em; color: #72777a;">有效期:2015-9-15至2015-9-20</div>
+			<div id="popup-date" style="font-size: 0.5em; color: #72777a;margin-top: 0.5em;">	有效期:2015-9-15至2015-9-20</div>
+			</div>
+	</div>
+</body>
+
+
+<script type="text/javascript">
+	var isLogin = true;
+
+	var userid = window.localStorage.getItem('userid');
+
+	if (userid == null || userid == "null") {
+		isLogin = false;
+	} else {
+		isLogin = true;
+	}
+	jQuery(document).ready(function() {
+
+		if (isLogin) {
+			$("#v_login").show();
+			$("#v_unlogin").hide();
+			getUserInfo(userid);
+		} else {
+			$("#v_login").hide();
+			$("#v_unlogin").show();
+
+		}
+
+		getGgList(); 
+		yaoqing();
+
+	});
+
+	function getGgList(){
+		var scheight = document.body.clientHeight;
+    $.ajax({
+        type: "post",
+        url: url("FirstPage.gglist&h="+scheight),
+        dataType: "jsonp",
+        jsonp: "callback",
+        jsonpCallback:"ggList",
+        success: function(json){
+        	json.gglist.forEach(function(e){
+        		
+        		$("#l_gg").append("<li style='width: 100%; float: left; ' class='am-active-slide'><a href='"+e.url+"'><img src='"+e.image+"'/></a></li>");
+        	//	$("#l_gg").append("<li style='width: 100%; float: left; ' class='am-active-slide'><a href='"+e.url+"'><img src='img/mainlb1.jpg'/></a></li>");
+        	//	$("#l_gg").append("<li style='width: 100%; float: left; ' class='am-active-slide'><a href='"+e.url+"'><img src='"+e.image+"'/></a></li>");
+        	})
+        		         		 $('#my-slider').flexslider({
+        			 directionNav:false,controlNav: false,
+        			  playAfterPaused: 1000,
+        			  before: function(slider) {
+        			    if (slider._pausedTimer) {
+        			      window.clearTimeout(slider._pausedTimer);
+        			      slider._pausedTimer = null;
+        			    }
+        			  },
+        			  after: function(slider) {
+        			    var pauseTime = slider.vars.playAfterPaused;
+        			    if (pauseTime && !isNaN(pauseTime) && !slider.playing) {
+        			      if (!slider.manualPause && !slider.manualPlay && !slider.stopped) {
+        			        slider._pausedTimer = window.setTimeout(function() {
+        			          slider.play();
+        			        }, pauseTime);
+        			      }
+        			    }
+        			  }
+        			  // 设置其他参数
+        			});
+        },
+        error: function(){
+    		$('#l_gg').append("<li style='width: 100%; float: left; ' class='am-active-slide'><a ><img src='img/main_bg.jpg'/></a></li>");
+        	
+        }
+        });
+	
+}
+	function yaoqing(){
+		var token = window.localStorage.getItem('token');
+		$.ajax({
+			type : "post",
+			url : url("FirstPage.sidebar&u=" + userid + "&t=" + token),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "sidebarList",
+			success : function(json) {
+				json.sidebarList.forEach(function(e) {
+					$("#yaoColor").append("<li ><a href='"+e.link_url+"' style='color:#333333'><img style='width: 10%; height: 10%' src='"+e.image+"'/>&nbsp;&nbsp;&nbsp;"+e.title+"</a></li>");
+					
+				})
+			},
+			error : function() {
+
+					}
+				});
+	}
+	function getAcList() {
+		var token = window.localStorage.getItem('token');
+		$.ajax({
+			type : "post",
+			url : url("Activities.query&u=" + userid + "&t=" + token),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "acList",
+			success : function(json) {
+				json.aclist.forEach(function(e) {
+					$('#popup-val').html(e.val);
+					$('#popup-content').html(e.content);
+					$('#popup-date').html("有效期："+e.cstime+"至"+e.cetime);
+					$('#my-popup').modal('open')
+				})
+			},
+			error : function() {
+
+					}
+				});
+
+	}
+
+	$('#my-popup').on('close.modal.amui', function() {
+		setTimeout(function(){
+			
+			getAcList();
+		},1000);
+	});
+	$('#my-popup').on('click',function(){
+		$('#my-popup').modal('toggle')
+	});
+	$('#doc-oc-demo2').on('open.offcanvas.amui', function() {
+		$('#menu-img').hide();
+	});
+	$('#doc-oc-demo2').on('close.offcanvas.amui', function() {
+		$('#menu-img').show();
+	});
+	$('#menu-img').on('click',function(){
+		if(!isLogin){
+			alert("请先登录");
+		}else{
+			$('#doc-oc-demo2').offCanvas({effect: 'push'});
+			$('#doc-oc-demo2').offCanvas('open');
+		}
+		
+	});
+	function getUserInfo(uid) {
+		var token = window.localStorage.getItem('token');
+		$.ajax({
+			type : "post",
+			url : url("User.userinfo&u=" + uid+"&t="+token),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "uinfo",
+			success : function(json) {
+				
+				if (json.uinfo == null ||json.uinfo.length == 0) {
+					$("#v_login").hide();
+					$("#v_unlogin").show();
+					isLogin = false;
+					return;
+				}
+				getAcList();
+				$('#l_nickname')[0].textContent = json.uinfo[0].nickname;
+				var m_name = json.uinfo[0].nickname;
+				var m_name1 = m_name;
+				if(m_name.length > 6){
+					m_name1 = m_name.substr(0,6)+'...';
+				}
+				$('#l_money')[0].textContent = json.uinfo[0].money;
+				$('#l_integral')[0].textContent = json.uinfo[0].integral;
+				var mo = json.uinfo[0].mobile;
+				var nm = mo.substr(0,3)+"****"+mo.substr(7,mo.length);
+				$('#mspan1').html(m_name1);
+				$('#mspan2').html(nm);
+
+			},
+			error : function() {
+				$("#v_login").hide();
+				$("#v_unlogin").show();
+				isLogin = false;
+			}
+		});
+
+	}
+
+	function scanCode() {
+		cordova.plugins.barcodeScanner.scan(function(result) {
+			if (result.cancelled == '0') {
+				checkresult(result.text);
+			}
+		}, function(error) {
+			alert("Scanning failed: " + error);
+		});
+
+	};
+
+	function checkresult(result) {
+
+		$.ajax({
+			type : "post",
+			url : url("Sale.check&i=" + result),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "sinfo",
+			success : function(data) {
+				var ret =data.ret;
+				if(ret =='sale'){
+					var sale = data.sale;
+					if (eval(sale).length == 0) {
+						alert('无效卡券');
+						return;
+					}
+	
+					if (sale[0].status == '2') {
+						alert('此卡券已被绑定');
+						return;
+					}
+	
+					var msg = sale[0].name + ",价值" + sale[0].total + sale[0].unit
+							+ ",要绑定到当前账号吗?";
+					var r = confirm(msg);
+					if (r == true) {
+						bindsale(result);
+					} else {
+	
+					}
+				}else if(ret == 'goods'){
+					var goods = data.goods;
+					if(goods.length <= 0){
+						alert("暂无此商品信息");
+						return;
+					}
+					gtgoodsUrl(goods[0]);
+				}else if(ret == 'waybill'){
+					var waybill = data.waybill;
+					if(waybill.length <= 0){
+						alert("暂无此运单信息");
+						return;
+					}
+					gtgoodsUrl(waybill[0]);
+				}
+			},
+			error : function() {
+				alert("网络错误,请稍后重试");
+			}
+		});
+	}
+
+	function gtgoodsUrl(data){
+		var url = data.url;
+		if(url.length < 1){
+			return;	
+		}
+		window.localStorage.setItem('nextp',JSON.stringify(data));
+		window.location.href=url;
+	}
+	
+	function bindsale(sale) {
+		if (isLogin == false) {
+			window.location.href = "login.html";
+			return;
+		}
+		var token = window.localStorage.getItem('token');
+		$.ajax({
+			type : "post",
+			url : url("Sale.bind&u=" + userid + "&i=" + sale+"&t="+token),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "sbind",
+			success : function(data) {
+	        	if(!checktoken(data)){
+	        		return; 
+	        	}
+				if (data.ret == "1") {
+					alert("账号无效");
+				} else if (data.ret == "2") {
+					alert("卡券无效");
+				} else {
+					alert("绑定完成");
+				}
+			},
+			error : function() {
+				alert("网络错误,请稍后重试");
+			}
+		});
+
+	}
+
+	function gotomessage() {
+		if (isLogin == false) {
+			window.location.href = "login.html";
+			return;
+		}
+
+		window.location.href = "message.html"
+
+	}
+	
+	function quitlogin(){
+	window.localStorage.setItem('userid',null);
+	window.localStorage.setItem('token',null);
+	window.location.href = "login.html";
+}
+</script>
+</html>

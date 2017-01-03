@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title></title>
+<link>
+<script src="js/include0.js"></script>
+<style type="text/css">
+.mi-title {
+	background-color: #474240;
+}
+
+.mi-black {
+	color: #4489ce;
+	background: white;
+	outline: none;
+	border: white 1px solid;
+	border-top: #dddddd 1px solid;
+}
+
+button {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	background: transparent;
+	border: transparent 1px
+}
+
+body, html {
+	width: 100%;
+	height: 100%;
+	background: white;
+}
+
+.green {
+	color: white;
+	background: #0c90d0;
+	border: #0c90d0 1px solid;
+}
+
+.blue {
+	color: white;
+	background: #0c90d0;
+	border: #0c90d0 1px solid;
+}
+
+.red {
+	color: white;
+	background: #0c90d0;
+	border: #0c90d0 1px solid;
+}
+</style>
+<script type="text/javascript">
+	var isLogin = true;
+    var did = getParameter('did');
+
+	var userid = window.localStorage.getItem('userid');
+	if (userid == null) {
+		isLogin = false;
+		window.location.href = "login.html";
+	} else {
+		isLogin = true;
+	}
+
+	jQuery(document).ready(function() {
+		getaddrList();
+	});
+
+	function getaddrList() {
+		var token = window.localStorage.getItem('token');
+		$.ajax({
+			type : "post",
+			url : url("Addr.addrlist&u=" + userid+"&t="+token),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "addrinfo",
+			success : function(json) {
+				if(!checktoken(json)){
+	        		return; 
+	        	}
+				var html = template('s_addr_list', json);
+				$("#d_addr_list").html(html);
+               
+               $('.radio_app').click(function(){
+                                     var chk = this.getAttribute('ischk')=='false' ? true : false;
+                                     this.checked = chk;
+                                     this.setAttribute('ischk',chk ? 'true' : 'false');
+                                     event.preventDefault();
+                                     });
+               
+               $('.sel_area').click(function(){
+                                    var radio = $(':radio',this);
+                                    var chk = radio[0].getAttribute('ischk')=='false' ? true : false;
+                                    radio[0].checked = chk;
+                                    radio[0].setAttribute('ischk',chk ? 'true' : 'false');
+                                    event.preventDefault();
+                                    });
+               var tag = window.localStorage.getItem('tag');
+               if(tag == '0'){
+               	var addid = window.localStorage.getItem('addrid');
+				$('input:radio[aid='+addid+']').attr("checked",true);
+				window.localStorage.removeItem('tag');
+				window.localStorage.removeItem('addrid');
+               }   
+ 			},
+			error : function() {
+			}
+		});
+
+	}
+
+function addAddr_fordoc(){
+   
+    var token = window.localStorage.getItem('token');
+    
+    var rs=did; //docid
+    $.each($('.radio_app'), function(i) {
+           var obj = $('.radio_app')[i];
+           //var cn = ;
+           if (obj.checked) {
+                rs = rs + "|" + obj.getAttribute('aid') ;
+           }
+           });
+
+    $.ajax({
+           type : "post",
+           url : url("GAddr.appendAddr&u="+userid+"&t="+token+"&rs="+rs),
+           dataType : "jsonp",
+           jsonp : "callback",
+           jsonpCallback : "appendinfo" ,
+           success : function(json) {
+                mi_exit(-1);
+                     },
+           error : function () {
+           
+           }
+    });
+}
+
+function addOnclick(){ 
+    window.location.href = "addradd.html?tag="+'1';
+}
+
+</script>
+</head>
+<body onselectstart ='return false'>
+
+	<!-- Header -->
+	<header data-am-widget="header"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title">选择收货人</h1>
+		<div id="btn_add" class="am-header-right am-header-nav" onclick="addOnclick()" >
+			<span  style="font-size: 2em;">+</span>
+	</header>
+	<div id="d_addr_list" style="background:#f8f8f8"></div>
+	<div style="height: 60px;border:none;background:#f8f8f8"></div>
+	<div class="am-g"
+		style="width: 100%; padding: 0em; background-color: white; position: fixed; bottom: 0px; margin-top: 5%;">
+
+
+		<div class="am-u-sm-12" align="center"
+			style="margin: 0em; padding: 0em;">
+			<button class="mi-black"
+				style="width: 100%; height: 50px; -webkit-border-radius: 0px; -moz-border-radius: 0px; border-radius: 0px;"
+				onclick="addAddr_fordoc()">确定</button>
+		</div>
+	</div>
+
+    <script id="s_addr_list" type="text/html">
+{{each addrlist as addr i}}
+
+<div style="{{if i != 0}}margin-top: 1em{{/if}};margin-bottom: 0px;background:white;border-bottom:1px #eee solid;border-top:1px #eee solid" class="am-g sel_area" >
+<div class="am-u-sm-12" style="color: #333333 ;font-size:1.1em">
+    <input class="radio_app" aid= "{{addr.addrId}}" type="radio" ischk="false"></input>&nbsp&nbsp{{addr.contact}}
+</div>
+<div class="am-u-sm-12" style="margin-top: 5px;margin-bottom: 5px;color: #72777a ;">电话：{{addr.phone}}</div>
+<div class="am-u-sm-12"  style="margin-bottom: 5px;color:#72777a;">地址：{{addr.prov}}&nbsp;{{addr.city}}&nbsp;{{addr.dist}}&nbsp;</div>
+<div class="am-u-sm-12"  style="margin-bottom: 0px;color:#72777a">{{addr.addrdetails}}</div>
+<div class="am-u-sm-12" hidden style="border-top:none;margin-top:1em;height: 1em;border-bottom:none;background:#f8f8f8"></div>
+</div>
+
+{{/each}}
+<!--<li style = "list-style-type:none ;"><button id = "btn_add" class="am-btn am-btn-secondary am-btn-block" style = "height:3em;" onclick="addOnclick()">新建收货地址</button></li>
+-->
+</script>
+
+</body>
+</html>

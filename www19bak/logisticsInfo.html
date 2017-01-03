@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<script src="js/include0.js"></script>
+
+<style type="text/css">
+body,html{
+	width:100%;
+	height:100%;
+}
+.am-header .am-header-title {
+margin: 0 15%;
+}
+.mi-title {
+	background-color: #474240;
+}
+
+.mi-black {
+	color: white;
+	background: #474240;
+	outline: none;
+	border: #474240 1px solid;
+	-moz-border-radius: 3px; /* Gecko browsers */
+	-webkit-border-radius: 3px; /* Webkit browsers */
+	border-radius: 3px; /* W3C syntax */
+}
+
+
+
+.zi {
+	margin:0em;
+}
+
+.zi-time {
+	color: #72777a;
+	font-size:0.5em;
+	
+}
+
+.zi-content {
+	color: #333333;
+}
+
+</style>
+<title>Insert title here</title>
+<link>
+
+
+</head>
+<body id="body" class="am-with-fixed-header" style="background:#f8f8f8;">
+<!-- Header -->
+	<header data-am-widget="header"
+		class="am-header am-header-default  am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 id="e_title" class="am-header-title">物流信息</h1>
+	
+	</header>
+	<div id="no-message" hidden style="width:100%;font-size:1em;margin-top:60%;text-align: center;">暂无信息</div>
+	<div id="log-message"  style="width:100%;font-size:0.8em;margin-top:1em;">
+		
+	</div>
+	<script id="s-msg" type="text/html">
+		<div class="am-g">
+		{{each data as val i }}	
+			<div class="am-u-sm-12 zi-content zi">{{val.context}}</div>
+			<div class="am-u-sm-12 zi-time zi" >{{val.time}}</div>
+			<div class="am-u-sm-12 zi" style="border-bottom:1px solid #eee;margin:0.5em 0"></div>
+		{{/each}}	
+		</div>
+	</script>
+	<script type="text/javascript">
+		var logid = getParameter("logid");
+		$.ajax({
+			type : "post",
+			url : url("GAddr.getLogisticInfo&logid=" + logid),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "pinfo",
+			success : function(data) {
+				if(data.ret.length < 1){
+					$("#no-message").show();
+					$("#log-message").hide();
+					return;
+				}
+				var companies ="yuantong";
+				var express_code ="500219403933";
+				companies =data.ret[0].companies;
+				express_code = data.ret[0].express_code;
+				$.getJSON('http://www.zhizhoumi.com/kuaidiInfo/kuaidi?type='+companies+'&postid='+express_code+'&callback=?', function(data){
+					if(data.message == 'ok'){
+						var strMess = '';
+						var html = template('s-msg', data);
+						$("#log-message").html(html);
+					}else{
+						alert(data.message);
+						mi_exit(-1); 
+					}
+				});		
+
+			},
+			error : function() {
+			}
+		});
+	</script>
+</body >
+</html>

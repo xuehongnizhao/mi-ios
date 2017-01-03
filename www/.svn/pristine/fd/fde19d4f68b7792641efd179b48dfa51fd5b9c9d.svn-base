@@ -1,0 +1,322 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<script src="js/include.js"></script>
+<link rel="stylesheet" href="css/basestyle.css">
+<title>Insert title here</title>
+<link>
+
+<style type="text/css">
+.am-header .am-header-title {
+margin: 0 15%;
+}
+.mi-title {
+	background-color: #5b3914;
+}
+
+.doc-pannel {
+	width: 100%;
+	border-top: 1px solid #dddddd;
+	height: 3em;
+	line-height: 3em;
+}
+
+.doc-pannel span {
+	border: none;
+	width: 5em;
+}
+
+.doc-group {
+	border-top-right-radius: 0;
+	border-top-left-radius: 0;
+	padding: 0em;
+}
+
+.doc-group:after {
+	content: '';
+	display: table;
+	clear: both
+}
+
+.doc-group:before {
+	display: block;
+	color: #bbb;
+	text-transform: uppercase;
+	margin: 0 -15px 15px;
+	padding: 4px 10px;
+	font-size: 12px
+}
+
+body, html {
+	width: 100%;
+	background-image: url('img/mi_bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+hr {
+	margin: 0em;
+	margin-left: 1em;
+	padding: 0px;
+	border-top: 1px solid #e8e8e8;
+}
+.am-tabs-default .am-tabs-nav>.am-active a {
+    background-color: transparent;
+    color: #ff3b30;
+}
+.line {
+	margin: 0px;
+	padding: 0px;
+	border-top: 1px solid #dddddd;
+}
+hr {
+    margin: 0em;
+    margin-left: 1em;
+    padding: 0px;
+    margin-right: 1em;
+    border-top: 1px solid #e8e8e8;
+}
+</style>
+</head>
+<body>
+
+	<!-- Header -->
+	<header data-am-widget="header" style="background: #5b3914;"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title"
+			style="font-size: 18px; text-align: left; margin: 0 10%;">评价</h1>
+	</header>
+		<div data-am-widget="tabs"  data-am-tabs="{noSwipe: 1}" class="am-tabs am-tabs-default" style="margin: 0px;">
+      <ul class="am-tabs-nav am-cf" style="background-color: #fbfef1;height: 4em;">
+          <li class="am-active"><a href="[data-tab-panel-0]"><div style="height: 24px;">全部评论</div><div id="all"></div></a></li>
+          <li class=""><a href="[data-tab-panel-1]"><div style="height: 24px;">好评</div><div id="hao"></div></a></li>
+          <li class=""><a href="[data-tab-panel-2]"><div style="height: 24px;">中评</div><div id="zhong"></div></a></li>
+          <li class=""><a href="[data-tab-panel-3]"><div style="height: 24px;">差评</div><div id="cha"></div></a></li>
+      </ul>
+      <div class="am-tabs-bd" style="border: none;">
+          <div data-tab-panel-0 class="am-tab-panel am-active" style="padding: 0px 0px 0px;">
+            <div class="am-g divBorder" style=" border-bottom: none; border-top: none;" id="e_eval">				
+			<script id="s_eval" type="text/html">	
+      			<div class="am-accordion-content" style="padding:0em;background-color: transparent;">
+				<div class="am-u-sm-12 line"></div>
+			{{if all}}
+			{{each all as val i}}
+		      	<div class="am-g" style="padding:0.5em 0.5em 0.5em 1em; background-color: #fbfef1;margin-top: 8px;">
+                <div class="am-u-sm-2 "	style="">
+				<img id="userIcon" src ="{{val.icon}}" onerror="this.src='img/myinfo1.png'"
+					style="width: 100%; border-radius: 8%;">
+				</div>					
+				<div class="am-u-sm-3" align="left"
+					style="color: 72777a; font-size: 1em; line-height: 2em; height: 2em;margin-top: 5px;">
+					{{val.nickname }}
+				</div>
+				<div class="am-u-sm-4" align="right"
+					style="color: #aaaaaa; font-size: 1em; line-height: 2em; height: 2em; padding-right: 20px;float:right;margin-top: 3px">
+					{{val.createtime}}
+				</div>
+                <div class="am-u-sm-11" style="border-top: 1px solid #dddddd; margin-top: 10px;margin-left: 10px;"></div>	
+                
+				<div class="am-u-sm-12" style="color: #72777a; font-size: 1em;margin-top: 5px;">
+					{{if val.content}}
+						<a style="color: #72777a;">{{val.content}}</a>
+					{{else}}
+						<a style="color: #72777a;">这家伙很懒什么都没有留下。</a>
+					{{/if}}
+				</div>
+				</div>
+            	<div class="am-u-sm-12 line"></div>	
+			
+			{{/each}}
+			{{else }}
+			<div class=“am-g” style="text-align: center; margin-top: 2em"
+				align="center">暂无评价信息</div>
+			{{/if}}
+				</div>
+				</div>
+			</script>
+				</div>
+          </div>
+          <div data-tab-panel-1 class="am-tab-panel" style="padding: 0px 0px 0px;">
+            <div class="am-g divBorder" style="border-bottom: none; border-top: none;" id="e_eval1">			
+				<script id="s_eval1" type="text/html">	
+      	           <div class="am-accordion-content" style="padding:0em;background-color: transparent;">
+				<div class="am-u-sm-12 line"></div>
+			{{if good}}
+			{{each good as val i}}
+		      	<div class="am-g" style="padding:0.5em 0.5em 0.5em 1em; background-color: #fbfef1;margin-top: 8px;">
+                <div class="am-u-sm-2 "	style="">
+				<img id="userIcon" src ="{{val.icon}}" onerror="this.src='img/myinfo1.png'"
+					style="width: 100%; border-radius: 8%;">
+				</div>					
+				<div class="am-u-sm-3" align="left"
+					style="color: 72777a; font-size: 1em; line-height: 2em; height: 2em;margin-top: 5px;">
+					{{val.nickname }}
+				</div>
+				<div class="am-u-sm-4" align="right"
+					style="color: #aaaaaa; font-size: 1em; line-height: 2em; height: 2em; padding-right: 20px;float:right;margin-top: 3px">
+					{{val.createtime}}
+				</div>
+                <div class="am-u-sm-11" style="border-top: 1px solid #dddddd; margin-top: 10px;margin-left: 10px;"></div>	
+                
+				<div class="am-u-sm-12" style="color: #72777a; font-size: 1em;margin-top: 5px;">
+					{{if val.content}}
+						<a style="color: #72777a;">{{val.content}}</a>
+					{{else}}
+						<a style="color: #72777a;">这家伙很懒什么都没有留下。</a>
+					{{/if}}
+				</div>
+				</div>
+            	<div class="am-u-sm-12 line"></div>	
+			
+			{{/each}}
+			{{else }}
+			<div class=“am-g” style="text-align: center; margin-top: 2em"
+				align="center">暂无评价信息</div>
+			{{/if}}
+				</div>
+				</div>
+				</script>
+				</div>
+          </div>
+          <div data-tab-panel-2 class="am-tab-panel" style="padding: 0px 0px 0px;">
+            <div class="am-g divBorder" style="border-bottom: none; border-top: none;" id="e_eval2">
+				
+					<script id="s_eval2" type="text/html">	
+      	                <div class="am-accordion-content" style="padding:0em;background-color: transparent;">
+				<div class="am-u-sm-12 line"></div>
+			{{if zhong}}
+			{{each zhong as val i}}
+		      	<div class="am-g" style="padding:0.5em 0.5em 0.5em 1em; background-color: #fbfef1;margin-top: 8px;">
+                <div class="am-u-sm-2 "	style="">
+				<img id="userIcon" src ="{{val.icon}}" onerror="this.src='img/myinfo1.png'"
+					style="width: 100%; border-radius: 8%;">
+				</div>					
+				<div class="am-u-sm-3" align="left"
+					style="color: 72777a; font-size: 1em; line-height: 2em; height: 2em;margin-top: 5px;">
+					{{val.nickname }}
+				</div>
+				<div class="am-u-sm-4" align="right"
+					style="color: #aaaaaa; font-size: 1em; line-height: 2em; height: 2em; padding-right: 20px;float:right;margin-top: 3px">
+					{{val.createtime}}
+				</div>
+                <div class="am-u-sm-11" style="border-top: 1px solid #dddddd; margin-top: 10px;margin-left: 10px;"></div>	
+                
+				<div class="am-u-sm-12" style="color: #72777a; font-size: 1em;margin-top: 5px;">
+					{{if val.content}}
+						<a style="color: #72777a;">{{val.content}}</a>
+					{{else}}
+						<a style="color: #72777a;">这家伙很懒什么都没有留下。</a>
+					{{/if}}
+				</div>
+				</div>
+            	<div class="am-u-sm-12 line"></div>	
+			
+			{{/each}}
+			{{else }}
+			<div class=“am-g” style="text-align: center; margin-top: 2em"
+				align="center">暂无评价信息</div>
+			{{/if}}
+				</div>
+				</div>
+					</script>
+				</div>
+          </div>
+           <div data-tab-panel-3 class="am-tab-panel " style="padding: 0px 0px 0px;">
+            <div class="am-g divBorder" style="border-bottom: none; border-top: none;" id="e_eval3">				
+		   		<script id="s_eval3" type="text/html">	
+      				<div class="am-accordion-content" style="padding:0em;background-color: transparent;">
+				<div class="am-u-sm-12 line"></div>
+			{{if bad}}
+			{{each bad as val i}}
+		      	<div class="am-g" style="padding:0.5em 0.5em 0.5em 1em; background-color: #fbfef1;margin-top: 8px;">
+                <div class="am-u-sm-2 "	style="">
+				<img id="userIcon" src ="{{val.icon}}" onerror="this.src='img/myinfo1.png'"
+					style="width: 100%; border-radius: 8%;">
+				</div>					
+				<div class="am-u-sm-3" align="left"
+					style="color: 72777a; font-size: 1em; line-height: 2em; height: 2em;margin-top: 5px;">
+					{{val.nickname }}
+				</div>
+				<div class="am-u-sm-4" align="right"
+					style="color: #aaaaaa; font-size: 1em; line-height: 2em; height: 2em; padding-right: 20px;float:right;margin-top: 3px">
+					{{val.createtime}}
+				</div>
+                <div class="am-u-sm-11" style="border-top: 1px solid #dddddd; margin-top: 10px;margin-left: 10px;"></div>	
+                
+				<div class="am-u-sm-12" style="color: #72777a; font-size: 1em;margin-top: 5px;">
+					{{if val.content}}
+						<a style="color: #72777a;">{{val.content}}</a>
+					{{else}}
+						<a style="color: #72777a;">这家伙很懒什么都没有留下。</a>
+					{{/if}}
+				</div>
+				</div>
+            	<div class="am-u-sm-12 line"></div>	
+			
+			{{/each}}
+			{{else }}
+			<div class=“am-g” style="text-align: center; margin-top: 2em"
+				align="center">暂无评价信息</div>
+			{{/if}}
+				</div>
+				</div>
+				</script>
+				</div>
+          </div>
+      </div>
+  </div>
+
+
+
+	
+
+	<script type="text/javascript">	
+	var goodsid = getParameter("goodsid");
+		jQuery(document).ready(function() {
+			evalList();
+		});
+	
+	function evalList() {
+	$.ajax({
+        type: "post",
+        url: url("RiceDetail.getEval&goodsid="+goodsid+""),
+        dataType: "jsonp",
+        jsonp: "callback",
+        jsonpCallback:"evalall",
+        success: function(json){
+        	var html = template('s_eval', json);
+			$("#e_eval").html(html);
+			var html1 = template('s_eval1', json);
+			$("#e_eval1").html(html1);
+			var html2 = template('s_eval2', json);
+			$("#e_eval2").html(html2);
+			var html3 = template('s_eval3', json);
+			$("#e_eval3").html(html3);
+			$('#all')[0].textContent = json.sum[0].quanbu;
+			$('#hao')[0].textContent = json.sum[0].haoping;
+			$('#zhong')[0].textContent = json.sum[0].zhongping;
+			$('#cha')[0].textContent = json.sum[0].chaping;
+			$("#tabs").tabs();
+        	
+         },
+        error: function(){
+        }
+	});
+	}
+
+		
+	</script>
+
+</body>
+</html>

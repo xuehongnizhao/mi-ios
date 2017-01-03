@@ -1,0 +1,279 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<script src="js/include.js"></script>
+
+<title>Insert title here</title>
+<link>
+<style type="text/css">
+.am-header .am-header-title {
+margin: 0 15%;
+}
+.mi-title {
+	background-color: #474240;
+}
+
+.mi-black {
+	color: white;
+	background: #474240;
+	outline: none;
+	border: #474240 1px solid;
+	-moz-border-radius: 3px; /* Gecko browsers */
+	-webkit-border-radius: 3px; /* Webkit browsers */
+	border-radius: 3px; /* W3C syntax */
+}
+
+body html{
+	width: 100%;
+	height: 100%;
+}
+
+button {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.am-tabs-d2 .am-tabs-nav {
+	background-color: white;
+	border-bottom: 1px solid #dddddd;
+}
+
+.am-tabs-d2 .am-tabs-nav a {
+	line-height: 42px;
+	color: #72777a;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active {
+	position: relative;
+	background-color: #fcfcfc;
+	border-bottom: 1px solid #dddddd;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active a {
+	line-height: 42px;
+	color: #72777a;
+	background: #f5f5f5;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active:after {
+	position: absolute;
+	width: 50%;
+	height: 0;
+	bottom: 0;
+	left: 28%;
+	border: 1px solid rgb(141,142,137);
+	content: "";
+	z-index: 1;
+}
+
+.buy-button {
+	background: #e7222b;
+	color: white;
+	width: 100%;
+	border: none;
+	height: 1.5em;
+	font-size: 1.2em;
+	outline: none;
+	margin-top: 0.3em;
+}
+
+.label-sale {
+	background: #e7222b;
+	color: white;
+	border: none;
+	border-radius: 3px;
+	width: 3em;
+	height: 1.5em;
+	line-height: 1.5em;
+	text-align: center;
+	font-size: 0.8em;
+	outline: none;
+}
+
+.Bar, .Bars {
+	position: relative;
+	/* 宽度 */
+	border: 1px solid #e60012;
+	padding: 0px;
+}
+
+.Bar div, .Bars div {
+	display: block;
+	position: relative;
+	background: #f06e6e; /* 进度条背景颜色 */
+	color: #333333;
+	height: 1em; /* 高度 */
+	line-height: 1em; /* 必须和高度一致，文本才能垂直居中 */
+}
+
+.Bars div {
+	background: #090
+}
+
+.Bar div span, .Bars div span {
+	position: absolute;
+	width: 6em; /* 宽度 */
+	text-align: center;
+	font-weight: normal;
+	font-size: 0.8em;
+}
+.ul-fixed {
+  position: fixed;
+  top: 49px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1010;
+}
+</style>
+</head>
+<body bgcolor="#f0f0f0">
+
+	<!-- Header -->
+	<header data-am-widget="header"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title">预存</h1>
+	</header>
+	<div id="d_tab" data-am-widget="tabs" class="am-tabs am-tabs-d2"
+		style="margin: 0px;">
+		<script id="s_tab" type="text/html">
+			<ul class="am-tabs-nav am-cf ul-fixed" style="width: 100%;height:3em">
+				<li class="am-active" style="height:3em"><a href="[data-tab-panel-0]" style = "background:transparent;height:2em;width:70%; margin:0.5em auto;line-height:2em">全部</a></li>
+				<div style = "margin:0.5em auto;width:1px;background:rgb(183,183,183);"></div>
+				<li class="" style="height:3em"><a href="[data-tab-panel-1]" style = "background:transparent;height:2em;width:70%; margin:0.5em auto;line-height:2em">充值</a></li>
+				<div style = "margin:0.5em auto;width:1px;background:rgb(183,183,183);"></div>
+				<li class="" style="height:3em"><a href="[data-tab-panel-2]" style = "background:transparent;height:2em;width:70%; margin:0.5em auto;line-height:2em">消费</a></li>
+			</ul>
+			<div class="am-tabs-bd"  style="border: none">
+				<div data-tab-panel-0 class="am-tab-panel am-active" style="margin-top: 3.5em;padding: 0px;" >
+					
+					{{if allList.length > 0}}
+					{{each allList as val i}}
+						<div class="am-g">
+							<div class ="am-u-sm-6" >
+								<div style="font-size: 1em;color:#72777a;line-height: 2em;">{{val.linkname}}</div>
+							</div>
+							<div class ="am-u-sm-6" >
+								<div style="font-size: 1em;color:##72777a;float: right;line-height: 2em;">
+									<span style="font-size:1em;color:#{{if val.type == "1" }}48a839{{else}}e85b5b{{/if}};">{{if val.type == "1" }}+{{else}}-{{/if}}{{val.money}}</span>
+								</div>
+							</div>
+							<div class ="am-u-sm-6" style="font-size: 0.8em;">
+								<div style="color:#c7c7c7;">{{val.date}}</div>
+							</div>
+							<div class ="am-u-sm-6" style="font-size: 0.8em;">
+								<div style="color:#c7c7c7;float: right;">{{val.status}}</div>
+							</div>
+						</div>
+						<hr style="margin: 0px;padding: 0px">
+					{{/each}}
+					{{else}}
+					<div class="am-g" style="text-align: center; margin-top: 50%;position:relative;bottom:0em;height:60%;color:#d4d4d4"
+						align="center">
+					<img src="img/nomoney.png" width="15%"> <br>
+					<div style="margin-top:0.3em;">暂无预存</div>
+					</div>
+					{{/if}}
+				</div>
+				<div data-tab-panel-1 class="am-tab-panel am-active" style="margin-top: 3.5em;padding: 0px"  >
+					{{if inList.length > 0}}
+					{{each inList as val i}}
+						<div class="am-g">
+							<div class ="am-u-sm-6" >
+								<div style="font-size: 1em;color:#72777a;line-height: 2em;">{{val.linkname}}</div>
+							</div>
+							<div class ="am-u-sm-6" >
+								<div style="font-size: 1em;color:#72777a;float: right;line-height: 2em;">
+									<span style="font-size:1em;color:#{{if val.type == "1" }}48a839{{else}}e85b5b{{/if}};">{{if val.type == "1" }}+{{else}}-{{/if}}{{val.money}}</span>
+								</div>
+							</div>
+							<div class ="am-u-sm-6" style="font-size: 0.8em;">
+								<div style="color:#c7c7c7;">{{val.date}}</div>
+							</div>
+							<div class ="am-u-sm-6" style="font-size: 0.8em;">
+								<div style="color:#c7c7c7;float: right;">{{val.status}}</div>
+							</div>
+						</div>
+						<hr style="margin: 0px;padding: 0px">
+					{{/each}}
+					{{else}}
+					<div class="am-g" style="text-align: center; margin-top: 50%;position:relative;bottom:0em;height:60%;color:#d4d4d4"
+						align="center">
+					<img src="img/nomoney.png" width="15%"> <br>
+					<div style="margin-top:0.3em;">暂无充值</div>
+					</div>
+					{{/if}}
+				</div>
+				<div data-tab-panel-2 class="am-tab-panel am-active" style="margin-top: 3.5em;padding: 0px"  >
+					{{if outList.length > 0}}
+					{{each outList as val i}}
+						<div class="am-g">
+							<div class ="am-u-sm-6" >
+								<div style="font-size: 1em;color:#72777a;line-height: 2em;">{{val.linkname}}</div>
+							</div>
+							<div class ="am-u-sm-6" >
+								<div style="font-size: 1em;color:#72777a;float: right;line-height: 2em;">
+									<span style="font-size:1em;color:#{{if val.type == "1" }}48a839{{else}}e85b5b{{/if}};">{{if val.type == "1" }}+{{else}}-{{/if}}{{val.money}}</span>
+								</div>
+							</div>
+							<div class ="am-u-sm-6" style="font-size: 0.8em;">
+								<div style="color:#c7c7c7;">{{val.date}}</div>
+							</div>
+							<div class ="am-u-sm-6" style="font-size: 0.8em;">
+								<div style="color:#c7c7c7;float: right;">{{val.status}}</div>
+							</div>
+						</div>
+						<hr style="margin: 0px;padding: 0px">
+					{{/each}}
+					{{else}}
+					<div class="am-g" style="text-align: center; margin-top: 50%;position:relative;bottom:0em;height:60%;color:#d4d4d4"
+						align="center">
+					<img src="img/nomoney.png" width="15%"> <br>
+					<div style="margin-top:0.3em;">暂无消费</div>
+					</div>
+					{{/if}}
+				</div>
+			</div>
+
+		</script>
+	</div>
+</body>
+<script type="text/javascript">
+	var userid = window.localStorage.getItem("userid");
+	var token = window.localStorage.getItem('token');
+	jQuery(document).ready(function() {
+	});
+
+	$.ajax({
+		type : "post",
+		url : url("Money.queryinfo&u=" + userid+"&t="+token),
+		dataType : "jsonp",
+		jsonp : "callback",
+		jsonpCallback : "money",
+		success : function(json) {
+        	if(!checktoken(json)){
+        		return; 
+        	}
+			var html = template('s_tab', json);
+			$("#d_tab").html(html);
+			$("#d_tab").tabs();
+		},
+		error : function() {
+		}
+	});
+</script>
+</html>

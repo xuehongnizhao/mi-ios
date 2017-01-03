@@ -1,0 +1,450 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<script src="js/include0.js"></script>
+
+<style type="text/css">
+.am-header .am-header-title {
+margin: 0 15%;
+}
+.mi-title {
+	background-color: #474240;
+}
+
+.mi-black {
+	color: white;
+	background: #474240;
+	outline: none;
+	border: #474240 1px solid;
+	-moz-border-radius: 3px; /* Gecko browsers */
+	-webkit-border-radius: 3px; /* Webkit browsers */
+	border-radius: 3px; /* W3C syntax */
+}
+
+.add_sub {
+	color: #1c1c1c;
+	background: white;
+	outline: none;
+	border: 1px solid #d0d0d0;
+}
+
+.leftround {
+	height: 2.3em;
+	width: 2.5em;
+	border: 1px solid #b0b0b0
+}
+
+
+.rightround {
+	margin: 0em 0em 0em 0em;
+	height: 2.3em;
+	width: 2.5em;
+	border: 1px solid #b0b0b0
+}
+
+.edit_num {
+	-webkit-appearance: none;
+	outline: none;
+	color: black;
+	background: white;
+	height: 2.3em;
+	border: 1px solid #b0b0b0;
+	text-align: center;
+	float: left;
+}
+.yps_num{
+}
+.hr1 {
+	margin-top: 0em;
+	margin-bottom: 0em;
+	padding-top: 0px;
+	border-top: 1px solid #dddddd;
+	height: 1em;
+	background: #f8f8f8;
+	border-bottom: 1px solid #dddddd;
+	position: fixed;
+  	top: 49px+3em;
+  	left: 0;
+  	right: 0;
+  	width: 100%;
+  	z-index: 1010;
+}
+
+.zi {
+	color: Black;
+}
+
+.zi-title {
+	color: #333333;
+}
+
+.zi-content {
+	color: #72777a;
+}
+
+.confirm-class {
+	color: white;
+	background: #e34343;
+	margin-top: 0.5em;
+	border: #e34343 1px solid;
+	width: 5em;
+	height: 2em;
+	outline: none;
+	-moz-border-radius: 3px; /* Gecko browsers */
+	-webkit-border-radius: 3px; /* Webkit browsers */
+	border-radius: 3px; /* W3C syntax */
+}
+
+.Center-Container.is-Inline {
+    text-align: center;
+    overflow: auto;
+}
+
+.Center-Container.is-Inline:after,
+.is-Inline .Center-Block {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.Center-Container.is-Inline:after {
+    content: '';
+    height: 100%;
+    margin-left: -0.25em; /* To offset spacing. May vary by font */
+}
+
+.is-Inline .Center-Block {
+    max-width: 99%; /* Prevents issues with long content causes the content block to be pushed to the top */
+    /* max-width: calc(100% - 0.25em) /* Only for IE9+ */
+}
+
+.ul-fixed {
+  position: fixed;
+  top: 49px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1010;
+}
+
+#container{display:flex;justify-content:center;align-items:center;}
+#center{}
+
+</style>
+<title>Insert title here</title>
+<link>
+
+
+</head>
+<body id="body" class="am-with-fixed-header" style="background:#f8f8f8;">
+	<!-- Header -->
+	<header data-am-widget="header"
+		class="am-header am-header-default  am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 id="e_title" class="am-header-title">配送信息</h1>
+	</header>
+		
+		
+		
+
+	<div id="e_al" style = "padding-top:1em">
+	</div>
+	<script id="s_al" type="text/html"> 
+		{{each al as val i}}		
+		<div id="{{'e_b'+val.id}}" style="background:#ffffff;padding-top:0.5em;border-top:1px #eee solid;border-bottom:1px #eee solid;margin-bottom:0.5em">		
+		<div class="am-g" style="margin: 0em; padding-right: 1em; padding-left: 1em; ">
+			<div class="am-u-sm-12" style="margin: 0em; padding: 0.5em 1em 0em 0em">
+				<a class="zi-title">{{val.contact}}</a>
+				<br><a class="zi-content" >电话：{{val.phone}}</a>
+				<br> <a class="zi-content">地址： {{if val.state == '1'}}{{val.adt}}{{/if}}{{val.addrdetails}}</a>
+			</div>
+		</div>
+		<div class="am-g" style="margin-top: 1em;margin-right:1em;padding-bottom:0.5em;">
+            <div class="am-u-sm-4" style="text-align:center;margin-top:0.2em;">
+				<a herf ="javascript:void(0);" onclick="showLogInfo('{{val.logid}}')">查看物流</a>
+			</div>
+            <div class="am-u-sm-4" style="text-align:right;margin-top:0.2em;"><a class="zi-content">配送数量 </a></div>
+			<div class="am-u-sm-4" style="margin-top:0.2em;"><a ><span class="yps_num">{{val.num}}</span>&nbsp&nbsp{{val.statename}}</a></div>
+		</div>
+		</div>
+		{{/each}}
+
+		<div style = height:3em></div>
+
+	<div class="am-u-sm-12 line"></div>
+
+	</script>
+
+
+</body>
+
+<script type="text/javascript">
+
+	var isLogin = true;
+
+	var userid = window.localStorage.getItem('userid');
+
+	jQuery(document).ready(function() {
+		ifReload();
+	});
+
+	if (userid == null) {
+		isLogin = false;
+		window.location.href = "login.html";
+	} else {
+		isLogin = true;
+	}
+
+	var docid = window.localStorage.getItem('orderinfo.docid');
+
+	if (docid == null) {
+		alert("系统错误,请重新操作");
+		//mi_exit(-1);
+	}
+	var token = window.localStorage.getItem('token');
+	$.ajax({
+		type : "post",
+		url : url("GAddr.getList&u=" + userid + "&d=" + docid + "&t="+token),
+		dataType : "jsonp",
+		jsonp : "callback",
+		jsonpCallback : "pinfo",
+		success : function(data) {
+			if(!checktoken(data)){
+        		return; 
+        	}
+			var html = template('s_al', data);
+			$("#e_al").html(html);
+			ifReload(data);
+
+			$.each($('.edit_num'), function(i) {
+				var obj = $('.edit_num')[i];
+				var cn = parseInt(obj.value);
+				var bor = $('#e_b' + obj.getAttribute('aid'));
+				/* if (cn > 0) {
+					bor.css('background', 'beige');
+				} else {
+					bor.css('background', 'white');
+				}  */
+			});
+
+		},
+		error : function() {
+		}
+	});
+
+	$('#btn_choose').click(function () {
+  		javascript:addAddr();
+	});
+
+	$('#btn_add').click(function(){
+		window.location.href = "addradd.html";
+	});
+
+	function num_change(num, aid) {
+		var znum = $('#e_znum').val();
+		var lnum = $('#e_lnum').text();
+		var obj = $('#e_c' + aid);
+		var bor = $('#e_b' + aid);
+		var nn = 0;
+		var ovl = obj.attr('ovl');
+
+		console.log('1:znum:' + znum + ",lnum:" + lnum + ",nn:" + nn + ",ovl:"
+				+ ovl + ",num:" + num);
+
+		if (parseInt(num) == 0) {
+			num = parseInt(obj.val()) - parseInt(ovl);
+			console.log('2:znum:' + znum + ",lnum:" + lnum + ",nn:" + nn
+					+ ",ovl:" + ovl + ",num:" + num);
+		}
+
+		if ((parseInt(lnum) == 0) && (num > 0)) {
+			num = 0;
+			console.log('3:znum:' + znum + ",lnum:" + lnum + ",nn:" + nn
+					+ ",ovl:" + ovl + ",num:" + num);
+		}
+
+		nn = parseInt(ovl) + parseInt(num);
+		console.log('4:znum:' + znum + ",lnum:" + lnum + ",nn:" + nn + ",ovl:"
+				+ ovl + ",num:" + num);
+		if (nn < 0) {
+			nn = 0;
+			console.log('5:znum:' + znum + ",lnum:" + lnum + ",nn:" + nn
+					+ ",ovl:" + ovl + ",num:" + num);
+		}
+
+		if (num > parseInt(lnum)) {
+			nn = lnum;
+			console.log('6:znum:' + znum + ",lnum:" + lnum + ",nn:" + nn
+					+ ",ovl:" + ovl + ",num:" + num);
+		}
+		console.log('7:znum:' + znum + ",lnum:" + lnum + ",nn:" + nn + ",ovl:"
+				+ ovl + ",num:" + num);
+		obj.val(nn);
+		obj.attr('ovl', nn);
+
+		/* if (nn > 0) {
+			bor.css('background', 'beige');
+		} else {
+			bor.css('background', 'white');
+		} */
+
+		var an = 0;
+
+		$.each($('.edit_num'), function(i) {
+			an = parseInt(an) + parseInt($('.edit_num')[i].value);
+		});
+		$.each($('.yps_num'), function(i) {
+			an = parseInt(an) + parseInt($('.yps_num')[i].textContent);
+		});
+		
+		$('#e_lnum').text(parseInt(znum) - parseInt(an));
+
+	}
+
+	function inputOnChange(aid) {
+		var obj = $('#e_c' + aid);
+		if (!isNumber(obj.val())) {
+			obj.val(0);
+
+		}
+		num_change(0, aid);
+	}
+
+	function isNumber(oNum) {
+		if (!oNum)
+			return false;
+		var strP = /^\-?\d+(\.\d+)?$/;
+		if (!strP.test(oNum))
+			return false;
+
+		try {
+			if (parseFloat(oNum) != oNum)
+				return false;
+		} catch (ex) {
+			return false;
+		}
+		return true;
+	}
+
+	function isok() {
+
+		var rs = docid;
+
+		$.each($('.edit_num'), function(i) {
+			var obj = $('.edit_num')[i];
+			var cn = parseInt(obj.value);
+			if (cn > 0) {
+				rs = rs + "|" + obj.getAttribute('aid') + "," + cn;
+			}
+		});
+
+		console.log(rs);
+
+		$.ajax({
+			type : "post",
+			url : url("GAddr.save&s=" + rs + ""),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "save",
+			success : function(data) {
+				mi_exit(-1);
+			},
+			error : function() {
+				alert("网络错误,请稍后重试");
+
+			}
+		});
+
+	}
+
+	function addAddr(){
+		var rs = docid;
+
+		$.each($('.edit_num'), function(i) {
+			var obj = $('.edit_num')[i];
+			var cn = parseInt(obj.value);
+            if (cn > 0) {
+				rs = rs + "|" + obj.getAttribute('aid') + "," + cn;
+			}
+		});
+
+		console.log(rs);
+
+		$.ajax({
+			type : "post",
+			url : url("GAddr.save&s=" + rs + ""),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "save",
+			success : function(data) {
+				window.location.href = "addrList_fordoc.html?did="+docid;
+			},
+			error : function() {
+				alert("网络错误,请稍后重试");
+
+			}
+		});		
+	}
+
+	function ifReload(data){
+		
+		if(window.localStorage.getItem('isFresh') == 'yes'){ 
+    	var rs=docid; //docid
+    $.each(data.al, function(i) {
+           var obj = data.al[i];
+           //var cn = ;          
+           rs = rs + "|" + obj;          
+           });
+    rs = rs + "|" + window.localStorage.getItem('addrid');
+    $.ajax({
+           type : "post",
+           url : url("GAddr.appendAddr&u="+userid+"&t="+token+"&rs="+rs),
+           dataType : "jsonp",
+           jsonp : "callback",
+           jsonpCallback : "appendinfo" ,
+           success : function(json) {
+           
+			window.location.reload();
+        	window.localStorage.setItem('isFresh','no');
+            },
+
+           error : function () {
+           
+           }
+    });      
+       
+        }  
+	}
+	
+	function showLogInfo(logid){
+		window.location.href="logisticsInfo.html?logid="+logid;
+	}
+	
+	//限制输入数字
+	function IsNum(e) {
+		var k = window.event ? e.keyCode : e.which;
+		if (((k >= 48) && (k <= 57)) || k == 8 || k == 0) {
+		} else {
+			if (window.event) {
+				window.event.returnValue = false;
+			} else {
+				e.preventDefault(); //for firefox               
+			}
+		}
+	}
+</script>
+
+</html>
+
+

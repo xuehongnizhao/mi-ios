@@ -1,0 +1,324 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>Insert title here</title>
+<script src="js/include.js"></script>
+<style type="text/css">
+.am-header .am-header-title {
+margin: 0 15%;
+}
+body, html {
+	width: 100%;
+	height: 100%
+}
+
+.am-form-group {
+	margin-bottom: 0em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	background: white;
+	padding-bottom: 0.5em;
+}
+
+.mi-title {
+	background-color: #474240;
+}
+
+.mi-black {
+	color: white;
+	background: #474240;
+	outline: none;
+	border: #474240 1px solid;
+
+}
+
+.bk{
+	border-bottom: 1px solid #ededed;
+}
+.row_height{
+	height: 3.6em;
+	line-height: 3.6em;
+}
+.honor , .item{
+padding-left: 1em;
+padding-right: 1em;
+padding-bottom: 0.5em;
+color:#72777a;
+}
+
+.bcolor{
+background-color:#ffffff;
+}
+.img-icon{
+	width: 1.7em;
+}
+
+
+.mi-black {
+	color: white;
+	background: #474240;
+	outline: none;
+	border: #474240 1px solid;
+	/* -moz-border-radius: 3px;
+	-webkit-border-radius: 3px; 
+	border-radius: 3px;  */
+}
+
+.transparent_class {   
+      filter:alpha(opacity=25);   
+      -moz-opacity:0.25;   
+      -khtml-opacity: 0.25;   
+      opacity: 0.25;   
+}
+</style>
+</head>
+<body style="background: #f8f8f8">
+	
+	<!-- Header -->
+	<header data-am-widget="header" class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+		    <a href="javascript:mi_exit(-1);" style="text-align: left">
+		      <i class="am-icon-angle-left" style="font-size: 2em;"></i>
+		    </a>
+		</div>
+	  <h1 class="am-header-title">
+	  	我的信息
+	  </h1>
+	  
+	</header>
+	<a href="edituserinfo.html">
+		
+		
+		
+		<div  class="am-g "  style="width:90%; margin:  5% 5% 5%;background: #4398F2;border-radius:10px;box-shadow:0 0 20px #BFEFFF;">
+			<div id="d_user_name" class="am-u-sm-12 " style="font-size:1em;padding-left: 0.5em;color: white;margin:0.5em 0.5em;" >
+				<span id="s_user_name" style="line-height: 1em;color: white"></span>
+				<img src = "img/qqq.png" style = "height:100%;width:10%;float:right;padding-right:10px">
+			</div>
+			<div class="am-u-sm-12" align="center" style="color: white;font-size: 2em;height: 1.8em;line-height: 1.8em;">
+				<span id="s_vip_num"></span>
+			</div>
+			<div class="am-u-sm-12 " style="height: 1em;"></div>
+			<div id="d_info_intrgrity" class="am-u-sm-12" style="background:rgb(114,179,245);border-radius: 0px 0px 10px 10px;">
+				<span id = "s_info_intrgrity" style="color:white">%</span>
+			</div>
+			
+		</div>
+	</a>
+		
+	<div id = "d_honor" class="am-g-collapse honor" style="padding-left:0em;padding-right:0em;;padding-top: 1.0em;min-height: 5.5em;background: #ffffff;border-top: 1px #dddddd solid;border-bottom: 1px #dddddd solid;" align="center">
+		<script id="s_honor" type="text/html">
+		{{each honorinfo as honor i}}
+		<div id="doc-dropdown-justify" style="display: inline-block;">
+		  <div class="am-dropdown" data-am-dropdown>
+		    {{if honor.state==honor.id}}
+			<a class="am-badge bcolor am-dropdown-toggle am-radius" href="javascript:void(0);">
+				<img alt="" src="{{honor.active_image}}" style="width: 5em;">
+			</a>
+			{{/if}}
+			{{if honor.state!=honor.id}}
+			<a class="am-badge bcolor am-dropdown-toggle am-radius" href="javascript:void(0);">
+				<img alt="" src="{{honor.noactive_image}}" style="width: 5em;">
+			</a>
+			{{/if}}
+
+		    <div class="am-dropdown-content">
+		      <h2>{{honor.name}}</h2>
+		      <p>
+			      {{honor.condition}}
+		      </p>
+		    </div>
+			
+		  </div>
+		</div>
+		{{ /each }}
+		</script>
+		
+	</div>
+	
+	<div style="border-top: 1px solid #dddddd;background: white;margin-top: 1em;">
+		<a href="addrList.html" style="color: #dddddd;">
+			<div class="am-g-collapse item bk row_height">
+				<img alt="" src="img/userinfo_03.png"  class="img-icon">
+				&nbsp;地址 
+				<i class="am-icon-angle-right am-fr" style="width: 3em;text-align: right; font-size: 2.0em;color:#cccccc"></i>
+			</div>
+		</a>
+		<a href="integralinfo.html" style="color: #dddddd;">
+			<div class="am-g-collapse item bk row_height"  style="padding-bottom: 0em;">
+				 <img alt="" src="img/userinfo_06.png"  class="img-icon">
+				 &nbsp;积分&nbsp;
+				 <i class="am-icon-angle-right am-fr" style="width: 0.6em;text-align: right; font-size: 2.0em;color:#cccccc"></i>
+				  <span style="float:right;width:1.5em;text-align: right;color:#c7c7c7">分</span>
+				 <span id = "s_integral" style="float:right;color:#c7c7c7"></span>
+			</div>
+		</a>
+		<a href="moneyinfo.html" style="color: #dddddd;">
+			<div class="am-g-collapse item bk row_height" style="padding-bottom: 0em;">
+				<img alt="" src="img/userinfo_08.png"  class="img-icon">
+				 &nbsp;预存&nbsp;
+				 <i class="am-icon-angle-right am-fr" style="width: 0.6em;text-align: right; font-size: 2.0em;color:#cccccc"></i>
+				  <span style="float:right;width:1.5em;text-align: right;color:#c7c7c7">元</span>
+				   <span id = "s_money" style="float:right;color:#c7c7c7"></span>
+			</div>
+		</a>
+		<a href="saleinfo.html" style="color: #dddddd;">
+			<div class="am-g-collapse item bk row_height" style="padding-bottom: 0em;">
+				<img alt="" src="img/userinfo_10.png"  class="img-icon">
+				 &nbsp;优惠券&nbsp;
+				 <i class="am-icon-angle-right am-fr" style="width: 0.6em;text-align: right; font-size: 2.0em;color:#cccccc;float: right"></i>
+				 <span style="float:right;width:1.5em;text-align: right;color:#c7c7c7">张</span>
+				 <span id = "s_salecount" style="float:right;color:#c7c7c7"></span>
+			</div>
+		</a>
+		<a href="giftinfo.html" style="color: #dddddd;">
+			<div class="am-g-collapse item bk row_height" style="padding-bottom: 0em;">
+				<img alt="" src="img/userinfo_16.png"  class="img-icon">
+				 &nbsp;礼包&nbsp;
+				 <i class="am-icon-angle-right am-fr" style="width: 0.6em;text-align: right; font-size: 2.0em;color:#cccccc;float: right"></i>
+				 <span style="float:right;width:1.5em;text-align: right;color:#c7c7c7">张</span>
+				 <span id = "s_giftcount" style="float:right;color:#c7c7c7"></span>
+			</div>
+		</a>
+		<a href="recomlist.html" style="color: #dddddd;">
+			<div class="am-g-collapse item bk row_height" style="padding-bottom: 0em;">
+				<img alt="" src="img/userinfo_15.png"  class="img-icon">
+				 &nbsp;推荐有奖&nbsp;
+				 <i class="am-icon-angle-right am-fr" style="width: 3em;text-align: right; font-size: 2.0em;color:#cccccc"></i>
+			</div>
+		</a>
+		<a href="modifypassword.html" style="color: #dddddd;">
+			<div class="am-g-collapse item bk row_height" style="padding-bottom: 0em;">
+				<img alt="" src="img/userinfo_12.png"  class="img-icon">
+				 &nbsp;修改密码&nbsp;
+				 <i class="am-icon-angle-right am-fr" style="width: 3em;text-align: right; font-size: 2.0em;color:#cccccc"></i>
+			</div>
+		</a>
+		<!-- <a href="recomlist.html" style="color: #000000;">
+			<div class="am-g-collapse item bk row_height" style="padding-bottom: 0em;">
+				<img alt="" src="img/userinfo_14.png"  class="img-icon">
+				 &nbsp;推荐用户&nbsp;
+				 <i class="am-icon-angle-right am-fr" style="width: 3em;text-align: right; font-size: 2.0em;color:#cccccc"></i>
+			</div>
+		</a> -->
+			<div class="am-g-collapse item bk row_height" style="padding-bottom: 0em;">
+				<img alt="" src="img/userinfo_14.png" class="img-icon">
+				&nbsp;服务中心:&nbsp;
+				
+				 <span id = "s_callcenter" style="float:right;color:#c7c7c7"></span>
+			</div>
+		<a href="javascript:void(0);" onclick="quitlogin()" style="color: #dddddd;">
+			<div class="am-g-collapse item bk row_height" style="padding-bottom: 0em;color:#e85b5b;text-align: center;">
+				&nbsp;退出登录&nbsp;
+			</div>
+		</a>
+	</div>
+</body>
+<script type="text/javascript">
+var isLogin = true;
+
+var userid = window.localStorage.getItem('userid');
+if(userid == null){
+	isLogin = false;
+	window.location.href="login.html";
+}else{
+	isLogin = true;
+}
+
+
+jQuery(document).ready(function(){
+	getUserInfo();
+	getHonorInfo();
+});
+
+function getUserInfo(){
+	var token = window.localStorage.getItem('token');
+    $.ajax({
+        type: "post",
+        url: url("User.userinfoset&u="+userid+"&t="+token),
+        dataType: "jsonp",
+        jsonp: "callback",
+        jsonpCallback:"uinfo",
+        success: function(json){
+        	if(!checktoken(json)){
+        		return; 
+        	}
+        	
+<!--        	if(json.uinfo[0].viptype=='1'){-->
+<!--        		$('#i_user_bg')[0].src="img/userinfo_card.png"-->
+<!--        	}else if(json.uinfo[0].viptype=='2'){-->
+<!--        		$('#i_user_bg')[0].src="img/silver.png"-->
+<!--        	}else if(json.uinfo[0].viptype=='3'){-->
+<!--        		$('#i_user_bg')[0].src="img/gold.png"-->
+<!--        	}else if(json.uinfo[0].viptype=='4'){-->
+<!--        		$('#i_user_bg')[0].src="img/diamond.png"-->
+<!--        	}-->
+<!--        	-->
+        	if(json.uinfo[0].viptype == '4'){
+        		$('#d_user_name')[0].style.color="#f8f4f4";
+        		$('#d_info_intrgrity')[0].style.color="#f8f4f4";
+        	}else{
+        		$('#d_user_name')[0].style.color="#121212";
+        		$('#d_info_intrgrity')[0].style.color="#1b1b1b";
+        	}
+        	
+        	$('#s_user_name')[0].textContent = json.uinfo[0].nickname;
+        	$('#s_vip_num')[0].textContent = formatVipNum(json.uinfo[0].vipnumber);
+        	$('#s_info_intrgrity')[0].textContent = '个人信息完整度: '+json.uinfo[0].infoIntegrity+'%';
+        	$('#s_integral')[0].textContent = json.uinfo[0].integral;
+        	$('#s_money')[0].textContent = json.uinfo[0].money;
+        	$('#s_salecount')[0].textContent = json.uinfo[0].salecount;
+        	$('#s_giftcount')[0].textContent = json.uinfo[0].giftcount;
+        	$('#s_callcenter')[0].textContent = json.uinfo[0].callcenter;
+        	$('#s_vip_num')[0].textContent = formatVipNum(json.uinfo[0].vipnumber);
+        	
+        	
+         },
+        error: function(){
+        }
+        });
+	
+}
+
+function getHonorInfo(){
+	var token = window.localStorage.getItem('token');
+    $.ajax({
+        type: "post",
+        url: url("User.honorinfo&u="+userid+"&t="+token),
+        dataType: "jsonp",
+        jsonp: "callback",
+        jsonpCallback:"hinfo",
+        success: function(json){
+        	if(!checktoken(json)){
+        		return; 
+        	}
+        	
+        	var html = template('s_honor',json);
+        	$("#d_honor").html(html);
+        	
+        	$("div[data-am-dropdown]").dropdown();
+         },
+        error: function(){
+        }
+        });
+	
+}
+
+function quitlogin(){
+	window.localStorage.setItem('userid',null);
+	window.localStorage.setItem('token',null);
+	window.history.back();
+}
+
+function formatVipNum(vipnumber){
+	var vip = vipnumber.substring(0,3)+'-'+vipnumber.substring(3,6)+'-'+vipnumber.substring(6);
+	return vip;
+}
+</script>
+</html>

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+scp -r /Users/libo/code/mi/mi-web/build/WEB-INF/classes/com/mg/mi root@172.16.1.161:/root/webapp/mi/WEB-INF/classes/com/mg/
+

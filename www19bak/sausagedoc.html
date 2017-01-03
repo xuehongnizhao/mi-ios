@@ -1,0 +1,619 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>Insert title here</title>
+<s:include value="head.jsp"></s:include>
+<link>
+<style type="text/css">
+.am-header .am-header-title {
+margin: 0 15%;
+}
+.but_1 {
+	color: #0c90d0;
+	background: white;
+	border: 1px solid #0c90d0;
+	width: 25px;
+}
+button {
+}
+.add_sub {
+  	color:#1c1c1c;
+  	background:white;
+  	outline:none;
+  	border:1px solid #d0d0d0;
+  	width:2.5em;height:2.5em;
+  	float:left;
+}
+.leftround{
+   -moz-border-radius: 3px 0px 0px 3px;      /* Gecko browsers */
+   -webkit-border-radius: 3px 0px 0px 3px; /* Webkit browsers */
+   border-radius:3px 0px 0px 3px;            /* W3C syntax */
+}
+.rightround{
+   -moz-border-radius: 0px 3px 3px 0px;
+    -webkit-border-radius:0px 3px 3px 0px;
+    border-radius: 0px 3px 3px 0px;            /* W3C syntax */
+}
+
+.edit_num{
+	color:black;
+	background:white;
+	height:2.5em;
+	border-left:none;
+	outline:none;
+	border-right:none;
+	border-top:1px solid #d0d0d0;
+	border-bottom:1px solid #d0d0d0;
+	width:50px;text-align: center;
+	float:left;
+}
+.hide {
+	display: none;
+}
+
+.noedit {
+	
+}
+
+.edit {
+	
+}
+
+.edit>.am-g>.count {
+	display: none;
+}
+
+.noedit>.am-g>.count_edit {
+	display: none;
+}
+
+.noedit>div>.add_select {
+	display: none;
+}
+
+.goods-font1 {
+	font-size: 1em;
+	padding-top: 0.2em;
+	color: #797979;
+}
+
+.goods-font2 {
+	font-size: 0.8em;
+	padding-top: 0.2em;
+	line-height: 2em;
+	color: #797979;
+}
+
+.add_select {
+	padding: 0.2em;
+	width: 3em;
+}
+</style>
+</head>
+<script type="text/javascript">
+	var isEdit = false;
+	var isAdd= false ;
+	
+	$(function(){
+		
+	});
+	function updateHideData(){
+		var _goodsList = getGoodsList();
+		var jl = parseInt($("#context1Size").val());
+		for(var i=0;i<jl;i++){
+			var gsize = parseInt($("#goodsSize_"+i).val());
+			for(var j=0;j<gsize;j++){
+				//$("#edit_"+i+"_"+j).attr("goodsValue",$("#edit_"+i+"_"+j).val());
+				$("#edit_"+i+"_"+j).val($("#edit_"+i+"_"+j).attr("goodsValue"));
+			}
+		}
+	}
+	function inputOnChange(input,id){
+		if(!isNumber(input.value)){
+			input.value = 0;
+		}
+		updatePrice(id);
+	}
+
+	function isNumber(oNum) 
+	{ 
+		if(!oNum) return false; 
+		var strP=/^\-?\d+(\.\d+)?$/;
+		if(!strP.test(oNum)) return false;
+
+		try{ 
+			if(parseFloat(oNum)!=oNum) return false; 
+		} 
+		catch(ex) 
+		{ 
+			return false; 
+		} 
+		return true; 
+	}
+	
+	function getGoodsList(){
+		var _list = new Array();
+		$(".c_goods").each(function(index,ele){
+			var _d = $(ele).val();
+			var _l = _d.split(",");
+			_list.push({id:_l[0],count:_l[1],name:_l[2],num:0});
+		});
+		return _list;
+	}
+	
+	function getNewGoodsHtml(goodsList,cindex){
+		var html = "";
+		for(var i=0;i < goodsList.length;i++){
+			html+=
+			'<div class="am-g goods " style="margin: 0em;padding: 0em">'+
+				'<input id=\'goodsid_'+cindex+'_'+i+'\' type="hidden" value="'+goodsList[i].id+'">'+
+				'<input id=\'logistics_'+cindex+'_'+i+'\' type="hidden" value="">'+
+				'<div id="count_'+cindex+'_'+i+'" class="am-u-sm-12 count goods-font2"	style="margin: 0em;padding:0em;">'+
+					goodsList[i].name+':<span id="value_'+cindex+'_'+i+'">0</span>箱';
+					if(i+1 == goodsList.length){
+						html+='<div id="edit_div_'+cindex+'" style="float:right;">	<button style="color: #797979; background: white; border: none; margin-top: 3px;font-size: 0.9em;outline:none;"'+
+						'id="edit_'+cindex+'"onclick="edit(\''+cindex+'\')"><img src="img/1fd_07.png" style="width: 25%;margin-bottom: 4px;margin-right: 5px;">编辑'+
+						'</button><button style="color: #797979; background: white; border: none; margin-top: 3px; margin-right: 10px;font-size: 0.9em;outline:none;"'+
+						'id="delete_'+cindex+'"onclick="confirmDelete(\''+cindex+'\')"><img src="img/1fd_09.png" style="width: 25%;margin-bottom: 4px;margin-right: 5px;">删除'+
+						'</button></div>';
+					}
+					html+=
+				'</div>'+
+				'<div class="am-u-sm-12 count_edit"style="padding: 0em;margin: 0em;font-size:0.8em;position: relative;height: 3em">'+
+					'<span style="float:left;color: #797979;line-height:2.5em">'+goodsList[i].name+':</span>'+
+					'<button class="leftround add_sub" style="margin-left: 0.3em" onclick="javascript:sub(\''+cindex+'_'+i+'\');"><img src="img/erw_14.png" style="width:100%;"></button>'+
+					'<input  class="edit_num" id="edit_'+cindex+'_'+i+'" goods=\''+goodsList[i].id+'\' type="text" value="0" goodsValue="0" style="width: 2em;text-align: center;padding: 0.1em;" onchange="javascript:updatePrice(\''+cindex+'_'+i+'\');">'+
+					'<button class="rightround add_sub"  onclick="javascript:add(\''+cindex+'_'+i+'\');"><img src="img/erw_11.png" style="width: 100%;"></button>'+
+				'</div>'+
+			'</div>';
+		}
+		
+
+	/* 	<div class="am-u-sm-12 count_edit" style="padding: 0em;margin: 0em;font-size:0.8em;position: relative;height: 3em">
+			<span style="float:left;color: #797979;line-height:2.5em"><s:property value="#goods.goodsName" />:</span>
+			<button class="leftround add_sub"  	style="margin-left: 0.3em"
+			 onclick="javascript:sub('<s:property value='#i.index'/>_<s:property value='#j.index'/>');">
+				<img src="img/erw_14.png" style="width:100%;">
+			</button>
+			<input class="edit_num" id="edit_<s:property value='#i.index'/>_<s:property value='#j.index'/>"
+				goodsValue='<s:property value="#goods.num"/>'
+				goods='<s:property value="#goods.goods_id"/>' type="text"
+				value="<s:property value="#goods.num"/>"
+				> 
+			<button style="" class="rightround add_sub" 
+				onclick="javascript:add('<s:property value='#i.index'/>_<s:property value='#j.index'/>');">
+				<img src="img/erw_11.png" style="width: 100%;">
+			</button>
+		</div>
+	</div> */
+		
+		
+		
+		return html;
+	}
+	
+	function newAddr(){
+		if(isEdit || isAdd){
+			showAlert('请退出当前编辑');
+			return;
+		}
+		isEdit = true;
+		isAdd = true;
+		
+		selectAddr(-1,function(item){
+			var cindex = $("#context1Size").val();
+			var _goodsList = getGoodsList();
+			
+			var htmlStr = "";
+			htmlStr =
+			'<div id="'+cindex+'" class="edit" style="width: 100%;border-top: 1px solid #CCCCCC;padding-left: 0.5em;">'+
+				'<input id="addrid_'+cindex+'" type="hidden" value="'+item.addrId+'">'+
+				'<input id="state_'+cindex+'" type="hidden" value="0">'+
+				'<div class="am-g goods-font2" style="">'+
+					'<div class="am-u-sm-8 " style="margin: 0px; padding: 0px;">送至<br> <font color="#222222"> 地址'+
+						(parseInt(cindex)+1)+':</font><span id="addr_text_'+cindex+'">'+
+						item.prov+"&nbsp;"+
+						item.city+"&nbsp;"+
+						item.dist+"<br>"+
+						item.addrdetails+'</span>'+
+					'</div>'+
+					'<div class=" am-u-sm-4 " align="right" style="padding: 0em;">'+
+						'<button style="color: #797979; background: white; border: none; margin-top: 3px; margin-right: 10px; display:block; font-size: 0.9em;outline:none;"'+
+						'id="save_'+cindex+'" onclick="save(\''+cindex+'\')">	'+
+						'<img src="img/erw_03.png"	style="margin-right: 5px; margin-bottom: 4px; width: 25%">保存</button>'+
+						'<button id="select_addr_'+cindex+'"	style="color: #797979; background: white; border: none; padding: 0em; margin-right: 10px; margin-top: 2em; display:block; font-size: 0.8em; outline: none;"'+
+						'onclick="javascript:editAddr(\''+cindex+'\');">'+
+						'<img src="img/erw_07.png"	style="margin-right: 5px; margin-bottom: 4px; width: 20%">选择地址</button>'+
+					'</div>'+
+				'</div>'+
+				'<input id=\'goodsSize_'+cindex+'\' type="hidden" value="'+_goodsList.length+'">'+
+				getNewGoodsHtml(_goodsList,cindex)+
+			'</div>';
+			$("#context1").html($("#context1").html()+htmlStr);
+			$("#context1Size").val(parseInt(cindex)+1);
+			updateHideData();
+		});
+		
+	}
+	
+	var editid;
+	var _call;
+	function selectAddr(index,call){
+		_call = call;
+		$.ajax({
+			   type:"post",  
+			   url:"selectAddr.action", 
+			   success:function(callbackdata){   
+				   saleList = jQuery.parseJSON(callbackdata);
+					var html="";
+					for (var i = 0; i < saleList.length; i++) {
+						var item = saleList[i];
+						if(i == 0){
+						html+='<label class="am-radio" style="text-align:left"><input type="radio" checked="checked" addrid="'+item.id+'" name="radio1" value="" data-am-uchcek>' +item.contact+item.phone+item.addrdetails+'</label>';			
+						}else{
+							html+='<label class="am-radio" style="text-align:left"><input type="radio" name="radio1" addrid="'+item.id+'" value="" data-am-uchcek>' +item.contact+item.phone+item.addrdetails+'</label>';	
+						}
+							
+					}
+					var dialogContent =document.getElementById('dialog_content'); 
+					dialogContent.innerHTML=html;
+				  	$('#your-modal').modal({
+				         relatedTarget: this,
+				         onConfirm: function(options) {
+				        	 var item;
+				        	 var cb = dialogContent.getElementsByTagName("input");
+				        	 for (var i = 0; i < cb.length; i++) {
+								if(cb[i].checked){
+									item = saleList[i];
+									break;
+								}
+							}
+				        	if(_call != null)
+				        		_call(item);
+				         },
+				         onCancel: function() {
+				         	
+				         }
+				       });
+				
+
+			   }
+			});
+	}
+	
+	function deleteInfo(itemid){
+		var gsize = $("#goodsSize_"+itemid).val();
+		var res = "";
+		for(var i=0;i<gsize;i++){
+			res += $("#logistics_"+itemid+"_"+i.toString()).val()+":"+$("#goodsid_"+itemid+"_"+i.toString()).val() + ":"+$("#edit_"+itemid+"_"+i.toString()).val()+";";
+		}
+		$.ajax({
+			type:"post",
+			url:"deleteLogisticsList.action",
+			data:{
+				"goodsListString":res
+			},
+			success:function(callback){
+				location.reload();
+			}
+		});
+	}
+	
+	function confirmDelete(itemid){
+		$('#delete-confirm').modal(
+				{
+					relatedTarget : this,
+					onConfirm : function(options) {
+						deleteInfo(itemid);
+					},
+					onCancel : function() {
+
+					}
+				});
+	}
+	
+	function editAddr(id){
+		editid = id;
+		selectAddr(-1,function(item){
+			$("#addr_text_"+editid).html(item.prov+"&nbsp;"+item.city+"&nbsp;"+item.dist+"<br>"+item.addrdetails);
+			$("#addrid_"+editid).val(item.addrId);
+		});
+	}
+	function sub(id){
+		var i = document.getElementById("edit_"+id).value;
+		$("#edit_"+id).attr("goodsValue",i);
+		if(i <= 0 ){
+			showAlert("不能小于0");
+		}else{
+			i = parseInt(i) - 1;
+			document.getElementById("edit_"+id).value = i;
+			$("#edit_"+id).attr("goodsValue",i);
+			updatePrice(id);
+		}
+		
+		
+	}
+	
+	function add(id){
+		var i = document.getElementById("edit_"+id).value;
+		i = parseInt(i) + 1;
+		document.getElementById("edit_"+id).value = i;
+		$("#edit_"+id).attr("goodsValue",i);
+		if(!updatePrice(id)){
+			showAlert("剩余数量不足");
+		}
+	}
+	
+	function updatePrice(id){
+		var _goodsList = getGoodsList();
+		
+		var jl = parseInt($("#context1Size").val());
+		for(var i=0;i<jl;i++){
+			var gsize = parseInt($("#goodsSize_"+i).val());
+			for(var j=0;j<gsize;j++){
+				var _goodsid = $("#goodsid_"+i+"_"+j).val();
+				var editval = parseInt($("#edit_"+i+"_"+j).attr("goodsValue"));
+				for(var x=0;x<_goodsList.length;x++){
+					if(_goodsList[x].id == _goodsid){
+						_goodsList[x].num += editval;
+						break;
+					}
+				}
+			}
+		}
+		for(var y=0;y<_goodsList.length;y++){
+			if(_goodsList[y].count < _goodsList[y].num){
+				$("#edit_"+id).val($("#edit_"+id).val() - (_goodsList[y].num - _goodsList[y].count));
+				$("#edit_"+id).attr("goodsValue",$("#edit_"+id).val());
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	function edit(itemid){
+		if(isEdit){
+			showAlert('请退出当前编辑');
+			return ;
+		}
+		isEdit = true;
+		var but = $("#but_"+itemid);
+			$("#"+itemid).removeClass("noedit");
+			$("#"+itemid).addClass("edit");
+			$("#save_"+itemid)[0].style.display="block";
+			$("#select_addr_"+itemid)[0].style.display="block";
+	}
+	
+	function save(itemid){
+		
+		isEdit = false;
+		var but = $("#but_"+itemid);
+		$("#"+itemid).removeClass("edit");
+		$("#"+itemid).addClass("noedit");
+		var gsize = $("#goodsSize_"+itemid).val();
+		var res = "";
+		for(var i=0;i<gsize;i++){
+			res += $("#logistics_"+itemid+"_"+i.toString()).val()+":"+$("#goodsid_"+itemid+"_"+i.toString()).val() + ":"+$("#edit_"+itemid+"_"+i.toString()).val()+";";
+			$("#value_"+itemid+"_"+i.toString()).html($("#edit_"+itemid+"_"+i.toString()).val());
+			$("#edit_"+itemid+"_"+i.toString()).attr("goodsValue",$("#edit_"+itemid+"_"+i.toString()).val());
+		}
+		var _addrid = $("#addrid_"+itemid).val();
+		var _docid = $("#docID").val();
+		$("#save_"+itemid)[0].style.display="none";
+		$("#select_addr_"+itemid)[0].style.display="none";
+		$.ajax({
+			   type:"post",  
+			   url:"saveLogisticsList.action",  
+			   data:{"id":_docid,"addrID":_addrid,"goodsListString":res},
+			   success:function(callbackdata){   
+				   var res = jQuery.parseJSON(callbackdata);
+				   if(isAdd){
+						isAdd = false;
+						location.reload();
+					}
+			   }
+			});
+	}
+	
+	function showAlert(msg){
+		var dialogMsg = document.getElementById('dialog-msg');
+		dialogMsg.innerHTML = msg;
+		$("#error-sale").modal();
+		
+	}
+</script>
+<body>
+
+	<!-- Header -->
+	<header data-am-widget="header"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit();" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title">
+			<a href="#title-link">红肠订单</a>
+		</h1>
+	</header>
+	<input id="docID" type="hidden" value='<s:property value="id"/>'>
+	<s:iterator value="goodsList" id="goods">
+		<input class="c_goods" type="hidden"
+			value='<s:property value="#goods.id"/>,<s:property value="#goods.count"/>,<s:property value="#goods.name"/>'>
+	</s:iterator>
+	<div class="am-g am-g-collapse item" style="margin-top: 1em;">
+		<div class="am-u-sm-8"
+			style="padding-left: 0.5em; padding-top: 0.5em;">
+			<span style="line-height: 2em;">订单信息:</span>
+		</div>
+		<div class="am-u-sm-4" align="right" style="padding-top: 0.5em;">
+			<button id="new-addr"
+				style=" outline:none;color: #333;background: #fff; border: #fff 1px solid; margin-top: 5px; margin-right: 10px;<s:if test="baseInfo.num == 0">display: none;</s:if>"
+				onclick="newAddr();">
+				<img src="img/1fd_03.png" style="width: 30%; margin-bottom: 5px; margin-right: 5px;">地址
+			</button>
+		</div>
+	</div>
+	<s:iterator value="goodsList" id="goods">
+		<div class="am-g am-g-collapse">
+			<div class="am-u-sm-9" style="padding-left: 0.5em;">
+				<span style="line-height: 2em; font-size: 0.8em"><s:property
+						value="#goods.name" /> &nbsp;&nbsp;共计<s:property
+						value="#goods.count" />箱</span>
+			</div>
+		</div>
+	</s:iterator>
+	<input id='context1Size' type="hidden"
+		value='<s:property value="addList.size()"/>'>
+	<!--addList  配送订单列表-->
+	<div id="context1" style="width: 100%; padding-top: 0.5em;">
+		<s:iterator value="addList" id="item" status="i">
+			<div id="<s:property value="#i.index"/>" class="noedit"
+				style="width: 100%; border-top: 1px solid #CCCCCC; padding-left: 0.5em;">
+				<input id="addrid_<s:property value="#i.index"/>" type="hidden"
+					value='<s:property value="#item.addrid"/>'>
+				<%-- <div style="width: 100%;">
+					<input id="state_<s:property value="#i.index"/>" type="hidden" value="0">
+					<span class="goods-font1">送至</span>
+					<s:if test='#item.state == "1"'>
+						<button class="am-btn am-btn-primary am-radius" id="but_<s:property value="#i.index"/>" style="font-size: 0.5em;float: right;margin-right: 2em;margin-top: 0.3em;" onclick="edit('<s:property value="#i.index"/>')">编辑</button>
+					</s:if>
+					<s:if test='#item.state == "2"'>
+						<div style="font-size: 0.8em;float: right;margin-right: 2em;margin-top: 0.3em;color:#0e90d2;font-weight: bold;">已发货</div>
+					</s:if>
+				</div> --%>
+				<div class="am-g goods-font2" style="">
+					<div class="am-u-sm-8 " style="margin: 0px; padding: 0px;">
+						送至<br> <font color="#222222"> 地址<s:property
+								value="#i.index+1" />:</font> 
+						<span id="addr_text_<s:property value="#i.index"/>"> 
+							<s:property value="#item.prov" />&nbsp; 
+							<s:property value="#item.city" />&nbsp;
+							<s:property value="#item.dist" /><br> 
+							<s:property	value="#item.addrdetails" />
+						</span>
+					</div>
+					<div class=" am-u-sm-4 " align="right" style="padding: 0em;">
+
+						<button
+							style="color: #797979; background: white; border: none; margin-top: 3px; margin-right: 10px; display:none; font-size: 0.9em;outline:none;"
+							id="save_<s:property value="#i.index"/>"
+							onclick="save('<s:property value="#i.index"/>')">
+							<img src="img/erw_03.png"
+								style="margin-right: 5px; margin-bottom: 4px; width: 25%">保存
+						</button>
+						<button id="select_addr_<s:property value="#i.index"/>"
+							style="color: #797979; background: white; border: none; padding: 0em; margin-right: 10px; margin-top: 2em; display:none; font-size: 0.8em; outline: none;"
+							onclick="javascript:editAddr('<s:property value='#i.index'/>');">
+							<img src="img/erw_07.png"
+								style="margin-right: 5px; margin-bottom: 4px; width: 20%">选择地址
+						</button>
+					</div>
+					<%-- <span id="addr_text_<s:property value='#i.index'/>">地址<s:property value="#i.index+1"/>:&nbsp;<s:property value="#item.addrdetails"/></span>&nbsp;<button class="am-btn am-btn-default am-radius add_select" onclick="javascript:editAddr('<s:property value='#i.index'/>');">选择</button> --%>
+
+				</div>
+				<input id='goodsSize_<s:property value="#i.index"/>' type="hidden"
+					value="<s:property value="#item.goodsList.size()"/>">
+				<s:iterator value="#item.goodsList" id="goods" status="j">
+					<div class="am-g  goods" style="margin: 0em;padding: 0em">
+						<input
+							id='goodsid_<s:property value='#i.index'/>_<s:property value='#j.index'/>'
+							type="hidden" value="<s:property value="#goods.goods_id"/>">
+						<input	id='logistics_<s:property value='#i.index'/>_<s:property value='#j.index'/>'
+							type="hidden" value="<s:property value="#goods.id"/>">
+						<%-- <div class="am-u-sm-7 goods-font2">
+							<s:property value="#goods.goodsName" />
+						</div> --%>
+						<div id="count_<s:property value='#i.index'/>_<s:property value='#j.index'/>"class="am-u-sm-12 count goods-font2" 
+							style="margin: 0em;padding:0em;">
+							<s:property value="#goods.goodsName" />:<span id="value_<s:property value='#i.index'/>_<s:property value='#j.index'/>"><s:property value="#goods.num" /></span>箱
+							<s:if test='#j.index+1 == #item.goodsList.size()'>
+								<s:if test='#item.state == "3"'>
+									<div style="font-size: 0.8em;float: right;margin-right: 2em;margin-top: 0.3em;color:#797979;">已完成</div>
+								</s:if>
+								<s:if test='#item.state == "2"'>
+									<div style="font-size: 0.8em;float: right;margin-right: 2em;margin-top: 0.3em;color:#797979;">已发货</div>
+								</s:if>
+								<s:if test='#item.state == "1"'>
+									<div id="edit_div_<s:property value='#i.index'/>" style="float:right;">
+										<button style="color: #797979; background: white; border: none; margin-top: 3px;font-size: 0.9em;outline:none;"
+											id="edit_<s:property value="#i.index"/>"
+											onclick="edit('<s:property value="#i.index"/>')"><img src="img/1fd_07.png" style="width: 25%;margin-bottom: 4px;margin-right: 5px;">编辑
+										</button>
+										<button style="color: #797979; background: white; border: none; margin-top: 3px; margin-right: 10px;font-size: 0.9em;outline:none;"
+											id="delete_<s:property value="#i.index"/>"
+											onclick="confirmDelete('<s:property value="#i.index"/>')"><img src="img/1fd_09.png" style="width: 25%;margin-bottom: 4px;margin-right: 5px;">删除
+										</button>
+									</div>
+								</s:if>
+							</s:if>
+						</div>
+
+						<div class="am-u-sm-12 count_edit" style="padding: 0em;margin: 0em;font-size:0.8em;position: relative;height: 3em">
+							<span style="float:left;color: #797979;line-height:2.5em"><s:property value="#goods.goodsName" />:</span>
+							<button class="leftround add_sub"  	style="margin-left: 0.3em"
+							 onclick="javascript:sub('<s:property value='#i.index'/>_<s:property value='#j.index'/>');">
+								<img src="img/erw_14.png" style="width:100%;">
+							</button>
+							<input class="edit_num" id="edit_<s:property value='#i.index'/>_<s:property value='#j.index'/>"
+								goodsValue='<s:property value="#goods.num"/>'
+								goods='<s:property value="#goods.goods_id"/>' type="text"
+								value="<s:property value="#goods.num"/>"
+								> 
+							<button style="" class="rightround add_sub" 
+								onclick="javascript:add('<s:property value='#i.index'/>_<s:property value='#j.index'/>');">
+								<img src="img/erw_11.png" style="width: 100%;">
+							</button>
+						</div>
+					</div>
+				</s:iterator>
+			</div>
+		</s:iterator>
+	</div>
+
+	<div class="am-modal am-modal-confirm" tabindex="-1" id="your-modal">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">
+				请选择要发货的地址 <a href="javascript: void(0)"
+					class="am-close am-close-spin" data-am-modal-close>&times;</a>
+			</div>
+			<div class="am-modal-bd" id="dialog_content"></div>
+			<div class="am-modal-footer">
+				<span class="am-modal-btn" data-am-modal-cancel>取消</span> <span
+					class="am-modal-btn" data-am-modal-confirm>确定</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="am-modal am-modal-alert" tabindex="-1" id="error-sale">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">提示信息</div>
+			<div class="am-modal-bd" id="dialog-msg" style="text-align: left"
+				align="left"></div>
+			<div class="am-modal-footer">
+				<span class="am-modal-btn">确定</span>
+			</div>
+		</div>
+	</div>
+<div class="am-modal am-modal-alert" tabindex="-1" id="delete-confirm">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">提示信息</div>
+			<div class="am-modal-bd">是否确认删除该配送信息?</div>
+			<div class="am-modal-footer">
+				<span class="am-modal-btn" data-am-modal-cancel>取消</span>
+				<span class="am-modal-btn" data-am-modal-confirm>确定</span>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

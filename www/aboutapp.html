@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<script src="js/include.js"></script>
+<link rel="stylesheet" href="css/basestyle.css">
+<title>Insert title here</title>
+<link>
+
+<style type="text/css">
+.am-header .am-header-title {
+margin: 0 15%;
+}
+.mi-title {
+	background-color: #5b3914;
+}
+
+.doc-pannel {
+	width: 100%;
+	border-top: 1px solid #dddddd;
+	height: 3em;
+	line-height: 3em;
+}
+
+.doc-pannel span {
+	border: none;
+	width: 5em;
+}
+
+.doc-group {
+	border-top-right-radius: 0;
+	border-top-left-radius: 0;
+	padding: 0em;
+}
+
+.doc-group:after {
+	content: '';
+	display: table;
+	clear: both
+}
+
+.doc-group:before {
+	display: block;
+	color: #bbb;
+	text-transform: uppercase;
+	margin: 0 -15px 15px;
+	padding: 4px 10px;
+	font-size: 12px
+}
+
+body, html {
+	width: 100%;
+	background-image: url('img/mi_bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+hr {
+	margin: 0em;
+	margin-left: 1em;
+	padding: 0px;
+	border-top: 1px solid #e8e8e8;
+}
+.line {
+	margin: 0px;
+	padding: 0px;
+	border-top: 1px solid #dddddd;
+}
+</style>
+</head>
+<body style="">
+
+	<!-- Header -->
+	<header data-am-widget="header" style="background: #5b3914;"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title"
+			style="font-size: 18px; text-align: left; margin: 0 10%;">关于</h1>
+	</header>
+	<div class="am-g" style="text-align: center;">
+			<img alt="" src="img/zhimi_04.png" style="margin-top:1.5em;width: 45%;">			
+	</div>
+	<div class="am-sm-12" style="margin-top: 0.5em;text-align: center;font-size: 12px;color: white;font-family: STSong;">
+		<span style="">公司网址:http://www.hlj-zzkj.com/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+		<span style="">淘宝网址:https://shop155642039.taobao.com/</span>
+	</div>
+	<div class="am-g" style="text-align: center;">
+			<img alt="" src="img/saoma03.png" style="margin-top: 1em;width: 30%;">			
+	</div>
+	<div class="am-sm-12" style="margin-top: 1em;text-align: center;font-size: 12px;color: white;font-family: STSong;">
+		<span style="">扫描二维码，&nbsp;您的朋友也可以下载知米客户端</span>
+	</div>
+	<div class="am-sm-12 " style="margin:1em 0;">
+			<div class="" align="center" >
+				<button onclick="tel()" class=" mi-black"
+					style="width: 100%; height: 50px;background-color: #fe9a0f;border: none;color: white;">联系我们</button>
+			</div>
+	</div>
+	<div class="am-sm-12" style="margin-top: 1em;text-align: left;font-size: 13px;color: white;padding: 0 2.5em; font-family: STSong;">
+		<span style="">之周科技指定核心区域，与五常民乐乡农户签约种植，从优选稻种、大棚育苗、插秧、施肥到后期收割、脱谷、研磨、包装等所有过程均由专人负责全程监管，保证了“米之周民乐自产米”的高品质。</span><br>
+		
+	</div>
+	<div class="am-u-sm-11 line" style="margin-left: 1em;margin-top: 1em;"></div>	
+	<div class="am-sm-12" style="margin-top: 2em;text-align: center;font-size: 12px;color: white;font-family: STSong;">
+		<span style="">Copyright2016</span><br>
+		<span>黑龙江之周科技有限公司版权所有</span>
+	</div>
+	
+	
+
+
+
+	<div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
+  			<div class="am-modal-dialog">
+  			  <div class="am-modal-hd">商家电话</div>
+  			  <div class="am-modal-b" id="mobel"></div>
+   			 <div class="am-modal-footer">
+      				<span class="am-modal-btn" style="color:#7cc5a7;" data-am-modal-cancel>取消</span>
+      				<span class="am-modal-btn" style="color:#7cc5a7;" data-am-modal-confirm>拨打</span>
+    		</div>
+  			</div>
+		</div>
+		
+	<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">错误</div>
+			<div class="am-modal-bd">
+				<a id="errmsg"></a>
+			</div>
+			<div class="am-modal-footer">
+				<span class="am-modal-btn">确定</span>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+	var userid = window.localStorage.getItem('userid');
+		jQuery(document).ready(function() {
+			queryTel();
+		});
+		
+		function queryTel() {
+			$.ajax({
+				type : "post",
+				url : url("RiceDetail.refuseTel"),
+				dataType : "jsonp",
+				jsonp : "callback",
+				jsonpCallback : "teldd",
+				success : function(data) {
+					var phone = data.tellist[0].tel;
+					$('#mobel').html(phone);
+				},
+				error : function() {
+				}
+			});
+
+		}	
+	function tel() {
+		var callcenter = $('#mobel').html();
+		$('#my-prompt').modal({
+		      relatedTarget: this,
+		      onConfirm: function(e) {				
+		    	  window.PhoneCaller.call(callcenter,callsucc,callfail);
+			},
+			onCancel: function(e) {
+			        
+		      }
+		});
+	}
+		
+
+		
+	</script>
+
+</body>
+</html>

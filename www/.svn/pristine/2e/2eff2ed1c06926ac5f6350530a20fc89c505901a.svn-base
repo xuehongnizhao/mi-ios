@@ -1,0 +1,454 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<script src="js/include.js"></script>
+<script src="js/selcontact.js"></script>
+<link rel="stylesheet" href="css/basestyle.css">
+<style type="text/css">
+body, html {
+	width: 100%;
+	height: 100%;
+	background-image: url('img/mi_bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.am-navbar .am-navbar-nav {
+	background-color: #f5f3f4;
+}
+
+.select_class {
+	background-color: #e1e6d2;
+	width: 73%;
+	-webkit-appearance: none;
+	border: none;
+	outline: none;
+	height: 2.5em;
+	margin-left: 2em;
+}
+
+.line {
+	border: none;
+	border-top: 1px solid #ddd;
+	height: 1px;
+	width: 100%;
+	margin: 0em
+}
+
+.margin {
+	margin: 0em;
+}
+
+.item-input {
+	height: 2.5em;
+	line-height: 2.5em;
+	border: 0px;
+	margin: 0px;
+	background: transparent;
+	border-color: transparent;
+	padding: 0px;
+	outline: none;
+	color: #333333;
+	padding-left: 1em;
+	width: 73%;
+}
+
+.item-label {
+	height: 2.5em;
+	text-align: center;
+	line-height: 2.5em;
+	font-weight: normal;
+	color: #72777a;
+	margin-bottom: 0;
+}
+
+.am-header .am-header-title {
+	margin: 0 15%;
+}
+</style>
+
+</head>
+
+<body>
+	<header data-am-widget="header"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title"
+			style="font-size: 18px; text-align: left; margin: 0 10%;">修改收货地址</h1>
+	</header>
+	<div class="am-g" style="background: #e1e6d2">
+
+		<input type="hidden" id="id" name="id" value="" /> <input
+			type="hidden" id="userid" name="userid" value="" /> <a
+			class="am-u-sm-3 am-u-sm-push-9" href="javascript:void(0);"
+			style="padding: 0px; border-left: none;" onclick="selectContact()">
+			<div align="center" style="margin-top: 1em;">
+				<img width="60%" src="img/addr_contact.png" style="color: #666;"></img>
+			</div>
+			<div
+				style="font-size: 1em; color: #4399f1; margin-top: 0.5em; color: #92bf64;"
+				align="center">选联系人</div>
+		</a>
+
+		<div class="am-u-sm-9 am-u-sm-pull-3"
+			style="padding-left: 0px; padding-right: 0px; padding-top: 0.5em; padding-bottom: 0.5em; border-right: 1px solid #9a9a9a; border-top: none; border-bottom: none">
+			<div style="color: #646464; padding-left: 0.5em;">
+				<label for="contact" class="item-label">收货人</label> <input
+					id="contact" name="contact" type="text" class="item-input" value />
+			</div>
+			<div class="line"
+				style="margin-top: 0.5em; margin-bottom: 0.5em; margin-left: 2%; width: 98%; border-top: 1px #9a9a9a solid; border-bottom: none"></div>
+			<div style="color: #646464; padding-left: 0.5em;">
+				<label for="phone" class="item-label">手机号</label> <input id="phone"
+					name="phone" type="text" class="item-input" value />
+			</div>
+		</div>
+	</div>
+	<div class="am-form-group am-g"
+		style="margin-top: 1em; border: none; background: #e1e6d2">
+		<div class="am-u-sm-12 "
+			style="padding-left: 0px; padding-right: 0px; padding-top: 0.5em; padding-bottom: 0.5em; padding-left: 0.5em; border: none;">
+			<label for="prov" class="item-label">省&nbsp;&nbsp;份</label> <input
+				id="prov" class="select_class " value="" readonly>
+		</div>
+		<div class="am-u-sm-12 line"
+			style="margin-left: 2.5vw; width: 95%; border-top: 1px #9a9a9a solid; border-bottom: none"></div>
+		<div class="am-u-sm-12 "
+			style="padding-left: 0px; padding-right: 0px; padding-top: 0.5em; padding-bottom: 0.5em; padding-left: 0.5em; border: none;">
+			<label for="city" class="item-label">城&nbsp;&nbsp;市</label> <input
+				id="city" class="select_class" readonly>
+		</div>
+		<div class="am-u-sm-12 line"
+			style="margin-left: 2.5vw; width: 95%; border-top: 1px #9a9a9a solid; border-bottom: none"></div>
+		<div class="am-u-sm-12 "
+			style="padding-left: 0px; padding-right: 0px; padding-top: 0.5em; padding-bottom: 0.5em; padding-left: 0.5em; border: none;">
+			<label for="dist" class="item-label">地&nbsp;&nbsp;区</label> <input
+				name="areaid" id="dist" areaid="" class="select_class" readonly>
+		</div>
+		<span class="am-form-caret"></span>
+
+	</div>
+
+	<div class="am-u-sm-12 "
+		style="background: #e1e6d2; padding-left: 0px; padding-right: 0px; padding-top: 0.5em; padding-bottom: 0.5em; padding-left: 0.5em; border: border-bottom:1px #eee solid">
+		<label for="addrdetails" class="item-label">详细地址</label> <input
+			name="addrdetails" placeholder="输入详细地址" id="addrdetails" areaid=""
+			class="item-input" style="width: 75%">
+	</div>
+	<div id="d_area">
+		<script id="s_area" type="text/html">
+			<div class="am-modal-actions" id="modal_prov" style="max-height: 80%;overflow:auto;">
+      			<div class="am-modal-actions-group margin" >
+				<ul id="u-prov" class="am-list">
+					{{each prov as val i}}
+					<li style = "height:3em;line-height:3em;border-bottom:1px #ededed solid;border-top:none;" val="{{val.prov}}" onclick="provitemClick(this)"> <span style = "display:block;">{{val.prov}}</span></li>
+					{{/each}}
+	  				<li style="border: none;"><button class="am-btn am-btn-secondary am-btn-block"  style = "height:3em;background:white;color:#4489ce;border:none;" onclick="closemodal('#modal_prov')">取消</button></li>
+				</ul>
+      			</div>
+    		</div>
+			<div class="am-modal-actions" id="modal_city" style="max-height: 80%;overflow:auto;">
+      			<div class="am-modal-actions-group margin">
+				<ul id="u-city" class="am-list">
+					{{each city as val i}}
+					<li style = "height:3em;line-height:3em;border-bottom:1px #ededed solid;border-top:none;" val="{{val.city}}" onclick="cityitemClick(this)" > <span style = "display:block;">{{val.city}}</span></li>
+					{{/each}}
+	  				<li style="border: none;"><button class="am-btn am-btn-secondary am-btn-block" style = "height:3em;background:white;color:#4489ce;border:none;" onclick="closemodal('#modal_city')">取消</button></li>
+				</ul>
+      			</div>
+    		</div>
+			<div class="am-modal-actions" id="modal_dist" style="max-height: 80%;overflow:auto;">
+      			<div class="am-modal-actions-group margin">
+				<ul id = "u-dist"class="am-list">
+					{{each dist as val i}}
+					<li style = "height:3em;line-height:3em;border-bottom:1px #ededed solid;border-top:none;" val="{{val.dist}}" areaid="{{val.id}}" onclick="distitemClick(this)"> <span style = "display:block;">{{val.dist}}</span></li>
+					{{/each}}
+	  				<listyle="border: none;"><button class="am-btn am-btn-secondary am-btn-block" style = "height:3em;background:white;color:#4489ce;border:none;" onclick="closemodal('#modal_dist')">取消</button></li>
+				</ul>
+      			</div>
+    		</div>
+			
+			<span class="am-form-caret"></span>
+		</script>
+
+	</div>
+
+	<div style="height: 13%"></div>
+	<div class="am-g"
+		style="width: 100%; padding: 1em 1.5em; background-color: transparent;margin-top: 5%;">
+
+
+		<div class="am-u-sm-12" align="center"
+			style="padding: 0em; margin: 0em;">
+			<button
+				style="color: white; background: #ff3b30; border: none; width: 100%; height: 50px; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px;"
+				onclick="updateAddrSubmit()">保存</button>
+		</div>
+	</div>
+
+	<div class="am-modal am-modal-alert" tabindex="-1" id="error-sale">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">提示信息</div>
+			<div class="am-modal-bd" id="dialog-msg" style="text-align: left"
+				align="left"></div>
+			<div class="am-modal-footer">
+				<span class="am-modal-btn">确定</span>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+<script type="text/javascript">
+	var userid = window.localStorage.getItem('userid');
+	function isNull(id) {
+		var _value = $(id).val();
+		_value = _value.replace(" ");
+		if (_value == "") {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	function updateAddrSubmit() {
+
+		if (isNull("#contact")) {
+			showalert("联系人不能为空!");
+			return;
+		}
+		if (isNull("#phone")) {
+			showalert("手机号不能为空!");
+			return;
+		}
+		if (isNull("#addrdetails")) {
+			showalert("详细地址不能为空!");
+			return;
+		}
+		if (isNull("#dist")) {
+			showalert("所在地区不能为空!");
+			return;
+		}
+
+		var reg = /^1\d{10}$/;
+		if (!reg.test($("#phone").val())) {
+			alert("请输入正确的手机号！");
+			return;
+		}
+
+		var murl = url("Addr.updateaddr&u=" + userid);
+		murl += "&t=" + window.localStorage.getItem('token');
+		murl += "&contact=" + getValue("#contact");
+		murl += "&phone=" + getValue("#phone");
+		murl += "&addrdetails=" + getValue("#addrdetails");
+		murl += "&areaid=" + $("#dist").attr("areaid");
+		murl += "&id=" + getValue("#id");
+		murl = encodeURI(murl);
+		murl = encodeURI(murl);
+
+		$.ajax({
+			type : "post",
+			url : murl,
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "update",
+			success : function(json) {
+				if (!checktoken(json)) {
+					return;
+				}
+				if (json.exist < 1) {
+					if (json.update > 0) {
+						if (json.lognum > 0) {
+							alert("修改地址后你的配送信息同时更新了，请在订单查询中查看。");
+
+						}
+						window.history.back();
+					}
+				} else {
+					showalert("当前地址已存在");
+				}
+			},
+			error : function() {
+			}
+		});
+
+	}
+
+	function CityComboBox() {
+		//event.preventDefault();
+		var select1 = $("#prov").val();
+		var murl = url("Addr.getcity&prov=" + select1);
+		murl = encodeURI(murl);
+		murl = encodeURI(murl);
+		$
+				.ajax({
+					type : "post",
+					url : murl,
+					dataType : "jsonp",
+					jsonp : "callback",
+					jsonpCallback : "citylist",
+					success : function(json) {
+						var d = json.city;
+						var strHtml = "";
+						for (var i = 0; i < d.length; i++) {
+							if (i == 0)
+								$("#city").val(d[i].city);
+							strHtml += '<li style = "height:3em;line-height:3em;border-bottom:1px #ededed solid;border-top:none;" val="'
+									+ d[i].city
+									+ '" onclick="cityitemClick(this)"> <span style = "display:block;">'
+									+ d[i].city + '</span></li>';
+						}
+						strHtml += '<li style="border: none;"><button class="am-btn am-btn-secondary am-btn-block" style = "height:3em;background:white;color:#4489ce;border:none;" onclick="closemodal(\'#modal_city\')">取消</button></li>';
+						$("#u-city").html(strHtml);
+						DistComboBox();
+					},
+					error : function() {
+					}
+				});
+
+	}
+
+	function DistComboBox(event) {
+		//event.preventDefault();
+		var select1 = $("#prov").val();
+		var select2 = $("#city").val();
+		var murl = url("Addr.getdist&prov=" + select1 + "&city=" + select2);
+		murl = encodeURI(murl);
+		murl = encodeURI(murl);
+		$
+				.ajax({
+					type : "post",
+					url : murl,
+					dataType : "jsonp",
+					jsonp : "callback",
+					jsonpCallback : "distlist",
+					success : function(json) {
+						var d = json.dist;
+						var strHtml = "";
+						for (var i = 0; i < d.length; i++) {
+							if (i == 0) {
+								$("#dist").val(d[i].dist);
+								$("#dist").attr("areaid", d[i].id);
+							}
+							strHtml += '<li style = "height:3em;line-height:3em;border-bottom:1px #ededed solid;border-top:none;" val="'
+									+ d[i].dist
+									+ '"areaid="'
+									+ d[i].id
+									+ '" onclick="distitemClick(this)"> <span style = "display:block;">'
+									+ d[i].dist + '</span></li>';
+						}
+						strHtml += '<li style="border: none;" ><button class="am-btn am-btn-secondary am-btn-block" style = "height:3em;background:white;color:#4489ce;border:none;" onclick="closemodal(\'#modal_dist\')">取消</button></li>';
+						$("#u-dist").html(strHtml);
+
+					},
+					error : function() {
+					}
+				});
+	}
+	function selectContactCallback(jsonStr) {
+		var code = jQuery.parseJSON(jsonStr);
+		document.getElementById('contact').value = code.data.name;
+		document.getElementById('phone').value = code.data.phone;
+	}
+
+	jQuery(document).ready(function() {
+		var addrid = getParameter("addrid");
+		$('#id')[0].value = addrid;
+		getAddrInfo(addrid);
+
+	});
+	function getAddrInfo(addrid) {
+		var token = window.localStorage.getItem('token');
+		$.ajax({
+			type : "post",
+			url : url("Addr.getaddrfromid&addrid=" + addrid + "&u=" + userid
+					+ "&t=" + token),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "addr",
+			success : function(json) {
+				if (!checktoken(json)) {
+					return;
+				}
+				$('#contact')[0].value = json.addr[0].contact;
+				$('#phone')[0].value = json.addr[0].phone;
+				$('#addrdetails')[0].value = json.addr[0].addrdetails;
+				$('#prov').val(json.addr[0].prov);
+				$('#city').val(json.addr[0].city);
+				$('#dist').val(json.addr[0].dist);
+				$('#dist').attr("areaid", json.addr[0].areaid);
+
+				var html = template('s_area', json);
+				$('#d_area').html(html);
+
+			},
+			error : function() {
+			}
+		});
+	}
+
+	function showalert(msg) {
+		var dialogMsg = document.getElementById('dialog-msg');
+		dialogMsg.innerHTML = msg;
+		$("#error-sale").modal();
+
+	}
+
+	$(function() {
+		$('#prov').on('click', function(e) {
+			$('#modal_prov').modal();
+		});
+
+		$('#city').on('click', function(e) {
+			$('#modal_city').modal();
+			;
+		});
+
+		$('#dist').on('click', function(e) {
+			$('#modal_dist').modal();
+		});
+
+	});
+
+	function provitemClick(item) {
+		var lastprov = $('#prov').val();
+		$('#prov').val(item.getAttribute("val"));
+		var newprov = $('#prov').val();
+		if (lastprov != newprov) {
+			CityComboBox();
+		}
+		$('#modal_prov').modal('close');
+	}
+
+	function cityitemClick(item) {
+		var lastcity = $('#city').val();
+		$('#city').val(item.getAttribute("val"));
+		var newcity = $('#city').val();
+		if (lastcity != newcity) {
+			DistComboBox();
+		}
+		$('#modal_city').modal('close');
+	}
+
+	function distitemClick(item) {
+		var lastdist = $('#dist').val();
+		$('#dist').val(item.getAttribute("val"));
+		$('#dist').attr("areaid", item.getAttribute("areaid"));
+		$('#modal_dist').modal('close');
+	}
+
+	function closemodal(id) {
+		$(id).modal('close');
+	}
+</script>
+</html>

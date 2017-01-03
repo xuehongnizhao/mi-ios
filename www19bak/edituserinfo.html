@@ -1,0 +1,417 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>Insert title here</title>
+<script src="js/include.js"></script>
+<link>
+<style type="text/css">
+
+.am-header .am-header-title {
+margin: 0 15%;
+}
+
+body, html {
+	width: 100%;
+	height: 100%;
+	background: white;
+}
+
+.mi-title {
+	background-color: #474240;
+}
+
+.mi-black {
+	color: #4489ce;
+	background: white;
+	outline: none;
+	border: white 1px solid;
+	border-top: #dddddd 1px solid;
+}
+
+.bk {
+	border-bottom: 1px solid #eeeeee;
+}
+
+.row_height {
+	height: 3.6em;
+	line-height: 3.6em;
+}
+
+.honor, .item {
+	padding-left: 1em;
+	padding-right: 1em;
+	padding-bottom: 0.5em;
+}
+
+.bcolor {
+	background-color: #ffffff;
+}
+
+label {
+	
+}
+
+.am-form-group {
+	margin-bottom: 0em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	background: white;
+	line-height: 2.5em;
+}
+
+.am-form-group .am-u-sm-10 {
+	margin: 0em;
+	padding: 0em;
+	padding-left: 1em;
+}
+
+.am-form-group .am-u-sm-2 {
+	padding-left: 1em;
+	padding-right: 0em;
+}
+
+.am-form-group .am-u-sm-2 input {
+	border: none;
+	outline: none;
+	color: #72777a;
+}
+
+.am-form-group .am-u-sm-2 input[readonly] {
+	background-color: white;
+}
+
+.am-form-group .am-u-sm-10 input {
+	border: 0px;
+	outline: none;
+	padding-left: 1em;
+	border-color: transparent;
+	color: #333333;
+}
+
+.am-form-group .am-u-sm-10 input:focus {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.am-form-group  textarea:focus {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.am-form-group .am-u-sm-10 input[readonly] {
+	background-color: white;
+}
+
+hr {
+	margin: 0em;
+	padding: 0em;
+	border-top: 1px solid #dddddd;
+}
+
+.hr-left {
+	margin-left: 1em;
+}
+
+.margin {
+	margin: 0em;
+}
+</style>
+</head>
+<body style="background: #f0f0f0" onload="showDateDialog();">
+
+	<!-- Header -->
+	<header data-am-widget="header"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"><i
+				class="am-icon-angle-left" style="font-size: 2em;"></i> </a>
+		</div>
+		<h1 class="am-header-title">个人信息</h1>
+	</header>
+
+	<div style="background:white">
+		<div class="am-form-group am-g">
+			<div class="am-u-sm-2">
+				<input type="text" value="姓名" readonly>
+			</div>
+			<div class="am-u-sm-10">
+				<input type="text" id="user-name" placeholder="请输入你的姓名" name="uname">
+			</div>
+		</div>
+		<hr class="hr-left">
+		<div class="am-form-group am-g">
+			<div class="am-u-sm-2">
+				<input type="text" value="性别" readonly>
+			</div>
+			<div class="am-u-sm-10 " id="sex-group">
+				<input type="text" id="user-sex" name="sex" readonly>
+			</div>
+		</div>
+		<hr class="hr-left">
+		<div class="am-form-group am-g">
+			<div class="am-u-sm-2">
+				<input type="text" value="生日" readonly>
+			</div>
+			<div class="am-u-sm-10">
+				<input id="user-birth" type="text" class="" name="birth"
+					onclick="showDateDialog();" readonly />
+			</div>
+		</div>
+		<hr class="hr-left">
+
+		<div class="am-form-group am-g">
+			<div class="am-u-sm-2">
+				<input type="text" value="QQ" readonly>
+			</div>
+			<div class="am-u-sm-10">
+				<input type="text" id="user-qq" placeholder="请输入你的QQ号码" name="qq">
+			</div>
+		</div>
+		<hr class="hr-left">
+		<!-- 
+		<div class="am-form-group am-g">
+			<div class="am-u-sm-2">
+				<input type="text" value="兴趣" readonly>
+			</div>
+			<div class="am-u-sm-10">
+				<input type="text" id="user-interest" placeholder="请输入你的兴趣"
+					name="interest">
+			</div>
+		</div>
+		-->
+		<div class="am-form-group am-g">
+			<div class="am-u-sm-2">
+				<input type="text" value="微信" readonly>
+			</div>
+			<div class="am-u-sm-10">
+				<input type="text" id="user-wechat" placeholder="请输入你的微信号码"
+					name="wechat">
+			</div>
+		</div>
+		<hr class="hr-left">
+		<div class="am-form-group am-g">
+			<div class="am-u-sm-2">
+				<input type="text" value="邮箱" readonly>
+			</div>
+			<div class="am-u-sm-10">
+				<input type="text" id="user-email" placeholder="请输入你的邮箱地址"
+					name="email">
+			</div>
+		</div>
+		<hr class="hr-left">
+		<div class="am-form-group am-g">
+			<div class="am-u-sm-2">
+				<input type="text" value="职业" readonly>
+			</div>
+			<div class="am-u-sm-10">
+				<input type="text" id="user-occupation" placeholder="请输入你的职业"
+					name="occupation">
+			</div>
+		</div>
+	</div>
+
+<!-- 		<div class="am-form-group am-g">
+			<div class="am-u-sm-2">
+				<input type="text" value="公司" readonly>
+			</div>
+			<div class="am-u-sm-10">
+				<input type="text" id="user-company" placeholder="请输入你的公司"
+					name="company">
+			</div>
+		</div>
+		<hr class="hr-left">
+		<div class="am-form-group am-g">
+			<div class="am-u-sm-2">
+				<input type="text" value="学校" readonly>
+			</div>
+			<div class="am-u-sm-10">
+				<input type="text" id="user-school" placeholder="请输入你的学校"
+					name="school">
+			</div>
+		</div>
+-->
+		<div style="height: 2%"></div>
+		<hr>
+		<div style="background:white">
+		
+		<div style="width: 100%; height: 10px"></div>
+		
+		<div class="am-form-group am-g">
+			<div class="am-u-sm-2">
+				<input type="text" value="签名" readonly>
+			</div>
+			<div class="am-u-sm-10">
+				<input class="" id="user-signature" name="signature"
+					style="border: none; resize: none; width: 100%; outline: none;"
+					placeholder="请输入个人签名">
+			</div>
+		</div>
+		<hr>
+
+		<div class="am-form-group am-g">
+			<div class="am-u-sm-2">
+				<input type="text" value="简介" readonly>
+			</div>
+			<div class="am-u-sm-10">
+				<input class="" id="user-intro" placeholder="请输入个人简介" name="perinfo"
+					style="border: none; resize: none; width: 100%; outline: none;">
+			</div>
+		</div>
+		<hr>
+		</div>
+
+		<div class="am-form-group " hidden="hidden">
+			<div class="" align="center" style="margin: 0.5em;">
+				<button onclick="updateperInfo()" class=" mi-black"
+					style="width: 80%; height: 50px;">保存修改</button>
+			</div>
+		</div>
+	</div>
+
+	<div style="height: 13%"></div>
+	<div class="am-g"
+		style="width: 100%; background-color: white; position: fixed; bottom: 0px; margin-top: 5%; padding: 0em;">
+
+
+		<div class="am-u-sm-12" align="center"
+			style="padding: 0em; margin: 0em;">
+			<button class="mi-black" style="width: 100%; height: 50px"
+				onclick="updateperInfo()">保存修改</button>
+		</div>
+	</div>
+
+	<div class="am-modal-actions" id="input_xb">
+		<div class="am-modal-actions-group margin">
+			<ul class="am-list">
+				<li style = "height:3em;line-height:3em;" val="男" data-am-modal-confirm><span>男</span></li>
+				<li style = "height:3em;line-height:3em;" val="女" data-am-modal-confirm><span>女</span></li>
+				<li><button class="am-btn am-btn-secondary am-btn-block"
+						data-am-modal-cancel style = "height:3em;">取消</button></li>
+			</ul>
+		</div>
+	</div>
+
+</body>
+<script type="text/javascript">
+	var userid = window.localStorage.getItem("userid");
+
+	$('#user-sex').on('click', function() {
+		$('#input_xb').modal({
+			relatedTarget : this,
+			onConfirm : function(e) {
+				$('#user-sex').val(e.trigger.getAttribute("val"));
+				$('#input_xb').modal('close');
+			},
+			onCancel : function(e) {
+				$('#input_xb').modal('close');
+			}
+
+		});
+	});
+
+	function showDateDialog() {
+        
+		$('#user-birth').text('').scroller($.extend({
+			preset : 'date'
+		}, {
+			theme : 'android-ics light',
+			mode : 'scroller',
+			display : 'bottom'
+		}));
+    }
+
+
+
+	jQuery(document).ready(function() {
+		getperInfo();
+	});
+
+	function getperInfo() {
+		//var uid = '20731ea0c5984e59a27f4167fc46930e';//6267c41208444ee4b0f9b6261b5920f0--20731ea0c5984e59a27f4167fc46930e
+		var token = window.localStorage.getItem('token');
+		$.ajax({
+			type : "post",
+			url : url("User.perinfo&u=" + userid+"&t="+token),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "pinfo",
+			success : function(json) {
+				if(!checktoken(json)){
+	        		return; 
+	        	}
+				var per = json.pinfo[0];
+
+				$('#user-name').val(per.uname == 'null' ? "" : per.uname);
+				$('#user-sex').val(per.sex == 'null' ? "" : per.sex);
+				$('#user-birth').val(per.birth == 'null' ? "" : per.birth);
+				$('#user-signature').val(
+						per.signature == 'null' ? "" : per.signature);
+				$('#user-occupation').val(
+						per.occupation == 'null' ? "" : per.occupation);
+				$('#user-qq').val(per.qq == 'null' ? "" : per.qq);
+				//$('#user-interest').val(
+				//		per.interest == 'null' ? "" : per.interest);
+				//$('#user-company')
+				//		.val(per.company == 'null' ? "" : per.company);
+				//$('#user-school').val(per.school == 'null' ? "" : per.school);
+				$('#user-wechat').val(per.wechat == 'null' ? "" : per.wechat);
+				$('#user-email').val(per.email == 'null' ? "" : per.email);
+				$('#user-intro').val(per.perinfo == 'null' ? "" : per.perinfo);
+			},
+			error : function() {
+			}
+		});
+
+	}
+
+	function updateperInfo() {
+		//var uid = '20731ea0c5984e59a27f4167fc46930e';//6267c41208444ee4b0f9b6261b5920f0--20731ea0c5984e59a27f4167fc46930e
+		var murl = url("User.updatePerInfo&u=" + userid);
+		murl +="&t=" + window.localStorage.getItem('token');
+		murl += "&uname=" + $('#user-name').val().trim();
+		murl += "&sex=" + $('#user-sex').val().trim();
+		murl += "&birth=" + $('#user-birth').val().trim();
+		murl += "&signature=" + $('#user-signature').val().trim();
+		murl += "&occupation=" + $('#user-occupation').val().trim();
+		murl += "&qq=" + $('#user-qq').val().trim();
+		//murl += "&interest=" + $('#user-interest').val().trim();
+		//murl += "&company=" + $('#user-company').val().trim();
+		//murl += "&school=" + $('#user-school').val().trim();
+		murl += "&wechat=" + $('#user-wechat').val().trim();
+		murl += "&email=" + $('#user-email').val().trim();
+		murl += "&perinfo=" + $('#user-intro').val().trim();
+
+		murl = encodeURI(murl);
+		murl = encodeURI(murl);
+
+		$.ajax({
+			type : "post",
+			url : murl,
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "update",
+			success : function(json) {
+				if(!checktoken(json)){
+	        		return; 
+	        	}
+				if (json.update > 0) {
+					window.history.back();
+				} else {
+					showalert("保存失败");
+				}
+			},
+			error : function() {
+			}
+		});
+
+	}
+</script>
+</html>

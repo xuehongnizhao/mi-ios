@@ -1,0 +1,278 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>Insert title here</title>
+<script src="js/include.js"></script>
+<link>
+<style type="text/css">
+
+.am-header .am-header-title {
+margin: 0 15%;
+}
+
+.mi-black {
+	color: #4489ce;
+	background: white;
+	outline: none;
+	border: white 1px solid;
+	border-top: #dddddd 1px solid;
+}
+
+.bk {
+	border-bottom: 1px solid #eeeeee;
+}
+
+.row_height {
+	height: 3.6em;
+	line-height: 3.6em;
+}
+
+.honor, .item {
+	padding-left: 1em;
+	padding-right: 1em;
+	padding-bottom: 0.5em;
+}
+
+.bcolor {
+	background-color: #ffffff;
+}
+
+label {
+	
+}
+
+.am-form-group {
+	margin-bottom: 0em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	background: #fbfef1;
+	line-height: 2em;
+}
+
+.am-form-group .am-u-sm-10 {
+	margin: 0em;
+	padding: 0em;
+	padding-left: 1em;
+}
+
+.am-form-group .am-u-sm-2 {
+	padding-left: 1em;
+	padding-right: 0em;
+}
+
+.am-form-group .am-u-sm-2 input {
+	border: none;
+	outline: none;
+	color: #a4a2a2;
+}
+
+.am-form-group .am-u-sm-2 input[readonly] {
+	background-color: #fbfef1;
+}
+
+.am-form-group .am-u-sm-10 input {
+	border: 0px;
+	outline: none;
+	padding-right: 1em;
+	border-color: transparent;
+	color: #a4a2a2;
+	float:right;
+	text-align: right;
+	margin-top: 5px;
+}
+.am-form-group .am-u-sm-8 input {
+	border: 0px;
+	outline: none;
+	padding-right: 1em;
+	border-color: transparent;
+	color: #333333;
+	float:right;
+	text-align: right;
+	margin-top: 5px;
+	background-color: #fbfef1;
+}
+
+
+.am-form-group .am-u-sm-10 input:focus {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.am-form-group  textarea:focus {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.am-form-group .am-u-sm-10 input[readonly] {
+	background-color: #fbfef1;
+}
+
+hr {
+	margin: 0em;
+	padding: 0em;
+	border-top: 1px solid #dddddd;
+}
+
+.hr-left {
+	margin-left: 1em;
+}
+
+.margin {
+	margin: 0em;
+}
+
+body, html {
+	width: 100%;
+	background-image: url('img/mi_bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.mi-title {
+	background-color: #5b3914;
+}
+input[name=edit-name] {
+	border: 1px solid #eee;
+	line-height: 2em;
+	height: 2em;
+	background: transparent;
+	width: 130px;
+	outline: none;
+	text-align: center;
+}
+input[name=edit-mobile] {
+	border: 1px solid #eee;
+	line-height: 2em;
+	height: 2em;
+	background: transparent;
+	width: 130px;
+	outline: none;
+	text-align: center;
+}
+.am-btn-secondary {
+    color: #4489ce;
+    background-color: white;
+    border-color: white;
+}
+hr {
+	margin: 0em;
+	margin-left: 1em;
+	padding: 0px;
+	border-top: 1px solid #e8e8e8;
+	margin-top: 8px;
+}
+</style>
+</head>
+<body style="">
+
+	<!-- Header -->
+	<header data-am-widget="header" style=""
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title"
+			style="font-size: 18px; text-align: left; margin: 0 10%;">米讯</h1>
+	</header>
+	<div class="am-g" style="background-color: transparent;padding: 0 15px;">
+	   		<div id="name1" style="color:white"></div>
+	   		<div id="" style="color:white;font-size: 13px;">（发布:<span id="ctime1"></span>）</div>
+	</div>
+	<hr>
+	<div class="am-g" style="background-color: transparent;padding: 0 15px;margin-top: 8px;">
+	   <div id="con1" style="color: white;font-size: 14px;"></div>
+	   <img	id="pic1" src=""style="height: auto; width: 100%;margin-top: 10px; ">
+	</div>
+	<div class="am-g" style="background-color: transparent;padding: 0 15px;margin-top: 8px;">
+	   <div id="con2" style="color: white;font-size: 14px;"></div>
+	   <img	id="pic2" src=""style="height: auto; width: 100%;margin-top: 10px; ">
+	</div>
+	<div class="am-g" style="background-color: transparent;padding: 0 15px;margin-top: 8px;">
+	   <div id="con3" style="color: white;font-size: 14px;"></div>
+	   <img	id="pic3" src=""style="height: auto; width: 100%;margin-top: 10px; ">
+	</div>
+	<div class="am-g" style="background-color: transparent;padding: 0 15px;margin-top: 8px;">
+	   <div id="con4" style="color: white;font-size: 14px;"></div>
+	   <img	id="pic4" src=""style="height: auto; width: 100%;margin-top: 10px; ">
+	</div>
+	<div class="am-g" style="background-color: transparent;padding: 0 15px;margin-top: 8px;">
+	   <div id="con5" style="color: white;font-size: 14px;"></div>
+	   <img	id="pic5" src=""style="height: auto; width: 100%;margin-top: 10px; ">
+	</div>
+	
+	
+    
+</body>
+<script type="text/javascript">
+	var userid = window.localStorage.getItem("userid");
+	var id = getParameter("id");
+	var isLogin = true;
+	jQuery(document).ready(function() {
+		getMixunInfo();
+
+	});
+	function getMixunInfo() {
+
+		$.ajax({
+			type : "post",
+			url : url("Home.getMiMessageInfo&id="+id+""),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "aclist",
+			success : function(json) {
+				var m_name = json.messlist[0].title;
+				var m_time = json.messlist[0].ctime;
+				$('#name1').html(m_name);
+				$('#ctime1').html(m_time);
+				//$('#con1')[0].textContent = json.messlist[0].content1;
+				//$('#pic1').attr('src', json.messlist[0].image1);
+				//$('#con2')[0].textContent = json.messlist[0].content2;
+				//$('#pic2').attr('src', json.messlist[0].image2);
+				//$('#con3')[0].textContent = json.messlist[0].content3;
+				//$('#pic3').attr('src', json.messlist[0].image3);
+				//$('#con4')[0].textContent = json.messlist[0].content4;
+				//$('#pic4').attr('src', json.messlist[0].image4);
+				//$('#con5')[0].textContent = json.messlist[0].content5;
+				//$('#pic5').attr('src', json.messlist[0].image5);
+				checkText('#con1',json.messlist[0].content1);
+				checkText('#con2',json.messlist[0].content2);
+				checkText('#con3',json.messlist[0].content3);
+				checkText('#con4',json.messlist[0].content4);
+				checkText('#con5',json.messlist[0].content5);
+				checkPic('#pic1',json.messlist[0].image1);
+				checkPic('#pic2',json.messlist[0].image2);
+				checkPic('#pic3',json.messlist[0].image3);
+				checkPic('#pic4',json.messlist[0].image4);
+				checkPic('#pic5',json.messlist[0].image5);
+				
+			},
+			error : function() {
+			}
+		});
+
+	}
+	function checkText(id,text){
+		 if(text.length>0){
+			 $(id).html(text);
+		 }else{
+			 $(id).hide();
+		}
+	}
+	function checkPic(id,pic){
+		 if(pic.length>0){
+			 $(id).attr('src',pic);
+		 }else{
+			 $(id).hide();
+		}
+	}
+</script>
+</html>

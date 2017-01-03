@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="stylesheet" href="comm/amazeui/css/amazeui.min.css" />
+<link rel="stylesheet" href="comm/amazeui/css/app.css">
+<link rel="stylesheet" href="css/mobiscroll.custom-2.5.0.min.css">
+<script src="comm/amazeui/js/jquery.min.js"></script>
+<script src="comm/amazeui/js/amazeui.min.js"></script>
+<script src="comm/js/public.js"></script>
+<script src="comm/js/mobiscroll.custom-2.5.0.min.js"></script>
+
+</head>
+
+<body style="background-color: #474240;">
+<script type="text/javascript">
+
+function url(req){
+	return "http://192.168.1.116:8080/mi/s/m?r="+req ;
+}
+
+//20731ea0c5984e59a27f4167fc46930e
+window.localStorage.setItem('userid','20731ea0c5984e59a27f4167fc46930e');  
+
+var userid = window.localStorage.getItem('userid');
+
+$.ajax({
+    type: "post",
+    url: url("FirstPage.gglist"),
+    dataType: "jsonp",
+    jsonp: "callback",
+    jsonpCallback:"ggList",
+    success: function(json){
+    	alert(json);
+    	
+    },
+    error: function(){
+    }
+    });
+
+
+
+</script>
+
+
+
+</body>
+
+

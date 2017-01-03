@@ -1,0 +1,282 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<link rel="stylesheet" href="comm/amazeui/css/amazeui.min.css" />
+<link rel="stylesheet" href="comm/amazeui/css/app.css">
+<link rel="stylesheet" href="css/mobiscroll.custom-2.5.0.min.css">
+<script src="comm/amazeui/js/jquery.min.js"></script>
+<script src="comm/amazeui/js/amazeui.min.js"></script>
+<script src="comm/js/ar_syscore.js"></script>
+<script src="comm/js/public.js"></script>
+<script src="comm/js/template.js"></script>
+<script src="comm/js/mobiscroll.custom-2.5.0.min.js"></script>
+
+<style type="text/css">
+
+.am-header .am-header-title {
+margin: 0 15%;
+}
+
+.mi-title {
+	background-color: #474240;
+}
+
+.mi-black {
+	color: white;
+	background: #474240;
+	outline: none;
+	border: #474240 1px solid;
+	-moz-border-radius: 3px; /* Gecko browsers */
+	-webkit-border-radius: 3px; /* Webkit browsers */
+	border-radius: 3px; /* W3C syntax */
+}
+</style>
+
+
+<style type="text/css">
+button {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.am-tabs-d2 .am-tabs-nav {
+	background-color: white;
+	border-bottom: 1px solid #dddddd;
+}
+
+.am-tabs-d2 .am-tabs-nav a {
+	line-height: 42px;
+	color: #72777a;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active {
+	position: relative;
+	background-color: #fcfcfc;
+	border-bottom: 1px solid #dddddd;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active a {
+	line-height: 42px;
+	color: #72777a;
+	background: #f5f5f5;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active:after {
+	position: absolute;
+	width: 50%;
+	height: 0;
+	bottom: 0;
+	left: 28%;
+	border: 1px solid rgb(141,142,137);
+	content: "";
+	z-index: 1;
+}
+
+.buy-button {
+	background: #e34343;
+	color: white;
+	width: 60%;
+	border: none;
+	height: 40px;
+	font-size: 1em;
+	outline: none;
+	float: right;
+}
+
+.percent-class {
+	background: #e34343;
+	color: white;
+	border: none;
+	border-radius: 3px;
+	line-height: 1.5em;
+	text-align: center;
+	font-size: 0.8em;
+	outline: none;
+	float: left;
+	height: 40px;
+}
+
+.label-sale {
+	background: #e7222b;
+	color: white;
+	border: none;
+	border-radius: 3px;
+	width: 3em;
+	line-height: 1.5em;
+	text-align: center;
+	font-size: 0.8em;
+	outline: none;
+}
+
+.Bar, .Bars {
+	position: relative;
+	/* 宽度 */
+	border: 1px solid #e60012;
+	padding: 0px;
+}
+
+.Bar div, .Bars div {
+	display: block;
+	position: relative;
+	background: #f06e6e; /* 进度条背景颜色 */
+	color: #333333;
+	height: 1em; /* 高度 */
+	line-height: 1em; /* 必须和高度一致，文本才能垂直居中 */
+}
+
+.Bars div {
+	background: #090
+}
+
+.Bar div span, .Bars div span {
+	position: absolute;
+	width: 6em; /* 宽度 */
+	text-align: center;
+	font-weight: normal;
+	font-size: 0.8em;
+}
+.ul-fixed {
+  position: fixed;
+  top: 49px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1010;
+}
+</style>
+</head>
+<body bgcolor="#f0f0f0">
+
+	<!-- Header -->
+	<header data-am-widget="header"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title">订购</h1>
+	</header>
+
+	<div id="l_tabs" data-am-widget="tabs" class="am-tabs am-tabs-d2"
+		style="margin: 0px;">
+		<script id="s_tab" type="text/html">
+		<ul class="am-tabs-nav am-cf ul-fixed" style="width: 100%;height:3em">
+			<li class="am-active" style = "height:3em"><a href="[data-tab-panel-0]" style = "background:transparent;height:2em;width:70%; margin:0.5em auto;line-height:2em">大米</a></li>
+			<div style = "margin:0.5em auto;width:1px;background:rgb(183,183,183);"></div>
+			<li class="" style = "height:3em"><a href="[data-tab-panel-1]" style = "background:transparent;height:2em;width:70%; margin:0.5em auto;line-height:2em">其他</a></li>
+		</ul>
+		
+		<div id="t_tab" class="am-tabs-bd"  style="border: none">
+
+		<div  data-tab-panel-0 class="am-tab-panel am-active" style="margin-top: 3.5em;padding: 0px"  >
+					
+					{{each rice1 as val i}}
+					
+						<a id="a1" href="buyrice.html?id={{val.id}}">
+							<div class="am-g">
+								<div class="am-u-sm-3"  style="padding: 0.5em;height: 5.5em;">
+									<img width="100%"  height="100%" src ="{{val.image}}" >
+								</div>
+								<div class="am-u-sm-9" style="padding: 0em;">
+								<div style="color:#333333;font-size: 1em; height: 2em; line-height: 2em;padding-left: 0.3em;">{{val.name}}</div>
+								<div class ="am-u-sm-4" style="font-size: 0.8em;padding-left: 0.3em;">
+									<div style="height: 0em;padding-top: 0.4em;">
+									<div class="label-sale" hidden  >9.5折</div>
+									</div>
+									<div style="font-size: 1em;color:#72777a;width:6em;margin-left:3px;">规格:{{val.standard}}</div>
+									<div style="font-size: 1.3em;color:#e85b5b;">￥{{val.price}}</div>
+								</div>
+								<div class ="am-u-sm-8" style="margin-top:0.5em;">
+								{{if val.surplus == "-1"}}
+								<div class="percent-class " align="center" style="background:#66b45a;padding:0em 0.5em 0em 0.5em;" >剩余<br>100%
+								{{else}}
+								<div class="percent-class " align="center" style="{{if val.percent > 50}}background:#66b45a;{{/if}}padding:0em 0.5em 0em 0.5em;" >剩余<br>{{val.percent}}%
+								{{/if}} 
+								</div>
+								<button class="buy-button" >购买</button>
+								</div>
+								
+								</div>
+							</div>
+						</a>
+
+
+						<hr style="margin: 0px;padding: 0px">
+						{{ /each }}					
+				</div>
+			<div data-tab-panel-1 class="am-tab-panel " style="margin-top: 3.5em;padding: 0px">
+					{{each other as val i}}
+						<a href="buyrice.html?id={{val.id}}" >
+							<div class="am-g">
+								<div class="am-u-sm-3"  style="padding: 0.5em;height: 5.5em;">
+									<img width="100%"  height="100%" src ="{{val.image}}">
+								</div>
+								<div class="am-u-sm-9" style="padding: 0em;">
+								<div style="color:#333333;font-size: 1em; height: 2em; line-height: 2em;padding-left: 0.3em;">{{val.name}}</div>
+								<div class ="am-u-sm-4" style="font-size: 0.8em;">
+									<div style="height: 2em;padding-top: 0.7em;">
+									<div class="label-sale"  hidden="hidden">9.5折</div>
+									</div>
+									<div style="font-size: 1.3em;color:#e85b5b;">￥{{val.price}}</div>
+								</div>
+								<div class ="am-u-sm-8" style="margin-top:0.5em;">
+								{{if val.surplus == "-1"}}
+								<div class="percent-class " align="center" style="background:transparent" >
+								{{else}}
+								<div class="percent-class " align="center" style="{{if val.percent > 50}}background:#66b45a;{{/if}}padding:0em 0.5em 0em 0.5em;" >剩余<br>{{val.percent}}%
+								{{/if}} 
+								</div>
+								<button class="buy-button" >购买</button>
+								</div>
+								
+								</div>
+							</div>
+						</a>
+						<hr style="margin: 0px;padding: 0px">
+					{{/each}}
+			
+			</div>
+
+	</div>
+
+	</script>
+
+	</div>
+
+
+	<script type="text/javascript">
+		$.ajax({
+			type : "post",
+			url : url("BuyRiceList.pageInfo"),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "pinfo",
+			success : function(data) {
+				var html = template('s_tab', data);
+				$("#l_tabs").html(html);
+				$("#l_tabs").tabs();
+			},
+			error : function() {
+			}
+		});
+
+    </script>
+
+
+
+
+
+
+</body>
+</html>

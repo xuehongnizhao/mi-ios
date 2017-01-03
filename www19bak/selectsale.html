@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="stylesheet" href="comm/amazeui/css/amazeui.min.css" />
+<link rel="stylesheet" href="comm/amazeui/css/app.css">
+<link rel="stylesheet" href="css/mobiscroll.custom-2.5.0.min.css">
+<script src="comm/amazeui/js/jquery.min.js"></script>
+<script src="comm/amazeui/js/amazeui.min.js"></script>
+<script src="comm/js/ar_syscore.js"></script>
+<script src="comm/js/public.js"></script>
+<script src="comm/js/template.js"></script>
+<script src="comm/js/mobiscroll.custom-2.5.0.min.js"></script>
+<style type="text/css">
+.am-header .am-header-title {
+margin: 0 15%;
+}
+body , html{
+	width:100%;
+	height: 100%;
+}
+body { 
+margin:0px auto; 
+} 
+.mi-title {
+	background-color: #474240;
+}
+
+.item {
+	background: white;
+	margin-top: 1em;
+	margin-right: 1em;
+	padding: 0em;
+}
+
+.item img {
+	display: block;
+	vertical-align: top;
+}
+
+.box-shadow {
+	box-shadow: 0 0 5px #b4b4b4;
+}
+
+.small {
+	font-size: 0.9em;
+	padding-left: 1em;
+	color: #7a7a7a;
+}
+
+.mi-black {
+	color: white;
+	background: #474240;
+	border: #474240 1px solid;
+	-moz-border-radius: 3px;      /* Gecko browsers */
+    -webkit-border-radius: 3px;   /* Webkit browsers */
+    border-radius:3px;            /* W3C syntax */
+}
+.s{
+-moz-border-radius: 3px;      /* Gecko browsers */
+    -webkit-border-radius: 3px;   /* Webkit browsers */
+    border-radius:3px;            /* W3C syntax */
+    padding-left: 2px;
+    padding-right: 2px;
+}
+</style>
+</head>
+<body style="background: #f1f1f1" onload="onLoadend();">
+
+<!-- Header -->
+<header data-am-widget="header"
+	class="am-header am-header-default am-header-fixed mi-title">
+	<div class="am-header-left am-header-nav">
+		<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+			class="am-icon-angle-left" style="font-size: 2em;"></i>
+		</a>
+	</div>
+	<h1 class="am-header-title">使用优惠卷</h1>
+</header>
+
+<div class="am-g">
+  <div class="am-u-lg-6" style="margin-top:0.5em">
+    <div class="am-input-group">
+      <span class="am-input-group-label">
+        <input type="checkbox">
+      </span>
+      <span class="am-form-field">
+      	<a>{{name}}</a>
+      	<a>{{sour}}</a>
+      	<br>
+      	<a>{{totle}}{{unit}},剩余{{value}}{{unit}}</a>
+      	
+      </span>
+    </div>
+  </div>
+  <div class="am-u-lg-6" style="margin-top:0.5em">
+    <div class="am-input-group">
+      <span class="am-input-group-label">
+        <input type="checkbox">
+      </span>
+      <input type="text" class="am-form-field">
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

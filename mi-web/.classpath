@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="/Users/libo/Development/tomcat/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="build/WEB-INF/lib/httpclient-4.3.6.jar"/>
+	<classpathentry kind="lib" path="build/WEB-INF/lib/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="build/WEB-INF/lib/c3p0-0.9.5.1.jar"/>
+	<classpathentry kind="lib" path="build/WEB-INF/lib/json-lib-2.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="build/WEB-INF/lib/mchange-commons-java-0.2.10.jar"/>
+	<classpathentry kind="lib" path="build/WEB-INF/lib/mysql-connector-java-5.1.6-bin.jar"/>
+	<classpathentry kind="lib" path="build/WEB-INF/lib/httpcore-4.3.3.jar"/>
+	<classpathentry kind="lib" path="build/WEB-INF/lib/commons-beanutils-1.7.0.jar"/>
+	<classpathentry kind="lib" path="build/WEB-INF/lib/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="build/WEB-INF/lib/commons-lang-2.5.jar"/>
+	<classpathentry kind="lib" path="build/WEB-INF/lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="build/WEB-INF/lib/ezmorph-1.0.3.jar"/>
+	<classpathentry kind="lib" path="build/WEB-INF/lib/gson-2.2.4.jar"/>
+	<classpathentry kind="lib" path="build/WEB-INF/lib/jpush-client-3.2.6.jar"/>
+	<classpathentry kind="lib" path="build/WEB-INF/lib/slf4j-api-1.7.7.jar"/>
+	<classpathentry kind="lib" path="build/WEB-INF/lib/slf4j-log4j12-1.7.7.jar"/>
+	<classpathentry kind="output" path="build/WEB-INF/classes"/>
+</classpath>

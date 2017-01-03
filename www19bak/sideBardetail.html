@@ -1,0 +1,258 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<script src="js/include.js"></script>
+<link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
+<title>Insert title here</title>
+<link>
+<style type="text/css">
+.am-header .am-header-title {
+margin: 0 15%;
+}
+.item {
+	position: relative;
+	border-bottom: 1px solid #dcdcdc;
+	min-height: 2em;
+}
+
+.item>div {
+	padding-top: 0.3em;
+	padding-bottom: 0.3em;
+	margin-left: 0em;
+	margin-right: 0em;
+}
+
+.item_date {
+	position: relative;
+	font-size: 1em;
+	color: #aaaaaa;
+	line-height: 2em;
+}
+
+.item_head {
+	padding-top: 0.5em;
+}
+
+.item_context {
+	font-size: 1em;
+	line-height: 2em;
+	padding-left: 0.5em;
+}
+
+.mi-title {
+	background-color: #474240;
+}
+
+.mi-black {
+	color: white;
+	background: #474240;
+	outline: none;
+	border: #474240 1px solid;
+	-moz-border-radius: 3px; /* Gecko browsers */
+	-webkit-border-radius: 3px; /* Webkit browsers */
+	border-radius: 3px; /* W3C syntax */
+}
+
+.am-accordion-basic .am-accordion-title:before {
+	content: "";
+	line-height: 1.5em;
+	font-size: 1em;
+}
+
+html body {
+	width: 100%;
+	height: 100%;
+}
+</style>
+</head>
+
+
+	
+<body style="background: white;">
+<!-- Header -->
+	<header data-am-widget="header"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title">消息详情</h1>
+	</header>
+<div style="text-align:center;clear:both;">
+<script src="/gg_bd_ad_720x90.js" type="text/javascript"></script>
+<script src="/follow.js" type="text/javascript"></script>
+</div>
+	<div id="loading" onclick="javascript:void(0)" align="center" style="position: absolute;width:100%;height: 100%;z-index:100;padding-top:70%">
+     <svg viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <g id="circle" class="g-circles g-circles--v1">
+          <circle id="12" transform="translate(35, 16.698730) rotate(-30) translate(-35, -16.698730) " cx="35" cy="16.6987298" r="10"></circle>
+          <circle id="11" transform="translate(16.698730, 35) rotate(-60) translate(-16.698730, -35) " cx="16.6987298" cy="35" r="10"></circle>
+          <circle id="10" transform="translate(10, 60) rotate(-90) translate(-10, -60) " cx="10" cy="60" r="10"></circle>
+          <circle id="9" transform="translate(16.698730, 85) rotate(-120) translate(-16.698730, -85) " cx="16.6987298" cy="85" r="10"></circle>
+          <circle id="8" transform="translate(35, 103.301270) rotate(-150) translate(-35, -103.301270) " cx="35" cy="103.30127" r="10"></circle>
+          <circle id="7" cx="60" cy="110" r="10"></circle>
+          <circle id="6" transform="translate(85, 103.301270) rotate(-30) translate(-85, -103.301270) " cx="85" cy="103.30127" r="10"></circle>
+          <circle id="5" transform="translate(103.301270, 85) rotate(-60) translate(-103.301270, -85) " cx="103.30127" cy="85" r="10"></circle>
+          <circle id="4" transform="translate(110, 60) rotate(-90) translate(-110, -60) " cx="110" cy="60" r="10"></circle>
+          <circle id="3" transform="translate(103.301270, 35) rotate(-120) translate(-103.301270, -35) " cx="103.30127" cy="35" r="10"></circle>
+          <circle id="2" transform="translate(85, 16.698730) rotate(-150) translate(-85, -16.698730) " cx="85" cy="16.6987298" r="10"></circle>
+          <circle id="1" cx="60" cy="10" r="10"></circle>
+      </g>
+
+      <use xlink:href="#circle" class="use"/>
+  </svg>
+	
+	</div>
+	<div id = "userid" style="display:none"></div>
+	<div id="decode" style="display:none;">未反转义的html内容</div>
+	<div id="m_list" style="height:100%">
+	<script id="s_list" type="text/html">
+	{{if msg.length > 0}}
+			     								
+		{{msg[0].detail}}
+						
+	{{else }}
+	
+		<p>没有找到数据</p>
+	
+	{{/if}}
+	
+	</script>
+
+	</div>
+
+</body>
+<script type="text/javascript">
+	var isLogin = true;
+
+	var userid = window.localStorage.getItem('userid');
+	
+	var mid = getParameter("sideid");
+
+	if (userid == null) {
+		isLogin = false;
+		window.location.href = "login.html";
+	} else {
+		isLogin = true;
+	}
+
+	jQuery(document).ready(function() {
+		$("#userid").html(userid);
+		queryMsg();
+		$('#loading').hide();
+	});
+
+	function queryMsg() {
+		var token = window.localStorage.getItem('token');
+		var murl = url("Message.getContentByID&u=" + userid + "&m="+mid+"&t="+token);
+		$.ajax({
+			type : "post",
+			url : murl,
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "msglist",
+			success : function(data) {
+	        	if(!checktoken(data)){
+	        		return; 
+	        	}
+				try {
+					$('h1').html(data.msg[0].title);
+					var html = data.msg[0].detail;
+					console.log(html);
+					$("#decode")[0].innerHTML = html;
+					
+					$('#m_list').html($("#decode").html());
+					
+					
+				} catch (e) {
+					console.log(e);
+					throw e;
+				}
+
+			},
+			error : function() {
+				alert("网络错误,请稍后重试");
+			}
+
+		});
+	}
+	function share(type,wxtitle,wxdesc,wxurl){
+		var wxscene = Wechat.Scene.TIMELINE;
+		if(type == 2){
+					
+			return;
+		}else{
+			if (type == 0){wxscene = Wechat.Scene.SESSION}
+			if (type == 1){wxscene = Wechat.Scene.TIMELINE}
+		}
+		Wechat.share({
+		    message: {
+		    	title: wxtitle,
+				description: wxdesc,
+		        thumb: surl('img/thumb.jpg'),
+				messageExt: "米之周应用优惠券分享",
+		        media: {
+		        	type: Wechat.Type.WEBPAGE,
+		        	webpageUrl:wxurl+"&key="+userid		        	
+		        }
+		    },
+		    scene: wxscene   // share to Timeline
+		}, function () {
+			alert("分享成功")	
+		}, function (reason) {
+			alert("Failed: " + reason);
+		});
+		
+	}
+	
+	function createShortUrl(message,sendUrl){
+		$('#loading').show();
+		$.ajax({
+			type : "post",
+			url : url("ShortUrl.getShortUrl"),
+			data :{"url":sendUrl+"?key="+userid},
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "shareSms",
+			success : function(data) {
+				$('#loading').hide();
+				app.sendSms('',message+data.ret);
+
+			},
+			error : function() {
+				$('#loading').hide();
+				app.sendSms('',message+sendUrl+"?key="+userid);
+			}
+
+		});
+		
+		
+	}
+	var app = {
+		    sendSms: function(number,message) {
+ 
+		    	//CONFIGURATION
+		        var options = {
+		            replaceLineBreaks: false, // true to replace \n by a new line, false by default
+		            android: {
+		                intent: 'INTENT'  // send SMS with the native android SMS messaging
+		                //intent: '' // send SMS without open any other app
+		            }
+		        };
+
+		        var success = function () { };
+		        var error = function (e) { };
+		        sms.send(number, message, options, success, error);
+		    }
+		};
+	
+</script>
+</html>

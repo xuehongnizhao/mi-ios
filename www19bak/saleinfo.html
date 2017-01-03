@@ -1,0 +1,481 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>Insert title here</title>
+
+<script src="js/include.js"></script>
+<link>
+<style type="text/css">
+.am-header .am-header-title {
+margin: 0 15%;
+}
+.mi-title {
+	background-color: #474240;
+}
+
+.am-tabs-d2 .am-tabs-nav {
+	background-color: white;
+	border-bottom: 1px solid #dddddd;
+}
+
+.am-tabs-d2 .am-tabs-nav a {
+	line-height: 42px;
+	color: #72777a;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active {
+	position: relative;
+	background-color: #fcfcfc;
+	border-bottom: 1px solid #dddddd;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active:after {
+	position: absolute;
+	width: 50%;
+	height: 0;
+	bottom: 0;
+	left: 28%;
+	border: 1px solid rgb(141,142,137);
+	content: "";
+	z-index: 1;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active a {
+	line-height: 42px;
+	color: #72777a;
+	background: #f5f5f5;
+}
+
+.ul-fixed {
+  position: fixed;
+  top: 49px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1010;
+}
+
+.mi-black {
+	color: white;
+	background: #474240;
+	outline: none;
+	border: #474240 1px solid;
+	-moz-border-radius: 3px; /* Gecko browsers */
+	-webkit-border-radius: 3px; /* Webkit browsers */
+	border-radius: 3px; /* W3C syntax */
+}
+
+hr {
+	margin: 0em;
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+	padding: 0px;
+	border-top: 1px solid #b4b4b4;
+}
+
+.item {
+	margin-left: 6.25%; '
+	margin-right: 6.25%;
+	margin-top: 1em;
+	width: 87.5%;
+	height: 9em;
+}
+
+.small {
+	font-size: 1em;
+	padding-left: 1.5em;
+	color: #7a7a7a;
+	line-height: 2em;
+}
+
+.margin {
+	margin: 0em;
+
+</style>
+</head>
+<body style="background: #f8f8f8">
+
+	<!-- Header -->
+	<header data-am-widget="header"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title">我的优惠券</h1>
+	</header>
+<div id="tabs11" data-am-widget="tabs" class="am-tabs am-tabs-d2" data-am-tabs-noswipe="1" style="margin: 0px;">
+		<ul class="am-tabs-nav am-cf ul-fixed" style="width:100%;height:3em">
+			<li class="am-active" style = "height:3em;"><a href="[data-tab-panel-0]" style = "background:white;height:2em;width:70%; margin:0.5em auto;line-height:2em;">未使用</a></li>
+			<div style = "margin:0.5em auto;width:1px;background:rgb(183,183,183);"></div>
+			<li class="" style = "height:3em;"><a href="[data-tab-panel-1]" style = "background:white;height:2em;width:70%; margin:0.5em auto;line-height:2em;">已使用</a></li>
+			<div style = "margin:0.5em auto;width:1px;background:rgb(183,183,183);"></div>
+			<li class="" style = "height:3em;"><a href="[data-tab-panel-2]" style = "background:white;height:2em;width:70%; margin:0.5em auto;line-height:2em;">已分享</a></li>
+		</ul>
+		
+		<div  class="am-tabs-bd"  style="border: none">
+		
+		<div id="d-sale" data-tab-panel-0 class="am-tab-panel am-active" style="margin-top: 3.5em;padding: 0px;" >
+		<script id="s-sale" type="text/html">
+		{{if allList.length > 0}}
+		{{each allList as val i}}
+
+		<a href="javascript:void(0);" id="{{val.id}}" onclick="{{if val.value > 0 }}fun1('{{val.id}}','{{val.name}}','{{val.value}}','{{val.unit}}','{{val.type}}','{{val.gid}}'){{/if}}" style="color: #000000;">
+		<div  class="item box-shadow">
+			<img src="img/sale_bg.png" width="87.5%" style="position:absolute;float:left;"  >
+			<div style="position: relative;" class="am-g">
+			<div class="am-u-sm-12" 
+				style="line-height: 2em;font-size: 1em;padding-left: 0.76em;color:#434343;text-align:center;">
+				{{val.name}}	
+			</div>
+			<div class="am-u-sm-6 small" >
+				面值：<span style="color:#333333">{{val.total+val.unit}}</span>
+			</div>
+			<div class="am-u-sm-6 small" style="padding-left:0em;" >
+				剩余：
+				<span style="color:#333333">
+				{{if val.unit == "元"}}{{val.value.toString()}}{{val.unit}}</span>{{/if}}
+				{{if val.unit != "元"}}{{val.value.toString().substring(0,val.value.toString().lastIndexOf("."))}}{{val.unit}}{{/if}}
+				</span>
+			</div>
+			<div class="am-u-sm-12 small">卡号：<span style="color:#333333">{{val.content}}</span></div>
+			</div>
+			<div class="am-u-sm-12 small">绑定日期：<span style="color:#333333">{{val.binddate}}<img {{ if val.type == 1}}hidden{{else if val.value > 0 && val.name != "新用户试用装大米9折优惠券"}}{{else}}hidden{{/if}} src = "img/share_10.png" width = "10%" style = "float:right;"></span></div>
+			</div>
+		
+		</a>
+
+		{{/each}}
+		{{else}}
+		<div class="am-g" style="text-align: center; margin-top: 50%;position:relative;bottom:0em;height:60%;color:#d4d4d4"
+			align="center">
+				<img src="img/nosale.png" width="15%"> <br>
+				<div style="margin-top:0.3em;">暂无优惠券</div>
+		</div>
+		{{/if}}
+		</script>
+		</div>
+		
+		<div id="d-sale1" data-tab-panel-1 class="am-tab-panel am-active" style="margin-top: 3.5em;padding: 0px;" >
+		<script id="s-sale1" type="text/html">
+		{{if noList.length > 0}}
+		{{each noList as val i}}
+		<a href="javascript:void(0);" id="{{val.id}}" onclick="{{if val.value > 0 }}fun1('{{val.id}}','{{val.name}}','{{val.value}}','{{val.unit}}','{{val.type}}','{{val.gid}}'){{/if}}" style="color: #000000;">
+		<div  class="item box-shadow">
+			<img src="img/sale_bg.png" width="87.5%" style="position:absolute;float:left;"  >
+			<div style="position: relative;" class="am-g">
+			<div class="am-u-sm-12" 
+				style="line-height: 2em;font-size: 1em;padding-left: 0.76em;color:#434343;text-align:center;">
+				{{val.name}}	
+			</div>
+			<div class="am-u-sm-6 small" >
+				面值：<span style="color:#333333">{{val.total+val.unit}}</span>
+			</div>
+			<div class="am-u-sm-6 small" style="padding-left:0em;" >
+				剩余：
+				<span style="color:#333333">
+				{{if val.unit == "元"}}{{val.value.toString()}}{{val.unit}}</span>{{/if}}
+				{{if val.unit != "元"}}{{val.value.toString().substring(0,val.value.toString().lastIndexOf("."))}}{{val.unit}}{{/if}}
+				</span>
+			</div>
+			<div class="am-u-sm-12 small">卡号：<span style="color:#333333">{{val.content}}</span></div>
+			</div>
+			<div class="am-u-sm-12 small">绑定日期：<span style="color:#333333">{{val.binddate}}<img {{if val.value > 0 && val.name != "新用户试用装大米9折优惠券"}}{{else}}hidden{{/if}} src = "img/share_10.png" width = "10%" style = "float:right;"></span></div>
+			</div>
+		
+		</a>
+		{{/each}}
+		{{else}}
+		<div class="am-g" style="text-align: center; margin-top: 50%;position:relative;bottom:0em;height:60%;color:#d4d4d4"
+			align="center">
+				<img src="img/nosale.png" width="15%"> <br>
+				<div style="margin-top:0.3em;">暂无优惠券</div>
+		</div>
+		{{/if}}
+		</script>
+		</div>
+		
+		<div id="d-sale2" data-tab-panel-2 class="am-tab-panel am-active" style="margin-top: 3.5em;padding: 0px;" >
+		<script id="s-sale2" type="text/html">
+		{{if shareList.length > 0}}
+		{{each shareList as val i}}
+		<a href= "javascript:void(0)" onclick="{{if val.status == '1'}}showShareType('{{val.id}}'){{/if}}">
+		<div  class="item box-shadow">
+		<img src="img/sale_bg.png" width="87.5%" style="position:absolute;float:left;">
+		<div style="position: relative;" class="am-g">
+		<div class="am-u-sm-12" 
+			style="line-height: 2em;font-size: 1em;padding-left: 0.76em;color:#434343;text-align:center;">
+			{{val.name}}	
+		</div>
+		<div class="am-u-sm-6 small" >
+			面值：<span style="color:#333333">{{val.total+val.unit}}</span>
+		</div>
+		{{if val.status == '1'}}
+		<div class="am-u-sm-12 small" style=""><img id="simg" src = "{{imgPath + val.id +'.png'}}" style="float:left; padding-right:1em ;height:4em;width:80%;">
+			<div style = "color:#4795ea;margin-top:14%">未使用</div>
+		</div>
+
+		{{else}}
+		<div class="am-u-sm-12 small" style="color:green"><img id="simg" src = "{{imgPath + val.id +'.png'}}" style="float:left; padding-right:1em ;height:4em;width:80%;">
+			<div style = "color:#717576;margin-top:14%">已使用</div>
+		</div>
+		{{/if}}
+		</div>
+		</div>
+		</a>
+		{{/each}}
+		{{else}}
+		<div class="am-g" style="text-align: center; margin-top: 50%;position:relative;bottom:0em;height:60%;color:#d4d4d4"
+			align="center">
+				<img src="img/nosale.png" width="15%"> <br>
+				<div style="margin-top:0.3em;">暂无优惠券</div>
+		</div>
+		{{/if}}
+		</script>
+		</div>
+		
+		</div>
+	</div>
+	
+	<div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt1" >
+	  <div class="am-modal-dialog" style = "background:white;border-radius:3px;">
+		<div class="am-modal-hd">分享优惠券</div>
+		<div style = "margin: 0 auto;height:1px;width:90%;background:rgb(183,183,183);"></div>
+			
+		<div class = "am-modal-footer" style = "height:3em;">
+	    	<span  style = "float:left;margin-left:0.5em;height:3em;line-height:300%">可分享：</span>
+	    	<span id="label1" style = "float:left;width:55%;height:3em;text-align:left;line-height:300%"></span>
+	          
+		</div>
+		
+		<div class = "am-modal-footer" style = "background:white;height:3em;padding-bottom:1em">
+	    	<span  style = "float:left;margin-left:0.5em;padding-right:0.5em;height:3em;line-height:300%">分享给好友</span>
+	    	<input type="text" id = "input1" style = "float:left;width:4em;height:2.5em;background:transparent;border:none;outline:none;line-height:100%;border-bottom:1px solid #dddddd">
+	    	<span id="label2" style="float:left; width:10%;height:3em;line-height:300%"></span>
+		</div>
+		<div class="am-modal-footer" style = "background:white;border-radius:0 0 3px 3px;">
+			<span class="am-modal-btn" style = "color:rgb(206,78,77)" data-am-modal-confirm>确定</span>
+		</div>
+	</div>
+	</div>
+<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">分享错误</div>
+    <div class="am-modal-bd">
+      请输入正确的分享数量！
+    </div>
+    <div class="am-modal-footer">
+      <span class="am-modal-btn">确定</span>
+    </div>
+  </div>
+</div>
+
+<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert1">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">分享错误</div>
+    <div class="am-modal-bd">
+      试用装不可以分享！
+    </div>
+    <div class="am-modal-footer">
+      <span class="am-modal-btn">确定</span>
+    </div>
+  </div>
+</div>
+
+<div class="am-modal-actions" id="share_type">
+		<div class="am-modal-actions-group margin">
+			<ul class="am-list">
+				<li style = "height:3em;line-height:3em;" value="1" onclick="shareItemClick(this)" ><span>朋友圈</span></li>
+				<li style = "height:3em;line-height:3em;" value="0" onclick="shareItemClick(this)" ><span>微信好友</span></li>
+				<!-- <li style = "height:3em;line-height:3em;" value="2" onclick="shareItemClick(this)" ><span>保存图片</span></li> -->
+				<li><button class="am-btn am-btn-secondary am-btn-block"
+						onclick="closemodal('#share_type')" style = "height:3em;background:white;color:#4489ce;border:none;">取消</button></li>
+			</ul>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+	var userid = window.localStorage.getItem("userid");
+	var token = window.localStorage.getItem('token');
+	var isShare = false;
+	var wxtitle="";
+	var wxdesc="这是朋友们一起众筹的项目，种植和销售正宗的黑龙江五常大米，不是虚假广告，请放心品尝！";
+	jQuery(document).ready(function(){
+		
+	});
+
+	$.ajax({
+        type: "post",
+        url: url("Sale.queryinfo&u="+userid+"&t="+token),
+        dataType: "jsonp",
+        jsonp: "callback",
+        jsonpCallback:"sale",
+        success: function(json){
+        	if(!checktoken(json)){
+        		return; 
+        	}
+        	json.imgPath = surl('img/');
+        	wxtitle=json.title;
+        	wxdesc=json.desc;
+        	var html = template('s-sale',json);
+        	$("#d-sale").html(html);
+        	var html1 = template('s-sale1',json);
+        	$("#d-sale1").html(html1);
+        	var html2 = template('s-sale2',json);
+        	$("#d-sale2").html(html2);
+        	$("#tabs11").tabs();
+         },
+        error: function(){
+        }
+	});
+	
+	function getSaleinfo(){
+		
+		$.ajax({
+	        type: "post",
+	        url: url("Sale.queryinfo&u="+userid+"&t="+token),
+	        dataType: "jsonp",
+	        jsonp: "callback",
+	        jsonpCallback:"sale",
+	        success: function(json){
+	        	if(!checktoken(json)){
+	        		return; 
+	        	}
+	        	json.imgPath = surl();
+	        	var html = template('s-sale',json);
+	        	$("#d-sale").html(html);
+	        	var html1 = template('s-sale1',json);
+	        	$("#d-sale1").html(html1);
+	        	var html2 = template('s-sale2',json);
+	        	$("#d-sale2").html(html2);
+	        	$("#tabs11").tabs();
+	         },
+	        error: function(){
+	        }
+		});
+	}
+			
+	function fun1(sid,name,value,unit,type,gid){
+		if(type == 1){
+			return;	
+		}
+
+		if("新用户试用装大米9折优惠券" == name){
+			  $('#my-alert1').modal();
+		  }else{
+			  $('#label1').text(value.split('.')[0]+unit);
+			  	 $("#input1").val("");
+				 $('#label2').text(unit);
+				 $('#my-prompt1').modal({
+		      relatedElement: this,
+		      onConfirm: function() {
+			  var value_int = parseInt(value);
+			  var input_int = parseInt($("#input1").val());
+			  if(input_int<=value_int&&input_int > 0){
+				  var count = value_int - input_int;
+				  var murl = url("Sale.shareSale&u="+userid+"&s="+sid+"&n="+name+"&c="+count+"&shareNum="+$('#input1').val()+"&unit="+unit+"&type="+type+"&gid="+gid+"&t="+token)
+				  murl = encodeURI(murl);
+				  murl = encodeURI(murl);		 
+				  $.ajax({
+				        type: "post",
+				        url: murl,
+				        dataType: "jsonp",
+				        jsonp: "callback",
+				        jsonpCallback:"sale",
+				        success: function(json){
+				        	if(!checktoken(json)){
+				        		return; 
+				        	}		        	
+				        	showShareType(json.ret);
+				        	isShare = true;
+				         },
+				        error: function(){
+				        }
+					});
+			  }else{
+				$('#my-alert').modal();
+			  }     
+		      }
+		    });
+		  }		 
+	}
+	
+	function showShareType(url){
+		window.localStorage.setItem("shareurl",url)
+		$('#share_type').modal('open');
+		
+	}
+	
+	
+	function shareItemClick(item) {
+		var url = window.localStorage.getItem('shareurl');
+		var type = item.value;
+		share(url,item.value);
+		$('#share_type').modal('close');
+	}
+
+	function closemodal(id) {
+		if(isShare){
+		window.location.reload();		
+		}
+		$(id).modal('close');
+	}
+	
+	function share(url,type){
+		var wxscene = Wechat.Scene.TIMELINE;
+		if(type == 2){
+			savepicfromurl(url);			
+			return;
+		}else{
+			if (type == 0){wxscene = Wechat.Scene.SESSION}
+			if (type == 1){wxscene = Wechat.Scene.TIMELINE}
+		}
+		Wechat.share({
+		    message: {
+		    	title: wxtitle,
+				description: wxdesc,
+		        thumb: surl('img/thumb.jpg'),
+				messageExt: "米之周应用优惠券分享",
+		        media: {
+		        	type: Wechat.Type.WEBPAGE,
+		        	webpageUrl:surl('html/saleshare.html?saleid='+url)		        	
+		        }
+		    },
+		    scene: wxscene   // share to Timeline
+		}, function () {
+			if(isShare){
+				window.location.reload();		
+				}	
+		}, function (reason) {
+			if(isShare){
+				window.location.reload();		
+			}
+			alert("Failed: " + reason);
+		});
+		
+	}
+	function savepicfromurl(urlpath){
+		var par = {
+			url:surl('img/'+urlpath+'.png'), 
+		    picname: urlpath
+		};
+		Wechat.savePicFromUrl(par
+		    , function () {
+		    
+		}, function (reason) {
+		    alert("Failed: " + reason);
+		});
+		
+	}
+	
+	</script>
+</body>
+</html>

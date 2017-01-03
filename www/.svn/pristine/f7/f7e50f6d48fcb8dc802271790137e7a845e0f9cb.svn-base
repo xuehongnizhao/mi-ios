@@ -1,0 +1,15 @@
+.mi-title {
+	background-color: #5b3914;
+}
+.mui-badge {
+	position: fixed;
+	margin: 3px 10px;
+	background: red;
+	-webkit-border-radius: 16px;
+	-moz-border-radius: 16px;
+	border-radius: 16px;
+	height: 16px;
+	line-height: 16px;
+	min-width: 16px;
+	font-size: 12px;
+}

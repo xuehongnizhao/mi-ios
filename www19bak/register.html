@@ -1,0 +1,302 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="stylesheet" href="comm/amazeui/css/amazeui.min.css" />
+<link rel="stylesheet" href="comm/amazeui/css/app.css">
+<link rel="stylesheet" href="css/mobiscroll.custom-2.5.0.min.css">
+<script src="comm/amazeui/js/jquery.min.js"></script>
+<script src="comm/amazeui/js/amazeui.min.js"></script>
+<script src="comm/js/public.js"></script>
+<script src="comm/js/mobiscroll.custom-2.5.0.min.js"></script>
+<title>Insert title here</title>
+<link>
+
+<style type="text/css">
+.am-header .am-header-title {
+margin: 0 15%;
+}
+.mi-title {
+	background-color: #474240;
+}
+
+.doc-pannel {
+	width: 100%;
+	border-top: 1px solid #dddddd;
+	height: 3em;
+	line-height: 3em;
+}
+
+.doc-pannel span {
+	border: none;
+	width: 5em;
+}
+
+.doc-group {
+	border-top-right-radius: 0;
+	border-top-left-radius: 0;
+	padding: 0em;
+}
+
+.doc-group:after {
+	content: '';
+	display: table;
+	clear: both
+}
+
+.doc-group:before {
+	display: block;
+	color: #bbb;
+	text-transform: uppercase;
+	margin: 0 -15px 15px;
+	padding: 4px 10px;
+	font-size: 12px
+}
+
+body, html {
+	width: 100%;
+	height: 100%
+}
+
+.mi-title {
+	background-color: #474240;
+}
+</style>
+</head>
+<body style="background-color: #f8f8f8;">
+
+	<!-- Header -->
+	<header data-am-widget="header"
+		class="am-header am-header-default am-header-fixed mi-title ">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title">快速注册</h1>
+	</header>
+	
+	<!-- 取消form验证  data-am-validator -->
+	
+	<form action="" class="am-form"  style="margin: 0em;padding: 0em;background: white">
+
+		<div class="doc-group">
+			<div class="am-input-group doc-pannel" style="border-top: none;" align="center">
+				<span class="am-input-group-label" style="background: white;padding-top: 13px;">手机号</span>
+				<input type="text"
+					style="border: none; outline: none; -moz-box-shadow: 0 0 0px #ffffff; box-shadow: 0 0 0px #ffffff;-webkit-box-shadow: none;height: 100%"
+					id="mobile" class="am-form-field" placeholder="请输入手机号">
+
+			</div>
+			<div class="am-input-group doc-pannel">
+				<span class="am-input-group-label"  style="background: white;padding-top: 13px;">验证码</span> <input type="text"
+					id="code" class="am-form-field"
+					style="border: none; outline: none;-moz-box-shadow: none;box-shadow: none;-webkit-box-shadow: none;height: 100%" minlength="6" maxlength="6"
+					placeholder="验证短信数字"> <span class="am-input-group-btn" style="border-left: 1px solid #dddddd">
+					<button class="am-btn am-btn-default" type="button" style="background: transparent;border: none;outline: none;"
+						onclick="getCode()" id="hq">获取验证码</button>
+				</span>
+			</div>
+
+			<div class="am-input-group doc-pannel">
+				<span class="am-input-group-label"  style="background: white;padding-top: 13px;">昵&nbsp;&nbsp;&nbsp;称</span>
+				<input type="text" style="border: none; outline: none;-moz-box-shadow: none;box-shadow: none;-webkit-box-shadow: none;height: 100%" id="nick"
+					class="am-form-field" placeholder="请输入您的昵称">
+			</div>
+			<div class="am-input-group doc-pannel">
+				<span class="am-input-group-label"  style="background: white;padding-top: 13px;">密&nbsp;&nbsp;&nbsp;码</span>
+				<input type="text" style="border: none; outline: none;-moz-box-shadow: none;box-shadow: none;-webkit-box-shadow: none;height: 100%" id="passwd"
+					class="am-form-field" placeholder="6-16个字符" minlength="6"
+					maxlength="16">
+			</div>
+			<button class="am-btn am-btn-success " type="button"
+				style="width: 100%; height:3em;color: white; background: #968976; border: 1px #968976 solid;"
+				onclick="submit1()">注册</button>
+
+
+
+		</div>
+	</form>
+
+
+
+	<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">错误</div>
+			<div class="am-modal-bd">
+				<a id="errmsg"></a>
+			</div>
+			<div class="am-modal-footer">
+				<span class="am-modal-btn">确定</span>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+
+		});
+
+		function isNumber(oNum) {
+			if (!oNum)
+				return false;
+			var strP = /^\-?\d+(\.\d+)?$/;
+			if (!strP.test(oNum))
+				return false;
+
+			try {
+				if (parseFloat(oNum) != oNum)
+					return false;
+			} catch (ex) {
+				return false;
+			}
+			return true;
+		}
+
+		function valiNumber(id) {
+			var _m = $(id);
+			var _g = $(id + "_group");
+			var _val = _m.val();
+			if (_val != "" && isNumber(_val)) {
+				_g.removeClass("am-form-error");
+				return false;
+			} else {
+				_g.addClass("am-form-error");
+				return true;
+			}
+		}
+		function valiNotNull(id) {
+			var _m = $(id);
+			var _g = $(id + "_group");
+			var _val = _m.val();
+			if (_val != "") {
+				_g.removeClass("am-form-error");
+				return false;
+			} else {
+				_g.addClass("am-form-error");
+				return true;
+			}
+		}
+
+		function submit1() {
+			if (!valiNumber("#mobile") && !valiNumber("#code")
+					&& !valiNotNull("#nickname")) {
+				doReg();
+			} else {
+				$('#errmsg').text("请检查您的输入是否正确");
+
+				$('#my-alert').modal();
+
+			}
+		}
+
+		function doReg() {
+			if ($('#nick').val().length>6) {
+				$('#errmsg').text("昵称应少于6位");
+				$('#my-alert').modal();
+				return;
+			}
+			$.ajax({
+				type : "post",
+				url : url("Register.register"),
+				data : {
+					"phone" : $('#mobile').val(),
+					"code" : $('#code').val(),
+					"nick" : encodeURIComponent($('#nick').val()),
+					"passwd" : $('#passwd').val()
+				},
+				dataType : "jsonp",
+				jsonp : "callback",
+				jsonpCallback : "cb",
+				success : function(data) {
+					if (data.ret == "1") {
+						$('#errmsg').text("该手机号已注册");
+						$('#my-alert').modal();
+					} else if (data.ret == "2") {
+						$('#errmsg').text("该昵称已被注册,请重新输入");
+						$('#my-alert').modal();
+					} else if (data.ret == "3") {
+						$('#errmsg').text("验证码失效,请重新获取");
+						$('#my-alert').modal();
+					} else {
+						window.localStorage.setItem('userid', data.ret);
+						window.localStorage.setItem('token', data.token);
+						window.localStorage.setItem('mobile', $('#mobile').val());
+						window.location.href = "main.html";
+					}
+				},
+				error : function() {
+					$('#errmsg').text("网络通讯错误,请稍后重试");
+					$('#my-alert').modal();
+
+				}
+			});
+
+		}
+
+		function getCode() {
+			$.ajax({
+				type : "post",
+				url : url("User.validateCode"),
+				data : {
+					"phone" : $('#mobile').val(),
+					"type":"1"
+				},
+				dataType : "jsonp",
+				jsonp : "callback",
+				jsonpCallback : "cb",
+				success : function(data) {
+					var d = data;
+					if (d != 0) {
+						$("#hq").popover({
+							content : '验证发送失败'
+						});
+						$("#hq").popover("open");
+					} else {
+						$("#hq").popover({
+							content : '验证已发送'
+						});
+						$("#hq").popover("open");
+						//$("#my-alert").modal();
+					}
+					setTimeout(function() {
+						$("#hq").popover("close");
+					}, 2000);
+				}
+			});
+		}
+	</script>
+	<!-- 
+<s:if test="vmessage != null">
+<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">消息</div>
+    <div class="am-modal-bd">
+    	<s:if test='vmessage == "1"'>
+      	验证码有误!
+      	</s:if>
+      	<s:if test='vmessage == "2"'>
+      	保存数据有误请稍后再试!
+      	</s:if>
+      	<s:if test='vmessage == "3"'>
+      	手机号已经被注册过!
+      	</s:if>
+    </div>
+    <div class="am-modal-footer">
+      <span class="am-modal-btn">确定</span>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$("#my-alert").modal();
+</script>
+</s:if>
+-->
+</body>
+</html>

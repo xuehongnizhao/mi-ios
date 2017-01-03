@@ -1,0 +1,473 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<script src="js/include.js"></script>
+<link rel="stylesheet" href="css/basestyle.css">
+<!-- <link rel="stylesheet" href="http://statics.webkfa.com/mui/mui.min.css">
+<script src="http://statics.webkfa.com/mui/mui.min.js"></script>
+<script src="http://statics.webkfa.com/mui/app.js"></script>
+ -->
+<script>
+	//mui.init();
+</script>
+<style type="text/css">
+body, html {
+	width: 100%;
+	height: 100%;
+	background-image: url('img/mi_bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.am-navbar .am-navbar-nav {
+	background-color: #f5f3f4;
+}
+
+#car-goods {
+	padding: 0;
+}
+
+.minus-wp, .add-wp {
+	height: 36px;
+	line-height: 36px;
+	width: 36px;
+	display: inline-block;
+	text-align: center;
+	background: transparent;
+	border: 1px solid #ffffff;
+	cursor: pointer;
+}
+
+.buy-num {
+	width: 50px;
+	text-align: center;
+	height: 36px;
+	background: transparent;
+	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, .05);
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, .05);
+	border: none;
+	border-top: 1px solid #ffffff;
+	border-bottom: 1px solid #ffffff;
+	border-top: 1px solid #ffffff;
+}
+
+.clearfix {
+	zoom: 1;
+}
+
+.fleft {
+	float: left;
+}
+
+i-minus {
+	background-position: -74px -738px;
+}
+
+.i-add {
+	background-position: -48px -738px;
+}
+
+.i-add, .i-minus {
+	width: 15px;
+	height: 15px;
+	vertical-align: middle;
+}
+
+input[type=checkbox], input[type=radio] {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 13px;
+	height: 13px;
+	margin: 0;
+	cursor: pointer;
+	vertical-align: bottom;
+	background: #fff;
+	border: 1px solid B9BBBE;
+	-webkit-border-radius: 1px;
+	-moz-border-radius: 1px;
+	border-radius: 1px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	position: relative;
+}
+
+input[type=checkbox]:active, input[type=radio]:active {
+	border: none;
+	background: #ebebeb;
+}
+
+input[type=checkbox]:hover {
+	border: none;
+}
+
+input[type=checkbox] {
+	width: 24px;
+	height: 24px;
+	content: url('img/normal_addr.png');
+	background: transparent;
+}
+
+input[type=checkbox]:checked, input[type=radio]:checked {
+	z-index: 100;
+	width: 24px;
+	height: 24px;
+	content: url('img/default_addr.png');
+	width: 24px;
+}
+
+input[type=checkbox]:checked::after {
+	width: 24px;
+	height: 24px;
+	content: url('img/default_addr.png');
+	display: block;
+}
+
+input[type=checkbox]:focus {
+	width: 24px;
+	height: 24px;
+	outline: none;
+	border-color: #4d90fe;
+}
+
+.total_price_div {
+	position: fixed;
+	bottom: 49px;
+	width: 100%;
+	color: white;
+	height: 60px;
+	line-height: 60px;
+	background: #fff;
+	color: #333;
+	z-index: 1000;
+}
+</style>
+</head>
+
+<body>
+	<header data-am-widget="header"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<h1 class="am-header-title" style="font-size: 18px;">购物车</h1>
+	</header>
+	<header id="hid2"
+		class="am-topbar am-topbar-inverse am-topbar-fixed-bottom "
+		style="border-top: 1px #dfdfdf solid">
+		<div data-am-widget="navbar" class="am-navbar  am-navbar-default ">
+			<ul class="am-navbar-nav am-cf am-avg-sm-4">
+				<li><a href="main.html" class=""> <img
+						style="width: 1.5em; height: auto; margin-top: 0.3em;"
+						src="img/shouye1.png"> <span class="am-navbar-label"
+						style="color: #999999; font-size: 12px; margin-top: 0.1em">首页</span>
+				</a></li>
+				<li><a href="buyrice.html" class=""> <img
+						style="width: 1.5em; height: auto; margin-top: 0.3em;"
+						src="img/shouye2.png"> <span class="am-navbar-label"
+						style="color: #999999; font-size: 12px; margin-top: 0.1em">订购</span>
+				</a></li>
+				<li><a href="javascript:void(0);" class=""> <span
+						class="mui-badge" id="shopcar-count"></span><img
+						style="width: 1.5em; height: auto; margin-top: 0.3em;"
+						src="img/shouye03.png"> <span class="am-navbar-label"
+						style="color: #ffcf58; font-size: 12px; margin-top: 0.1em">购物车</span>
+
+				</a></li>
+				<li><a href="myinfo.html" class=""> <img
+						style="width: 1.5em; height: auto; margin-top: 0.3em;"
+						src="img/shouye4.png"> <span class="am-navbar-label"
+						style="color: #999999; font-size: 12px; margin-top: 0.1em">我的</span>
+				</a></li>
+			</ul>
+		</div>
+	</header>
+	<div id="car-goods" class="am-u-sm-12" style="margin: 0; padding: 0"></div>
+	<div id="" class="am-u-sm-12"
+		style="margin: 0; padding: 0; height: 109px"></div>
+	<div class="total_price_div">
+		<input id="quanxuan" type="checkbox" style="margin: 18px 6px;"><span>全选</span>
+		<div
+			style="float: right; background: #ff9402; color: #fff; padding: 0 6px; font-size: 1.2em">
+			结算(<span class="total-num">5</span>)
+		</div>
+		<div style="float: right; padding:0 12px 0 0 ;">
+			<div class="total-price-div" style="line-height: 36px;">
+				合计：<span
+					style="color: #e74b59; font-size: 1.5em" class="total-price">¥0</span>
+			</div>
+			<div
+				style="line-height: 14px; font-size: 0.8em; color: #939393; float: right">不计运费</div>
+		</div>
+	</div>
+</body>
+<script id='s-car-goods' type="text/html">
+{{each rice1 as val i}}
+{{if val.num > 0}}
+<div class="am-g cart-litemw-cnt" style="background-color: #e1e6d2; margin-top: 1em;" goods_id={{val.id}}>
+	<input class="child" name="car_cb" type='checkbox' style="float:left;margin:0 6px;position: absolute;" >	
+	<div class='am-u-sm-12 cart_sub_item' style="padding:0 0 0 36px;margin:0">
+	<div class="am-u-sm-4" style="margin:0;padding:0 0 0 0">
+		<img style="width:100%;height:auto;" src ="{{val.image}}" >
+	</div>
+	<div class="am-u-sm-8" style="padding: 0 0 0 12px;">
+		<div style="color:#676767;font-size: 1em; height: 1.5em;">{{val.name}}</div>
+		<div style="color:#969696;font-size: 0.6em; height: 1.5em; line-height: 1.5em;overflow: hidden; text-overflow: ellipsis;white-space: nowrap;width: 95%;">{{val.introduce}}</div>
+		<div style="font-size: 0.6em;color:#92bf64;">规格：{{val.standard}}/箱</div>
+		<div style="line-height: 36px;">
+			<span style="text-align: right;font-size: 1em;color:#e74b59;">￥</span><span class='goods-price' style="font-size: 1.3em;color:#e74b59;">{{val.price}}</sapn>
+			<span hidden class='goods-total-price'>{{val.price*val.num}}</span>
+		<div class ="" style="font-size: 14px;float: right;text-align: center;border-radius: 2px;padding:0 0.6em 0 0;">
+			<span class="minus-wp fleft" >
+				<span class="am-icon-minus"></span>
+			</span>
+			<span type="text" class="buy-num buynum fleft">{{val.num}}</span>
+			<span class="add-wp fleft" >
+				<span class="am-icon-plus" ></span>
+			</span>
+		</div>															
+		</div>
+	</div>
+	</div>
+
+</div>
+
+{{/if}}
+{{/each}}
+
+</script>
+
+
+<script type="text/javascript">
+	var syswidth = $('body').css('width'); 
+	syswidth = syswidth.substr(0, syswidth.length - 2);
+	var isLogin = true;
+
+	var userid = window.localStorage.getItem('userid');
+	jQuery(document).ready(function() {
+		getGoodsList();
+		showCarCount();
+
+	});
+	function getGoodsList() {
+		$.ajax({
+			type : "post",
+			url : url("BuyRiceList.pageInfo"),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "pinfo",
+			success : function(json) {
+				for (var i = 0; i < json.rice1.length; i++) {
+					var num = window.localStorage.getItem(json.rice1[i].id);
+					json.rice1[i].num = num;
+				}
+				var html = template('s-car-goods', json);
+				$("#car-goods").html(html);
+				initShopCar();
+				
+			},
+			error : function() {
+			}
+		});
+	}
+	function initShopCar(){
+		var syswidth = $('.cart-litemw-cnt').css('width');
+		syswidth = syswidth.substr(0, syswidth.length - 2);
+		$('.cart_sub_item').css('width', syswidth - 36 + 'px');
+		$('.cart_sub_item').css('margin-left', '36px');
+		$('.cart_sub_item').css('padding-left', '0px');
+
+		var height = $('.am-u-sm-4').css('width').toString();
+		$('.am-u-sm-4 img').css('height', height);
+		height = height.substr(0, height.length - 2);
+		$('.child').css('margin-top', (height / 2 - 12) + 'px');
+		$(".minus-wp").click(minusBuyNum);
+		//购买数量加
+		$(".add-wp").click(addBuyNum);
+		$('.child').on('change',checkBoxChange);
+		
+	}
+	function addToShopCar(goodsid, e) {
+		var num = window.localStorage.getItem(goodsid);
+		if (typeof (num) == "undefined" || num == null) {
+			num = 0;
+		}
+		num = Number(num) + 1;
+		window.localStorage.setItem(goodsid, num);
+		new Toast({
+			context : $('body'),
+			message : '加入购物车成功'
+		}).show();
+		stopBubble(e);
+	}
+	function goToRiceDetail(goodsid, e) {
+		window.location.href = "ricedetail.html?goodsid=" + goodsid;
+		stopBubble(e);
+	}
+	function minusgoodsnum(goodsid) {
+		var num = window.localStorage.getItem(goodsid);
+		if (num > 1) {
+			num = Number(num) - 1;
+		}
+		window.localStorage.setItem(goodsid, num);
+		window.location.reload();
+	}
+	function plusgoodsnum(goodsid) {
+		var num = window.localStorage.getItem(goodsid);
+		if (num < 100) {
+			num = Number(num) + 1;
+		}
+		window.localStorage.setItem(goodsid, num);
+		window.location.reload();
+	}
+	function editgoodsnum(goodsid, num) {
+		window.localStorage.setItem(goodsid, num);
+		window.location.reload();
+	}
+	function checkBoxChange() {
+		var self = this;
+		editQuantity(self, "checkbox");
+		var quanxuan = true;
+		var allCb = $('input[name="car_cb"]');
+		for (var i = 0; i < allCb.length; i++) {
+			if(!allCb[i].checked){
+				quanxuan = false
+			}
+		}
+		$('#quanxuan')[0].checked = quanxuan;
+	}
+	//购买数量减
+	function minusBuyNum() {
+		var self = this;
+		editQuantity(self, "minus");
+	}
+	//购买数量加
+	function addBuyNum() {
+		var self = this;
+		editQuantity(self, "add");
+	}
+	//购买数量增或减，请求获取新的价格
+	function editQuantity(self, type) {
+		var sPrents = $(self).parents(".cart-litemw-cnt")
+		var goods_id = sPrents.attr("goods_id");
+		var numInput = sPrents.find(".buy-num");
+		var priceSpan = sPrents.find(".goods-price");
+		var totalPriceSpan = sPrents.find(".goods-total-price");
+		var buynum = parseInt(numInput.html());
+		var goodsprice = parseInt(priceSpan.html());
+		var quantity = 1;
+		if (type == "add") {
+			if (buynum < 100) {
+				quantity = parseInt(buynum + 1);
+			} else {
+				$.sDialog({
+					skin : "red",
+					content : '购买数目必须大于1',
+					okBtn : false,
+					cancelBtn : false
+				});
+				return;
+			}
+			// 
+		} else if (type == "minus") {
+			if (buynum > 1) {
+				quantity = parseInt(buynum - 1);
+			} else {
+				$.sDialog({
+					skin : "red",
+					content : '购买数目必须大于1',
+					okBtn : false,
+					cancelBtn : false
+				});
+				return;
+			}
+		} else {
+			quantity = parseInt(buynum);
+		}
+		numInput.html(quantity);
+		window.localStorage.setItem(goods_id, quantity);
+		sPrents.find(".goods-total-price").html(goodsprice * quantity);
+		calculatorTotalPrice();
+
+		/* $.ajax({
+		    url:ApiUrl+"/index.php?act=member_cart&op=cart_edit_quantity",
+		    type:"post",
+		    data:{key:key,cart_id:cart_id,quantity:quantity},
+		    dataType:"json",
+		    success:function (res){
+		        if(checklogin(res.login)){
+		            if(!res.datas.error){
+		                numInput.val(quantity);
+		                sPrents.find(".goods-total-price").html(res.datas.total_price);
+		                var goodsTotal = $(".goods-total-price");
+		                var totalPrice = parseFloat("0.00");
+		                for(var i = 0;i<goodsTotal.length;i++){
+		                    totalPrice += parseFloat($(goodsTotal[i]).html());
+		                }
+		                $(".total_price").html("￥"+totalPrice.toFixed(2));
+		            }else{
+		                $.sDialog({
+		                    skin:"red",
+		                    content:res.datas.error,
+		                    okBtn:false,
+		                    cancelBtn:false
+		                });
+		            }
+		        }
+		    }
+		}); */
+	}
+	$('#quanxuan').on('change', function() {
+		if (this.checked) {
+			$("input[name='car_cb']").each(function() {
+				this.checked = true;
+			});
+		} else {
+			$("input[name='car_cb']").each(function() {
+				this.checked = false;
+			});
+		}
+		calculatorTotalPrice();
+	});
+	function calculatorTotalPrice(){
+		var goodsTotal = $('.cart-litemw-cnt');
+		var totalPrice = parseFloat("0.00");
+		var totalNum = 0;
+		var carCount = 0;
+		for (var i = 0; i < goodsTotal.length; i++) {
+			if($(goodsTotal[i]).find('input[name="car_cb"]')[0].checked){
+				 totalPrice += parseFloat($(goodsTotal[i]).find('.goods-total-price').html());
+				 totalNum += parseInt($(goodsTotal[i]).find('.buy-num').html());
+			}
+			carCount += parseInt($(goodsTotal[i]).find('.buy-num').html());
+				
+		}
+		$('.total-price').html("¥"+totalPrice);
+		if($('.total-price').html().length > 6 && syswidth <= 320){
+			$('.total-price').css("font-size",'14px');
+			$('.total-price').parents().css("font-size",'14px');
+			
+		}else{
+			$('.total-price').css("font-size",'1.5em');
+			$('.total-price').parents('.total-price-div').css("font-size",'1em');
+		}
+		window.localStorage.setItem("shopcar-count",carCount);
+		if(totalNum > 99){
+			$('.total-num').html('99+');
+			
+		}else{
+			$('.total-num').html(totalNum);
+			
+		}
+		if(carCount > 99){
+			$('#shopcar-count').html("99+");
+		}else{
+			$('#shopcar-count').html(carCount);
+		}
+	}
+</script>
+</html>

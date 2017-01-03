@@ -1,0 +1,434 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<script src="js/include.js"></script>
+
+<style type="text/css">
+.am-header .am-header-title {
+margin: 0 15%;
+}
+.mi-title {
+	background-color: #474240;
+}
+
+.mi-black {
+	color: white;
+	background: #474240;
+	outline: none;
+	border: #474240 1px solid;
+	-moz-border-radius: 3px; /* Gecko browsers */
+	-webkit-border-radius: 3px; /* Webkit browsers */
+	border-radius: 3px; /* W3C syntax */
+}
+</style>
+
+
+<style type="text/css">
+button {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.am-tabs-d2 .am-tabs-nav {
+	background-color: transparent;
+	border-bottom: 1px solid #b4b5b5;
+}
+
+.am-tabs-d2 .am-tabs-nav a {
+	line-height: 42px;
+	color: #2b2b2b;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active {
+	position: relative;
+	background-color: #fcfcfc;
+	border-bottom: none;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active a {
+	line-height: 42px;
+	color: #e7222b;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active:after {
+	position: absolute;
+	width: 50%;
+	height: 0;
+	bottom: 0;
+	left: 25%;
+	border: 1px red solid;
+	content: "";
+	z-index: 1;
+}
+
+.buy-button {
+	background: #e7222b;
+	color: white;
+	width: 100%;
+	border: none;
+	height: 1.7em;
+	font-size: 1.1em;
+	outline: none;
+	margin-top: 0.3em;
+}
+
+.label-sale {
+	background: #e7222b;
+	color: white;
+	border: none;
+	border-radius: 3px;
+	width: 3em;
+	height: 1.5em;
+	line-height: 1.5em;
+	text-align: center;
+	font-size: 0.8em;
+	outline: none;
+}
+
+.Bar, .Bars {
+	position: relative;
+	/* 宽度 */
+	border: 1px solid #e60012;
+	padding: 0px;
+}
+
+.Bar div, .Bars div {
+	display: block;
+	position: relative;
+	background: #f06e6e; /* 进度条背景颜色 */
+	color: #333333;
+	height: 1em; /* 高度 */
+	line-height: 1em; /* 必须和高度一致，文本才能垂直居中 */
+}
+
+.Bars div {
+	background: #090
+}
+
+.Bar div span, .Bars div span {
+	position: absolute;
+	width: 6em; /* 宽度 */
+	text-align: center;
+	font-weight: normal;
+	font-size: 0.8em;
+}
+
+.am-list>li{
+	border:none;
+	
+	color:#72777a;
+}
+
+.span-class{
+	color:#333333;
+	margin-left: 0.5em;
+}
+
+input[type=radio].checkbox{
+	display:none;
+}
+input[type=radio].checkbox+label{
+	background:url(img/pay_noselect.png) no-repeat;width: 2em;
+	background-position:center;
+	background-size:1.1em 1.1em;
+}
+
+input[type=radio]:checked.checkbox+label{
+	background:url(img/pay_select.png) no-repeat;width: 2em;
+	background-position:center;
+	background-size:1.1em 1.1em;
+}
+
+input[type=checkbox].checkbox{
+	display:none;
+}
+input[type=checkbox].checkbox+label{
+	background:url(img/pay_noselect.png) no-repeat;width: 2em;
+	background-position:center;
+	background-size:1.1em 1.1em;
+}
+
+input[type=checkbox]:checked.checkbox+label{
+	background:url(img/pay_select.png) no-repeat;width: 2em;
+	background-position:center;
+	background-size:1.1em 1.1em;
+}
+
+</style>
+</head>
+<body bgcolor="#f0f0f0">
+
+	<!-- Header -->
+	<header data-am-widget="header"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title">订单支付</h1>
+	</header>
+	
+	<ul class="am-list am-list-static am-margin-sm" id="e_goods" style="margin: 0em;">
+	<script id="s_goods" type="text/html">
+		<li>
+		<div  class="am-g">
+			<div class="am-u-sm-4 am-padding-xs" style="margin:0em;padding:0em;" align="center" >
+				<a href="riceinfo.html"><img style="height:6em" src="{{tg[0].image}}"></a>
+			</div> 
+			<div class="am-u-sm-8" style="margin:0em;padding:0em;">
+				<div class="am-margin-xs am-padding-xs" style="margin:0em;padding:0em;"><a style="color:#000000;font-size:1em">{{tg[0].introduce}}</a></div>
+				<br>
+				<div class="am-align-left am-margin-xs" style="margin:0em;padding:0em;">
+					<a style="color:#e85b5b;margin-left:0em;font-size:1em" >单价:￥<span id="goodsprice" style="font-size:1.1em;">{{tg[0].price}}</span></a>
+				</div>	
+				<div id="div_off" class="am-align-right am-margin-xs" style="margin-right:4em"></div>
+			</div>
+		</div>
+		</li>
+
+<hr style="margin-top:0.1em;margin-bottom:0.1em;">
+		<li><img src="img/pay_tips.png" style="width:1.5em;margin:0em 0em 0em 1em;">&nbsp;购买数量:<span class="span-class">{{doc[0].count}}{{tg[0].unit}}<span></li>
+<hr style="margin-top:0.1em;margin-bottom:0.1em;margin-left:1em;">		
+		<li><img src="img/pay_tips.png" style="width:1.5em;margin:0em 0em 0em 1em;">&nbsp;优惠信息:<span class="span-class">{{if doc[0].off == '1'}}无{{else}}尊享{{doc[0].off*10}}折{{/if}}</span></li>
+<hr style="margin-top:0.1em;margin-bottom:0.1em;margin-left:1em;">				
+		<li><img src="img/pay_tips.png" style="width:1.5em;margin:0em 0em 0em 1em;">&nbsp;卡券优惠:
+			{{if sale.length == 0}}<span class="span-class">无</span>{{else}}
+			<ul class="am-list am-margin-sm" style="borderStyle:none none none none;font-size:0.8em">
+			{{each sale as val i}}
+			<li style="margin-left:1em;"><i class="am-icon-money am-icon-fw"></i>&nbsp&nbsp{{val.name}},使用{{val.usenum}}{{val.unit}}</li>
+			{{/each}}
+			</ul>
+			{{/if}}
+		</li>
+<hr style="margin-top:0.1em;margin-bottom:0.1em;margin-left:1em;">
+		<li><img src="img/pay_tips.png" style="width:1.5em;margin:0em 0em 0em 1em;">&nbsp;运费:<span class="span-class">{{if doc[0].freight == '0'}}免运费{{else}}{{doc[0].freight}}元{{/if}}</span></li>
+<hr style="margin-top:0.1em;margin-bottom:0.1em;margin-left:1em;">		
+		<li><img src="img/pay_tips.png" style="width:1.5em;margin:0em 0em 0em 1em;">&nbsp;实付金额:<span class="span-class">{{doc[0].payed}}元</span></li>
+<hr style="margin-top:0.1em;margin-bottom:0.1em;">			
+		</script>
+	</ul>
+	<div id="d_buysale" onclick="selectBuySale(this)" style="line-height:3em;">
+		<div style="width:10%;float:left;margin-left:1em;"><input class="checkbox" type="checkbox" value="alipay" style="width:1.2em;height:1.2em;float:right">
+			<label style="margin-bottom:0em;">&nbsp;</label></div>
+		仅购买米券
+	</div>
+	<div style="color: #e85b5b;margin:0.5em 1.3em;font-size:0.7em;">
+		提示：选择购买米券，支付完成后，此订单不发货，直接绑定到你的优惠券中。
+	</div>
+	<hr style="margin:0em 0.1em;">
+	<div id = "payDIV" style="padding-top: 0.5em">
+		<div class="am-g" >
+		  <div class="am-u-sm-6" style="width:100%;margin-top:0.5em;margin-bottom:1em"><span style="color: #72777a; ">支付方式</span></div>		</div>
+		<hr style="margin-top:0.1em;margin-bottom:0.1em;">
+		<ul class="am-list" style="margin-top:0.2em">
+			<li class="am-list-item-desced" style="padding-bottom: 0;padding-left: 0em;padding-right: 0.5em;">
+				<div class="am-g" style="line-height: 3em;" onclick="radioClick(this)">
+					<div class="am-u-sm-9" style="margin-left:-1em;">
+						<img src="img/pay_alipay.png" style="width:2.3em;margin:0em 1em 0em 1em;">&nbsp;
+						支付宝
+					</div>
+					<div class="am-u-sm-3" style="float:right;width:4em;"><input class="checkbox" type="radio" name="payRadio" value="alipay" style="width:1.2em;height:1.2em;float:right" checked><label>&nbsp;</label></div>
+				</div>
+				
+			</li>
+			<hr style="margin-top:0.1em;margin-bottom:0.1em;margin-left:1em;">
+			<li class="am-list-item-desced" style="padding-bottom: 0;padding-left: 0em;padding-right: 0.5em;">
+				<div class="am-g" style="line-height: 3em;" onclick="radioClick(this)">
+					<div class="am-u-sm-9" style="margin-left:-1em;">
+						<img src="img/pay_weixin.png" style="width:2.3em;margin:0em 1em 0em 1em;">&nbsp;
+						微信支付
+					</div>
+					<div class="am-u-sm-3" style="float:right;width:4em;"><input  class="checkbox" type="radio" name="payRadio" value="weixin" style="width:1.2em;height:1.2em;float:right;"><label>&nbsp;</label></div>
+				</div>
+			</li>
+		</ul>
+	</div>
+		
+    <header class="am-topbar am-topbar-inverse am-topbar-fixed-bottom" style="background: white;border:1px solid white;border-top:1px solid #dddddd;">
+
+	<button style="color: #e85b5b; background: white; border: white 1px solid; width: 100%; height: 3em; outline: none;"
+				onclick="pay()">支付</button>
+	
+	</header>
+
+	<script type="text/javascript">
+	var isLogin = true;
+	var isBuySale = false;
+	var userid = window.localStorage.getItem('userid');
+	var token = window.localStorage.getItem('token');
+
+	if(userid == null){
+		isLogin = false;
+		window.location.href="login.html";
+	}else{
+		isLogin = true;
+	}
+	
+	var docid = window.localStorage.getItem('orderinfo.docid');
+	
+	if(docid == null){
+		alert("系统错误,请重新操作");
+		//mi_exit(-1);
+	}
+	
+	
+    $.ajax({
+        type: "post",
+        url: url("BuyRice.piwdid&u="+userid+"&d="+docid+""+"&t="+token),
+        dataType: "jsonp",
+        jsonp: "callback",
+        jsonpCallback:"pinfo",
+        success: function(data){
+        	if(!checktoken(data)){
+        		return; 
+        	}
+        	var html = template('s_goods',data);
+        	if(data.doc[0].payed == '0'){
+        		$("#payDIV").hide();
+        	}
+        	if(data.doc[0].issale == '1'){
+        		selectBuySale();
+        	}
+        	$("#e_goods").html(html);
+        	
+         },
+        error: function(){
+        }
+        });
+	
+		function alipay(paystr){
+	       	Alipay.pay(paystr,function(data){
+        		if(data=="succ"){
+        			payok('2');
+        		}else if(data=="fail"){
+    	    		alert("支付失败");
+        		}else{
+        			
+        		}
+        	},
+        	function(data2){
+	    		alert("网络错误,请稍后重试!");
+        	});
+		}
+
+		function weixinpay(paystr){
+			
+			if(paystr.prepayid == ""){
+        		alert("调取微信支付失败");
+        		return;
+        	}
+			var params = {
+				appid: paystr.appid,
+				mch_id: paystr.mchid, // merchant id
+				prepay_id: paystr.prepayid, // prepay id returned from server
+				nonce: paystr.noncestr, // nonce string returned from server
+				timestamp: paystr.timestamp, // timestamp
+				sign: paystr.sign // signed string
+			};
+			Wechat.sendPaymentRequest(params, function () {
+        	  			
+						payok('3');
+        		   }, function (reason) {
+        	  			alert("Failed: " + reason);
+        		   });
+		}
+		
+		function payok(paytype){
+			var bs = 0;
+			if(isBuySale){
+				bs=1;
+			}
+			
+		    $.ajax({
+		        type: "post",
+		        url: url("PayV2.paysuccV2&d="+docid+"&paytype="+paytype+""),
+		        dataType: "jsonp",
+		        jsonp: "callback",
+		        jsonpCallback:"paysucc",
+		        success: function(data){
+		        	if(!isBuySale){
+		        	window.localStorage.setItem('orderinfo.docid',docid);
+		        	alert("支付完成,请录入收货地址");
+		        	window.location.href="goodsaddr.html";
+		        	}else{
+		        		window.location.href="saleinfo.html";
+		        	}
+		         },
+		        error: function(){
+		    		alert("网络错误,请稍后重试");
+
+		        }
+		        });
+			
+		}		
+		
+	
+		function pay() {
+			isBuySale = $('#d_buysale input')[0].checked;
+			var payType = $('input[name="payRadio"]:checked').val();
+			var bs='0';
+			if(isBuySale){
+				bs='1';
+			}
+			var token = window.localStorage.getItem('token');
+			$.ajax({
+				type : "post",
+				url : url("PayV2.piwdocV2&u=" + userid + "&d=" + docid + "&pt="+payType+"&bs="+bs+"&t="+token),
+				dataType : "jsonp",
+				jsonp : "callback",
+				jsonpCallback : "piwdocret",
+				success : function(data) {
+		        	if(!checktoken(data)){
+		        		return; 
+		        	}
+					if(data.ret=='1'){
+						alert("此订单已支付");
+					}else{
+						if(data.ret == '0'){
+							payok('1');
+							
+							return;
+						}
+						if(payType == "alipay"){
+							alipay(data.ret);
+						}else if(payType == "weixin"){
+							weixinpay(data.ret)
+						}
+					}
+				},
+				error : function() {
+					alert("支付请求失败,请稍后重试");
+				}
+			});
+
+		}
+		function radioClick(el){
+			$(el).find(".checkbox").each(function () {
+				if(!this.checked){
+					this.checked = !this.checked;
+				}
+		  	});  
+        }
+		function selectBuySale(){
+			$('#d_buysale input')[0].checked=!$('#d_buysale input')[0].checked;
+		}
+	</script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>分享优惠券</title>
+<link>
+<script src="js/include0.js"></script>
+<style type="text/css">
+.mi-title {
+	background-color: #474240;
+}
+
+.mi-black {
+	color: #4489ce;
+	background: white;
+	outline: none;
+	border: white 1px solid;
+	border-top: #dddddd 1px solid;
+}
+
+button {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	background: transparent;
+	border: transparent 1px
+}
+
+body, html {
+	width: 100%;
+	height: 100%;
+	background: white;
+}
+
+.green {
+	color: white;
+	background: #0c90d0;
+	border: #0c90d0 1px solid;
+}
+
+.blue {
+	color: white;
+	background: #0c90d0;
+	border: #0c90d0 1px solid;
+}
+
+.red {
+	color: white;
+	background: #0c90d0;
+	border: #0c90d0 1px solid;
+}
+
+.buy-button {
+	background: #e34343;
+	color: white;
+	width: 60%;
+	border: none;
+	height: 40px;
+	font-size: 1em;
+	outline: none;
+	float: right;
+}
+</style>
+<script type="text/javascript">
+	var isLogin = true;
+
+	var userid = window.localStorage.getItem('userid');
+
+	var token = window.localStorage.getItem('token');
+
+	var sid = getParameter('saleid');
+
+	jQuery(document).ready(function() {
+
+	});
+
+	var shareStr = "";
+
+	$.ajax({
+		type : "post",
+		url : url("Sale.queryinfofromid&s=" + sid),
+		dataType : "jsonp",
+		jsonp : "callback",
+		jsonpCallback : "sale",
+		success : function(json) {
+
+			$("#shareType").text(json.allList[0].sname);
+			if (json.allList[0].unit == '箱') {
+				$("#valueID2").text(json.allList[0].unit);
+			} else if (json.allList[0].unit == '元') {
+				$("#valueID1").text('￥');
+				$("#valueID2").text('.' + json.allList[0].value.split('.')[1]);
+			}
+			
+			$("#valueID").text(json.allList[0].value.split('.')[0]);
+			$("#typeID").text(json.allList[0].gname);
+			shareStr = json.allList[0].sname + '已放入账户';
+		},
+		error : function() {
+			alert("系统错误");
+		}
+	});
+
+	function bind() {
+		var reg = /^1\d{10}$/;
+		if (!reg.test($("#phone").val())) {
+			alert("请输入正确的手机号！");
+			return;
+		}
+
+		var murl = url("Sale.bindShare&s=" + sid + "&p=" + $("#phone").val());
+		murl = encodeURI(murl);
+		murl = encodeURI(murl);
+
+		$.ajax({
+			type : "post",
+			url : murl,
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "sbind",
+			success : function(data) {
+
+				if (data.ret == "1") {
+					alert("优惠券已使用");
+				} else {
+					$('#div_phone').toggle();
+					$('#div_button').toggle();
+					$('#div_success').toggle();
+					$('#div_info').toggle();
+					$("#shareType1").text(shareStr + "   ");
+					$("#shareType2").text($('#phone').val());
+				}
+			},
+			error : function() {
+				alert("网络错误,请稍后重试");
+			}
+		});
+	}
+
+	function gotodownload() {
+		window.open("https://www.zhizhoumi.com/mi-download/mi-download.html");
+	}
+
+	//限制输入数字
+	function IsNum(e) {
+		var k = window.event ? e.keyCode : e.which;
+		if (((k >= 48) && (k <= 57)) || k == 8 || k == 0) {
+		} else {
+			if (window.event) {
+				window.event.returnValue = false;
+			} else {
+				e.preventDefault(); //for firefox               
+			}
+		}
+	}
+</script>
+</head>
+<body
+	style="background: #f8f8f8; -moz-background-size: 100% 100%; background-size: 100% 100%; background-repeat: no-repeat;">
+	<div style='display: none;'>
+		<img src='http://1.190.175.59/mi/img/thumb.jpg' />
+	</div>
+	<div>
+		<img src="img/lefttop.png"
+			style="width: 25%; height: auto; margin: 10px 10px;">
+	</div>
+	<div align="center" style="margin-top: 1em;">
+		<img src="img/toptitle.png"
+			style="width: 60%; height: auto; margin: 10px 10px;">
+	</div>
+	<div style="margin: 0.5em 10%;">下载客户端并注册登录，即可使用免费券下单购买大米，一个用户只限使用一张免费优惠券，多余的优惠券可以转送给朋友。</div>
+	<div class="am-g"
+		style=" bottom: 1%; background: transparent;">
+		<div class="am-u-sm-12" style="padding: 0em 2rem 0em 2rem">
+			<div class="am-u-sm-12" align="center"
+				style="border: 1px solid #d6d6d9; border-radius: 0px 0px 5px 5px; padding: 0em;">
+				<img src="img/bindShare3.png" width="100%" style="display: block;">
+				<div class="am-u-sm-12" style="background: white; width: 100%;">
+					<div id="shareType"
+						style="float: left; margin-left: 2%; font-size: 1.3em; color: #333333; margin-top: 2.5%"></div>
+					<div id="valueID2"
+						style="float: right; margin-right: 2%; font-size: 1.2em; color: #e34343; margin-top: 5.5%"></div>
+					<div id="valueID"
+						style="float: right; margin-right: 0%; font-size: 2em; color: #e34343"></div>
+					<div id="valueID1"
+						style="float: right; margin-right: 2%; font-size: 1em; color: #e34343; margin-top: 6.5%"></div>
+				</div>
+				<div class="am-u-sm-12" style="background: white; width: 100%;">
+					<div id="typeID"
+						style="float: left; margin-top: 15%; margin-left: 2%; color: #c1c0c0; position: absolute"></div>
+					<img
+						style="display: block; float: right; height: 20%; width: 20%; margin-top: 5%"
+						src="img/bindShare6.png"> <img
+						style="display: block; float: right; height: 15%; width: 15%; margin-top: 10%; padding-right: 2%"
+						src="img/bindShare5.png"> <img
+						style="display: block; float: right; height: 10%; width: 10%; margin-top: 15%; padding-right: 2%"
+						src="img/bindShare7.png">
+				</div>
+				<img src="img/bindShare4.png" width="100%" style="display: block;">
+			</div>
+			<div
+				style="margin: 0 auto; height: 1.3em; width: 100%; background: transparent; overflow: hidden"></div>
+			<div id="div_phone" class="am-u-sm-12" align="center"
+				style="padding: 0em;">
+				<input type="text" maxlength="11" onkeypress="return IsNum(event)"
+					id="phone" placeholder="输入手机号"
+					style="text-align: center; background: white; height: 45px; width: 100%; border: 1px #d6d6d9 solid; border-radius: 3px; outline: none">
+			</div>
+			<div
+				style="margin: 0 auto; height: 0.6em; width: 100%; background: transparent; overflow: hidden"></div>
+			<div id="div_button" class="am-u-sm-12" align="center"
+				style="padding: 0em;">
+				<button class="mi-black"
+					style="background: #998a75; color: white; width: 100%; height: 45px; border: none;"
+					onclick="bind()">领取优惠券</button>
+			</div>
+
+			<div id="div_success" class="am-u-sm-12" align="center" hidden
+				style="margin-top: 10px; padding: 0em;">
+				<span style="color: #685b47; font-size: 1.5em">恭喜您领取成功</span> <img
+					src="img/bindShare8.png" width="10%">
+			</div>
+			<div
+				style="padding: 0em; margin: 0 auto; height: 0.5em; width: 100%; background: transparent; overflow: hidden;"></div>
+			<div id="div_info" class="am-u-sm-12" align="center" hidden
+				style="padding: 0em;">
+				<span id="shareType1" style="font-size: 1.05em; color: #968976"></span>
+				<span id="shareType2" style="font-size: 1.05em; color: #685b47"></span>
+			</div>
+			<div
+				style="margin: 0 auto; height: 1em; width: 100%; background: transparent; overflow: hidden;"></div>
+			<div class="am-u-sm-12" align="center">
+				<span class="am-u-sm-12"
+					style="height: 10%; color: #685b47; padding: 0em;">登录APP即可使用</span>
+			</div>
+			<div
+				style="padding: 0em; margin: 0 auto; height: 0.5em; width: 100%; background: transparent; overflow: hidden;"></div>
+			<div class="am-u-sm-12" align="center" style="padding: 0em;">
+				<button class="mi-black"
+					style="background: #695a45; color: white; width: 100%; height: 45px; border: none;"
+					onclick="gotodownload()">
+					<img src="img/bindShare5.png"
+						style="width: 1em; heigh: 100%; margin-right: 0.5em">下载知米客户端
+				</button>
+			</div>
+		</div>
+</body>
+</html>

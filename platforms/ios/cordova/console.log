@@ -1,0 +1,212 @@
+2015-08-22 10:51:45.916 米[68158:5040160] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Data/Application/953C0C23-3EE0-4D72-957B-49BADAA5DE68/Library/Cookies/Cookies.binarycookies
+2015-08-22 10:51:46.537 米[68158:5040160] Apache Cordova native platform version 3.8.0 is starting.
+2015-08-22 10:51:46.538 米[68158:5040160] Multi-tasking -> Device: YES, App: YES
+2015-08-22 10:51:46.579 米[68158:5040160] Unlimited access to network resources
+2015-08-22 10:51:46.600 米[68158:5040160] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-08-22 10:51:47.174 米[68158:5040160] JPushLog: 
+---------------------Jpush(IOS8Version) log----------------------
+ --------------------Jpush SDK Version:1.8.3---------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+2015-08-22 10:51:47.175 米[68158:5040160] JPushLog ERROR: JPush WARNING!
+APNS is NOT supported on simulator
+2015-08-22 10:51:47.180 米[68158:5040278] Jpush WARNING
+ Unkown value for APS_FOR_PRODUCTION (null), default set to development aps evironment
+2015-08-22 10:51:47.180 米[68158:5040278] load aps evi error, no em provision url
+2015-08-22 10:51:47.181 米[68158:5040160] JPushLog: 
+---------------------Jpush(IOS8Version) log----------------------
+ --------------------Jpush SDK Version:1.8.3---------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+2015-08-22 10:51:47.424 米[68158:5040160] Resetting plugins due to page load.
+2015-08-22 10:51:47.888 米[68158:5040160] Finished load of: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Bundle/Application/5AA2309A-B356-42C4-82B6-89DAA9BA1C07/%E7%B1%B3.app/www/main.html
+2015-08-22 10:51:51.477 米[68158:5040160] Resetting plugins due to page load.
+2015-08-22 10:51:51.541 米[68158:5040160] Finished load of: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Bundle/Application/5AA2309A-B356-42C4-82B6-89DAA9BA1C07/%E7%B1%B3.app/www/userinfo.html
+2015-08-22 10:51:53.191 米[68158:5040160] Resetting plugins due to page load.
+2015-08-22 10:51:53.242 米[68158:5040160] Finished load of: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Bundle/Application/5AA2309A-B356-42C4-82B6-89DAA9BA1C07/%E7%B1%B3.app/www/addrList.html
+2015-08-22 10:51:55.263 米[68158:5040160] Resetting plugins due to page load.
+2015-08-22 10:51:55.324 米[68158:5040160] Finished load of: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Bundle/Application/5AA2309A-B356-42C4-82B6-89DAA9BA1C07/%E7%B1%B3.app/www/addradd.html
+2015-08-22 10:51:56.337 米[68158:5040160] THREAD WARNING: ['ContactPicker'] took '65.243164' ms. Plugin should use a background thread.
+2015-08-22 10:51:59.129 米[68158:5040160] Phone Label: _$!<Mobile>!$_
+2015-08-22 10:51:59.129 米[68158:5040160] Phone Label: _$!<Home>!$_
+2015-08-22 10:51:59.129 米[68158:5040160] John Appleseed John-Appleseed@mac.com
+2015-08-22 10:51:59.646 米[68158:5040228] plugin com.apple.MobileAddressBook.ContactsViewService invalidated
+2015-08-22 10:52:52.823 米[68158:5041011] Communications error: <OS_xpc_error: <error: 0x42b35f4> { count = 1, contents =
+	"XPCErrorDescription" => <string: 0x42b383c> { length = 22, contents = "Connection interrupted" }
+}>
+2015-08-22 10:52:52.844 米[68158:5041069] Terminating since there is no system app.
+2015-08-22 10:53:03.836 米[68499:5042076] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Data/Application/9390395D-CFC6-4E59-9DEA-C9AEF34285E4/Library/Cookies/Cookies.binarycookies
+2015-08-22 10:53:03.944 米[68499:5042076] Apache Cordova native platform version 3.8.0 is starting.
+2015-08-22 10:53:03.945 米[68499:5042076] Multi-tasking -> Device: YES, App: YES
+2015-08-22 10:53:03.949 米[68499:5042076] Unlimited access to network resources
+2015-08-22 10:53:03.954 米[68499:5042076] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-08-22 10:53:04.049 米[68499:5042076] JPushLog: 
+---------------------Jpush(IOS8Version) log----------------------
+ --------------------Jpush SDK Version:1.8.3---------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+2015-08-22 10:53:04.050 米[68499:5042076] JPushLog ERROR: JPush WARNING!
+APNS is NOT supported on simulator
+2015-08-22 10:53:04.052 米[68499:5042103] Jpush WARNING
+ Unkown value for APS_FOR_PRODUCTION (null), default set to development aps evironment
+2015-08-22 10:53:04.052 米[68499:5042103] load aps evi error, no em provision url
+2015-08-22 10:53:04.055 米[68499:5042076] JPushLog: 
+---------------------Jpush(IOS8Version) log----------------------
+ --------------------Jpush SDK Version:1.8.3---------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+2015-08-22 10:53:04.092 米[68499:5042076] Resetting plugins due to page load.
+2015-08-22 10:53:04.269 米[68499:5042076] Finished load of: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Bundle/Application/485C83ED-8ACC-48CE-9D2D-A42C0516927A/%E7%B1%B3.app/www/main.html
+2015-08-22 10:53:06.054 米[68499:5042076] Resetting plugins due to page load.
+2015-08-22 10:53:06.099 米[68499:5042076] Finished load of: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Bundle/Application/485C83ED-8ACC-48CE-9D2D-A42C0516927A/%E7%B1%B3.app/www/userinfo.html
+2015-08-22 10:53:07.387 米[68499:5042076] Resetting plugins due to page load.
+2015-08-22 10:53:07.425 米[68499:5042076] Finished load of: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Bundle/Application/485C83ED-8ACC-48CE-9D2D-A42C0516927A/%E7%B1%B3.app/www/addrList.html
+2015-08-22 10:53:08.811 米[68499:5042076] Resetting plugins due to page load.
+2015-08-22 10:53:08.865 米[68499:5042076] Finished load of: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Bundle/Application/485C83ED-8ACC-48CE-9D2D-A42C0516927A/%E7%B1%B3.app/www/addradd.html
+2015-08-22 10:53:09.859 米[68499:5042076] THREAD WARNING: ['ContactPicker'] took '31.126953' ms. Plugin should use a background thread.
+2015-08-22 10:53:11.785 米[68499:5042076] Phone Label: _$!<Mobile>!$_
+2015-08-22 10:53:11.785 米[68499:5042076] Phone Label: _$!<Home>!$_
+2015-08-22 10:53:11.785 米[68499:5042076] John Appleseed John-Appleseed@mac.com
+2015-08-22 10:53:12.296 米[68499:5042089] plugin com.apple.MobileAddressBook.ContactsViewService invalidated
+2015-08-22 10:53:29.508 米[68499:5042076] Phone Label: _$!<Work>!$_
+2015-08-22 10:53:29.508 米[68499:5042076] Phone Label: _$!<Other>!$_
+2015-08-22 10:53:29.509 米[68499:5042076] Hank M. Zakroff hank-zakroff@mac.com
+2015-08-22 10:53:30.038 米[68499:5042095] plugin com.apple.MobileAddressBook.ContactsViewService invalidated
+2015-08-22 10:53:32.009 米[68499:5042076] Phone Label: _$!<Home>!$_
+2015-08-22 10:53:32.009 米[68499:5042076] David Taylor 
+2015-08-22 10:53:32.530 米[68499:5042505] plugin com.apple.MobileAddressBook.ContactsViewService invalidated
+2015-08-22 10:55:44.155 米[68915:5045139] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Data/Application/5AE11207-2CA0-4A1E-8D6D-B8F602226DEB/Library/Cookies/Cookies.binarycookies
+2015-08-22 10:55:44.273 米[68915:5045139] Apache Cordova native platform version 3.8.0 is starting.
+2015-08-22 10:55:44.273 米[68915:5045139] Multi-tasking -> Device: YES, App: YES
+2015-08-22 10:55:44.277 米[68915:5045139] Unlimited access to network resources
+2015-08-22 10:55:44.280 米[68915:5045139] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-08-22 10:55:44.379 米[68915:5045139] JPushLog: 
+---------------------Jpush(IOS8Version) log----------------------
+ --------------------Jpush SDK Version:1.8.3---------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+2015-08-22 10:55:44.379 米[68915:5045139] JPushLog ERROR: JPush WARNING!
+APNS is NOT supported on simulator
+2015-08-22 10:55:44.380 米[68915:5045169] Jpush WARNING
+ Unkown value for APS_FOR_PRODUCTION (null), default set to development aps evironment
+2015-08-22 10:55:44.380 米[68915:5045169] load aps evi error, no em provision url
+2015-08-22 10:55:44.383 米[68915:5045139] JPushLog: 
+---------------------Jpush(IOS8Version) log----------------------
+ --------------------Jpush SDK Version:1.8.3---------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+2015-08-22 10:55:44.419 米[68915:5045139] Resetting plugins due to page load.
+2015-08-22 10:55:44.612 米[68915:5045139] Finished load of: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Bundle/Application/8682D8AE-52D7-4A2D-90FC-BD52CE9190E1/%E7%B1%B3.app/www/main.html
+2015-08-22 10:55:46.485 米[68915:5045139] Resetting plugins due to page load.
+2015-08-22 10:55:46.551 米[68915:5045139] Finished load of: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Bundle/Application/8682D8AE-52D7-4A2D-90FC-BD52CE9190E1/%E7%B1%B3.app/www/userinfo.html
+2015-08-22 10:55:48.084 米[68915:5045139] Resetting plugins due to page load.
+2015-08-22 10:55:48.123 米[68915:5045139] Finished load of: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Bundle/Application/8682D8AE-52D7-4A2D-90FC-BD52CE9190E1/%E7%B1%B3.app/www/addrList.html
+2015-08-22 10:55:49.516 米[68915:5045139] Resetting plugins due to page load.
+2015-08-22 10:55:49.571 米[68915:5045139] Finished load of: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Bundle/Application/8682D8AE-52D7-4A2D-90FC-BD52CE9190E1/%E7%B1%B3.app/www/addradd.html
+2015-08-22 10:55:50.476 米[68915:5045139] THREAD WARNING: ['ContactPicker'] took '30.761963' ms. Plugin should use a background thread.
+2015-08-22 10:55:52.531 米[68915:5045139] Phone Label: _$!<Mobile>!$_
+2015-08-22 10:55:52.531 米[68915:5045139] Phone Label: _$!<Home>!$_
+2015-08-22 10:55:52.531 米[68915:5045139] John Appleseed John-Appleseed@mac.com
+2015-08-22 10:55:53.043 米[68915:5045156] plugin com.apple.MobileAddressBook.ContactsViewService invalidated
+2015-08-22 10:56:02.731 米[68915:5045542] Terminating since there is no system app.
+2015-08-22 10:56:38.759 米[69227:5046686] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Data/Application/D901198A-E4A3-4DD0-83FD-E048080B8F56/Library/Cookies/Cookies.binarycookies
+2015-08-22 10:56:38.866 米[69227:5046686] Apache Cordova native platform version 3.8.0 is starting.
+2015-08-22 10:56:38.867 米[69227:5046686] Multi-tasking -> Device: YES, App: YES
+2015-08-22 10:56:38.871 米[69227:5046686] Unlimited access to network resources
+2015-08-22 10:56:38.874 米[69227:5046686] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-08-22 10:56:38.975 米[69227:5046686] JPushLog: 
+---------------------Jpush(IOS8Version) log----------------------
+ --------------------Jpush SDK Version:1.8.3---------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+2015-08-22 10:56:38.975 米[69227:5046686] JPushLog ERROR: JPush WARNING!
+APNS is NOT supported on simulator
+2015-08-22 10:56:38.976 米[69227:5046712] Jpush WARNING
+ Unkown value for APS_FOR_PRODUCTION (null), default set to development aps evironment
+2015-08-22 10:56:38.976 米[69227:5046712] load aps evi error, no em provision url
+2015-08-22 10:56:38.979 米[69227:5046686] JPushLog: 
+---------------------Jpush(IOS8Version) log----------------------
+ --------------------Jpush SDK Version:1.8.3---------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+2015-08-22 10:56:39.030 米[69227:5046686] Resetting plugins due to page load.
+2015-08-22 10:56:39.205 米[69227:5046686] Finished load of: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Bundle/Application/D98AF981-D22A-4A7C-A16F-787A7F994BE9/%E7%B1%B3.app/www/main.html
+2015-08-22 10:56:41.888 米[69227:5046686] Resetting plugins due to page load.
+2015-08-22 10:56:41.937 米[69227:5046686] Finished load of: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Bundle/Application/D98AF981-D22A-4A7C-A16F-787A7F994BE9/%E7%B1%B3.app/www/userinfo.html
+2015-08-22 10:56:43.169 米[69227:5046686] Resetting plugins due to page load.
+2015-08-22 10:56:43.203 米[69227:5046686] Finished load of: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Bundle/Application/D98AF981-D22A-4A7C-A16F-787A7F994BE9/%E7%B1%B3.app/www/addrList.html
+2015-08-22 10:56:44.415 米[69227:5046686] Resetting plugins due to page load.
+2015-08-22 10:56:44.468 米[69227:5046686] Finished load of: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Bundle/Application/D98AF981-D22A-4A7C-A16F-787A7F994BE9/%E7%B1%B3.app/www/addradd.html
+2015-08-22 10:56:45.608 米[69227:5046686] THREAD WARNING: ['ContactPicker'] took '29.670898' ms. Plugin should use a background thread.
+2015-08-22 10:56:47.922 米[69227:5046686] Phone Label: _$!<Mobile>!$_
+2015-08-22 10:56:47.922 米[69227:5046686] Phone Label: _$!<Home>!$_
+2015-08-22 10:56:47.922 米[69227:5046686] John Appleseed John-Appleseed@mac.com
+2015-08-22 10:56:48.435 米[69227:5046700] plugin com.apple.MobileAddressBook.ContactsViewService invalidated
+2015-08-22 10:57:30.977 米[69496:5047855] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Data/Application/19B73237-CEB5-496E-B733-B46E6041FF17/Library/Cookies/Cookies.binarycookies
+2015-08-22 10:57:31.093 米[69496:5047855] Apache Cordova native platform version 3.8.0 is starting.
+2015-08-22 10:57:31.094 米[69496:5047855] Multi-tasking -> Device: YES, App: YES
+2015-08-22 10:57:31.097 米[69496:5047855] Unlimited access to network resources
+2015-08-22 10:57:31.102 米[69496:5047855] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-08-22 10:57:31.252 米[69496:5047855] JPushLog: 
+---------------------Jpush(IOS8Version) log----------------------
+ --------------------Jpush SDK Version:1.8.3---------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+2015-08-22 10:57:31.252 米[69496:5047855] JPushLog ERROR: JPush WARNING!
+APNS is NOT supported on simulator
+2015-08-22 10:57:31.253 米[69496:5047901] Jpush WARNING
+ Unkown value for APS_FOR_PRODUCTION (null), default set to development aps evironment
+2015-08-22 10:57:31.254 米[69496:5047901] load aps evi error, no em provision url
+2015-08-22 10:57:31.261 米[69496:5047855] JPushLog: 
+---------------------Jpush(IOS8Version) log----------------------
+ --------------------Jpush SDK Version:1.8.3---------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+2015-08-22 10:57:31.303 米[69496:5047855] Resetting plugins due to page load.
+2015-08-22 10:57:31.499 米[69496:5047855] Finished load of: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Bundle/Application/8705A294-5659-4FF3-B53B-1BA91978F97C/%E7%B1%B3.app/www/main.html
+2015-08-22 10:57:33.847 米[69496:5047855] Resetting plugins due to page load.
+2015-08-22 10:57:33.923 米[69496:5047855] Finished load of: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Bundle/Application/8705A294-5659-4FF3-B53B-1BA91978F97C/%E7%B1%B3.app/www/userinfo.html
+2015-08-22 10:57:35.298 米[69496:5047855] Resetting plugins due to page load.
+2015-08-22 10:57:35.339 米[69496:5047855] Finished load of: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Bundle/Application/8705A294-5659-4FF3-B53B-1BA91978F97C/%E7%B1%B3.app/www/addrList.html
+2015-08-22 10:57:36.594 米[69496:5047855] Resetting plugins due to page load.
+2015-08-22 10:57:36.648 米[69496:5047855] Finished load of: file:///Users/libo/Library/Developer/CoreSimulator/Devices/523AF6D9-A0BE-4B8C-9DAB-691CE1B66CC2/data/Containers/Bundle/Application/8705A294-5659-4FF3-B53B-1BA91978F97C/%E7%B1%B3.app/www/addradd.html
+2015-08-22 10:57:37.370 米[69496:5047855] THREAD WARNING: ['ContactPicker'] took '23.220947' ms. Plugin should use a background thread.
+2015-08-22 10:57:39.392 米[69496:5047855] Phone Label: _$!<Mobile>!$_
+2015-08-22 10:57:39.392 米[69496:5047855] Phone Label: _$!<Home>!$_
+2015-08-22 10:57:39.393 米[69496:5047855] John Appleseed John-Appleseed@mac.com
+2015-08-22 10:57:39.902 米[69496:5047899] plugin com.apple.MobileAddressBook.ContactsViewService invalidated

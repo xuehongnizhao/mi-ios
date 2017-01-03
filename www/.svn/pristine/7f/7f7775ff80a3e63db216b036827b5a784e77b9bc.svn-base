@@ -1,0 +1,307 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<script src="js/include.js"></script>
+<link rel="stylesheet" href="css/basestyle.css">
+<style type="text/css">
+
+.am-header .am-header-title {
+margin: 0 15%;
+}
+.mi-title {
+	background-color: #5b3914;
+}
+
+.doc-pannel {
+	width: 100%;
+	border-top: 1px solid #dddddd;
+	height: 3em;
+	line-height: 3em;
+}
+
+.doc-pannel span {
+	border: none;
+	width: 5em;
+}
+
+.doc-group {
+	border-top-right-radius: 0;
+	border-top-left-radius: 0;
+	padding: 0em;
+}
+
+.doc-group:after {
+	content: '';
+	display: table;
+	clear: both
+}
+
+.doc-group:before {
+	display: block;
+	color: #bbb;
+	text-transform: uppercase;
+	margin: 0 -15px 15px;
+	padding: 4px 10px;
+	font-size: 12px
+}
+
+body, html {
+	width: 100%;
+	height: 100%
+}
+
+body, html {
+	width: 100%;
+	height: 100%;
+	background-image: url('img/mi_bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+hr {
+	margin: 0em;
+	margin-left: 1em;
+	padding: 0px;
+	border-top: 1px solid #e8e8e8;
+}
+.line {
+	margin: 0px;
+	padding: 0px;
+	border-top: 1px solid #dddddd;
+}
+</style>
+</head>
+
+<body>
+	<header data-am-widget="header" style="background: #5b3914;"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title"
+			style="font-size: 18px; text-align: left; margin: 0 10%;">商品详情</h1>
+	</header>
+	<div data-am-widget="slider" class="am-slider am-slider-d1"
+		id="mi-advert" data-am-flexslider="{playAfterPaused: 1000}">
+		<ul id="l_gg" class="am-slides">
+			
+		</ul>
+	</div>
+		<div class="am-g" style="background-color: #e1e6d2;padding: 0 15px;">
+	   		<div id="name1" style=""></div>
+	   		<div id="introduce1" style="color:#e74b59;font-size: 14px;"></div>
+	   		<div  style="color:#e74b59">
+	      	<span style="text-align: left;font-size: 1em;color:#e74b59;">￥</span>
+	      	<span id="price1" style="font-size: 20px;margin-left: -7px;"></span>
+	   	</div>
+	
+	</div>
+		<div class="am-u-sm-12" style="background-color: #e1e6d2;margin-top: 10px;">
+	    <div  id="act" style="float:left;height: 3.5em;width: 14%;color:#aaaaaa;margin-top: 10px">
+	                        促销
+	    </div>
+	    <div style="margin-top: 10px">评价五次可以获得大米一箱</div>
+	    <div>评价五次可以获得大米一箱,多送</div>	
+	</div>
+	
+	<div id="e_eval" class="am-u-sm-12" style="background-color: white;margin-top: 10px;" >
+			<script id="s_eval" type="text/html">
+		<div style="" >	 	
+			<div class="am-g" style=""  onclick = "fun1()">
+			<div class="am-u-sm-4" style="color: #72777a;margin-top: 8px; ">评价
+              <span style="color: #aaaaaa;margin-top: 8px;">({{tg[0].person}})</span>
+        	 </div>			
+        	<i class="am-icon-angle-right" style="font-size: 1.5em;float: right;color:#aaaaaa"></i>
+		</div>
+	
+      	<div class="am-accordion-content" style="padding:0em;">
+			<div class="am-u-sm-12 line"></div>
+			{{if eva}}
+			{{each eva as val i}}
+		      <div class="am-g" style="padding:0.5em 0.5em 0.5em;">					
+				<div class="am-u-sm-3" align="left"
+					style="color: 72777a; font-size: 1em; padding-left: 0.5em; line-height: 2em; height: 2em;">
+					{{val.nickname }}
+				</div>
+				<div class="am-u-sm-4" align="right"
+					style="color: #aaaaaa; font-size: 1em; line-height: 2em; height: 2em; padding-right: 0em;float:right;">
+					{{val.createtime}}
+				</div>
+				<div class="am-u-sm-12" style="color: #72777a; font-size: 1em;padding-right:1em;">
+					{{if val.content}}
+						<a style="color: #72777a;">{{val.content}}</a>
+					{{else}}
+						<a style="color: #72777a;">这家伙很懒什么都没有留下。</a>
+					{{/if}}
+				</div>
+			</div>
+            <div class="am-u-sm-12 line"></div>	
+			
+		{{/each}}
+		{{else }}
+			<div class=“am-g” style="text-align: center; margin-top: 2em"
+				align="center">暂无评价信息</div>
+		{{/if}}
+		</div>
+		</div>
+	</script>
+		</div>
+		<div class="am-u-sm-12" style="height: 4em"></div>
+       <div data-am-widget="navbar" class="am-navbar  am-navbar-default " style="">
+			<ul class="am-navbar-nav am-cf am-avg-sm-4" style="background-color:#e1e6d2;padding-left: 0px;padding-right: 0px;text-align: center;overflow: hidden; ">
+				<li><a href="shopcar.html" class=""><span
+						class="mui-badge" id="shopcar-count"></span> <img
+						style="width: 1.5em; height: auto; margin-top: 0.3em;"
+						src="img/shouye3.png"> <span class="am-navbar-label"
+						style="color: #999999; font-size: 12px; margin-top: 0.1em">购物车</span>
+				</a></li>
+				<li style="background-color: #92bf64;" onclick="tel()"><span class="am-navbar-label"
+						style="color: white; font-size: 14px; margin-top: 0.1em">联系商家</span>
+				</li>
+				<li style="background-color: #e74b59;" onclick="addToShopCar('{{val.id}}',event)" ><span class="am-navbar-label"
+						style="color: white; font-size: 14px; margin-top: 0.1em">加入购物车</span>
+				</li>
+			</ul>
+		</div>
+		<div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
+  			<div class="am-modal-dialog">
+  			  <div class="am-modal-hd">商家电话</div>
+  			  <div class="am-modal-b" id="mobel"></div>
+   			 <div class="am-modal-footer">
+      				<span class="am-modal-btn" style="color:#7cc5a7;" data-am-modal-cancel>拨打</span>
+      				<span class="am-modal-btn" style="color:#7cc5a7;" data-am-modal-confirm>取消</span>
+    		</div>
+  			</div>
+		</div>
+        
+	
+</body>
+
+
+<script type="text/javascript">
+	var isLogin = true;
+	var goodsid = getParameter("goodsid");
+
+	var userid = window.localStorage.getItem('userid');
+
+	if (userid == null || userid == "null") {
+		isLogin = false;
+	} else {
+		isLogin = true;
+	}
+	jQuery(document).ready(function() {
+		getAdvertList();
+		queryEval();
+		showCarCount();
+	});
+	
+	function getAdvertList() {
+		var scheight = document.body.clientHeight;
+		$.ajax({
+			type : "post",
+			url : url("RiceDetail.riceDetail&goodsid="+goodsid+""),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "ggList",
+			success : function(json) {
+				var width = screen.width;
+	        	var height = width/8*4;
+	        	var m_name = json.advlist[0].name;
+				var m_introduce = json.advlist[0].introduce;
+				var m_price = json.advlist[0].price;
+				var jsonObj =eval('('+json.advlist[0].imagearray+')');
+				var phone = json.tel[0].tel;
+				for (var i = 0; i < jsonObj.length; i++) {
+					$("#l_gg").append("<li style=''><img src='"+jsonObj[i]+"' style='width:"+width+"px;height:"+height+"px;' onerror=\"this.src='img/homepage_10.png'\"/></li>");
+				}
+				
+				$('#mobel').html(phone);
+				$('#name1').html(m_name);
+				$('#introduce1').html(m_introduce);
+				$('#price1').html(m_price);
+	        	  $('#mi-advert').flexslider({
+	        			 directionNav:false,controlNav: false,
+	        			  playAfterPaused: 1000,
+	        			  before: function(slider) {
+	        			    if (slider._pausedTimer) {
+	        			      window.clearTimeout(slider._pausedTimer);
+	        			      slider._pausedTimer = null;
+	        			    }
+	        			  },
+	        			  after: function(slider) {
+	        			    var pauseTime = slider.vars.playAfterPaused;
+	        			    if (pauseTime && !isNaN(pauseTime) && !slider.playing) {
+	        			      if (!slider.manualPause && !slider.manualPlay && !slider.stopped) {
+	        			        slider._pausedTimer = window.setTimeout(function() {
+	        			          slider.play();
+	        			        }, pauseTime);
+	        			      }
+	        			    }
+	        			  }
+	        			  // 设置其他参数
+	        			});
+			},
+			error : function() {
+
+			}
+		});
+	}
+	//查询评论
+	function queryEval() {
+		$.ajax({
+			type : "post",
+			url : url("RiceDetail.comment&goodsid="+goodsid+""),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "evaldd",
+			success : function(data) {
+				var html = template('s_eval', data);
+				$("#e_eval").html(html);
+					
+			},
+			error : function() {
+			}
+		});
+
+	};
+	function addToShopCar(goodsid,e){
+		var goodsid = getParameter("goodsid");
+		var num = window.localStorage.getItem(goodsid);
+		if (typeof(num) == "undefined" || num == null) {
+			num = 0;
+		}
+		num = Number(num)+1;
+		if(num > 100){
+			num = 100;
+		}else{
+			var count = window.localStorage.getItem("shopcar-count");
+			window.localStorage.setItem("shopcar-count",Number(count)+1);
+		}
+		window.localStorage.setItem(goodsid,num);
+		
+		new Toast({context:$('body'),message:'加入购物车成功'}).show();
+		showCarCount();
+		stopBubble(e);
+	}
+	
+	function tel() {
+		$('#my-prompt').modal({
+		      relatedTarget: this,
+		      onConfirm: function(e) {				
+			  		
+			},
+			onCancel: function(e) {
+			        
+		      }
+		});
+	}
+</script>
+</html>

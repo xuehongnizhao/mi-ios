@@ -1,0 +1,297 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<script src="js/include.js"></script>
+<link rel="stylesheet" href="css/basestyle.css">
+<script type="text/javascript">
+	var onDeviceReady = function() {
+		cordova.getAppVersion.getVersionCode(function(version) {
+			checkUpdate(version);
+		});
+		console.log("JPushPlugin:Device ready!")
+		initiateUI();
+	}
+	var onGetRegistradionID = function(data) {
+		try {
+			console.log("JPushPlugin:registrationID is " + data)
+			window.localStorage.setItem('pushid', data);
+			insertPushData();
+		} catch (exception) {
+			console.log(exception);
+		}
+	}
+
+	var onTagsWithAlias = function(event) {
+		try {
+			console.log("onTagsWithAlias");
+			var result = "result code:" + event.resultCode + " ";
+			result += "tags:" + event.tags + " ";
+			result += "alias:" + event.alias + " ";
+			$("#tagAliasResult").html(result);
+		} catch (exception) {
+			console.log(exception)
+		}
+	}
+	var onOpenNotification = function(event) {
+		try {
+			var alertContent = "";
+			if (device.platform == "Android") {
+				alertContent = window.plugins.jPushPlugin.openNotification.alert;
+			} else {
+				alertContent = event.aps.alert;
+			}
+
+		} catch (exception) {
+			console.log("JPushPlugin:onOpenNotification" + exception);
+		}
+	}
+	var onReceiveNotification = function(event) {
+		try {
+			var alert
+			if (device.platform == "Android") {
+				alert = window.plugins.jPushPlugin.receiveNotification.alert;
+			} else {
+				alert = event.aps.alert;
+			}
+			$("#notificationResult").html(alert);
+
+		} catch (exeption) {
+			console.log(exception)
+		}
+	}
+	var onReceiveMessage = function(event) {
+		try {
+
+			var message = "";
+			if (device.platform == "Android") {
+				message = window.plugins.jPushPlugin.receiveMessage.message;
+			} else {
+				message = event.content;
+			}
+			//var extras = window.plugins.jPushPlugin.extras
+
+			$("#messageResult").html(message);
+
+		} catch (exception) {
+			console.log("JPushPlugin:onReceiveMessage-->" + exception);
+		}
+	}
+
+	var initiateUI = function() {
+
+		try {
+			window.plugins.jPushPlugin.init();
+			window.plugins.jPushPlugin.getRegistrationID(onGetRegistradionID);
+
+			if (device.platform != "Android") {
+				window.plugins.jPushPlugin.setDebugModeFromIos();
+				window.plugins.jPushPlugin.setApplicationIconBadgeNumber(0);
+			} else {
+				window.plugins.jPushPlugin.setDebugMode(true);
+			}
+		} catch (exception) {
+			console.log(exception);
+		}
+
+	}
+
+	function insertPushData() {
+		var userid = window.localStorage.getItem('userid');
+		var pushid = window.localStorage.getItem('pushid');
+		if (userid != "" && pushid != "") {
+			$.ajax({
+				type : "post",
+				url : url("User.insertpush"),
+				data : {
+					"userid" : userid,
+					"pushid" : pushid
+				},
+				dataType : "jsonp",
+				jsonp : "callback",
+				jsonpCallback : "ipush",
+				success : function(data) {
+
+				},
+				error : function() {
+
+				}
+
+			});
+		}
+	}
+
+	document.addEventListener("deviceready", onDeviceReady, false);
+	document.addEventListener("jpush.openNotification", onOpenNotification,
+			false);
+	document.addEventListener("jpush.receiveNotification",
+			onReceiveNotification, false);
+	document.addEventListener("jpush.receiveMessage", onReceiveMessage, false);
+
+	//jpush.receiveMessage
+</script>
+<style type="text/css">
+
+body, html {
+	width: 100%;
+	height: 100%;
+	background-image: url('img/mi_bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+
+.am-navbar .am-navbar-nav {
+	background-color: #f5f3f4;
+}
+.scrollDiv {
+	width: 80%;
+	height: 3em;
+	min-height: 20px;
+	line-height: 25px;
+	overflow: hidden;
+}
+.scrollDiv li {
+	color: #646464;
+	font-size: 14px;
+	magin-top: 2px;
+	height: 22px;
+	overflow: hidden; /*自动隐藏文字*/
+	text-overflow: ellipsis; /*文字隐藏后添加省略号*/
+	white-space: nowrap; /*强制不换行*/
+	width: 95%; /*不允许出现半汉字截断*/
+}
+
+.goods-item{
+	width:100%;
+	padding-left: 5dp;
+	padding-right: 5dp;
+	
+}
+</style>
+</head>
+
+<body >
+	<header data-am-widget="header"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title" style="font-size: 18px;style="font-size:16px;"">知米</h1>
+		<div class="am-header-right am-header-nav">
+			<a onclick="fun1()" href="javascript:void(0)"
+				style="text-align: left; font-size: 16px;"> <span class=""
+				style="color: white;">消息</span>
+			</a>
+		</div>
+	</header>
+	<header id="hid2"
+		class="am-topbar am-topbar-inverse am-topbar-fixed-bottom "
+		style="border-top: 1px #dfdfdf solid">
+		<div data-am-widget="navbar" class="am-navbar  am-navbar-default ">
+			<ul class="am-navbar-nav am-cf am-avg-sm-4">
+				<li><a href="javascript:void(0);" class=""> <img
+						style="width: 1.5em; height: auto; margin-top: 0.3em;"
+						src="img/shouye01.png"> <span class="am-navbar-label"
+						style="color: #ffcf58; font-size: 12px; margin-top: 0.1em">首页</span>
+				</a></li>
+				<li><a href="buyrice.html" class=""> <img
+						style="width: 1.5em; height: auto; margin-top: 0.3em;"
+						src="img/shouye2.png"> <span class="am-navbar-label"
+						style="color: #999999; font-size: 12px; margin-top: 0.1em">订购</span>
+				</a></li>
+				<li><a href="shopcar.html" class=""> <img
+						style="width: 1.5em; height: auto; margin-top: 0.3em;"
+						src="img/shouye3.png"> <span class="am-navbar-label"
+						style="color: #999999; font-size: 12px; margin-top: 0.1em">购物车</span>
+				</a></li>
+				<li><a href="myinfo.html" class=""> <img
+						style="width: 1.5em; height: auto; margin-top: 0.3em;"
+						src="img/shouye4.png"> <span class="am-navbar-label"
+						style="color: #999999; font-size: 12px; margin-top: 0.1em">我的</span>
+				</a></li>
+			</ul>
+		</div>
+	</header>
+	<div data-am-widget="slider" class="am-slider am-slider-d1"
+		id="mi-advert" data-am-flexslider="{playAfterPaused: 1000}">
+		<ul id="l_gg" class="am-slides">
+			<li><img src="http://s.amazeui.org/media/i/demos/bing-1.jpg">
+			</li>
+			<li><img src="http://s.amazeui.org/media/i/demos/bing-2.jpg">
+			</li>
+			<li><img src="http://s.amazeui.org/media/i/demos/bing-3.jpg">
+			</li>
+			<li><img src="http://s.amazeui.org/media/i/demos/bing-4.jpg">
+			</li>
+		</ul>
+	</div>
+	<div id="mi-xun" style="height: 3em;width:100%;float: left;position: relative;">
+		<div style="float: left" >
+	  		<img style="height: 2.6em; width: 2.6em;margin-top:8px;margin-left: 8px;" src="img/news3.png" id="">
+		</div>
+	  	<a style="height: 2.4em;width: 1px;line-height:2.4em;float:left;margin-top: 10px;margin-left: 5px;border-right: 1px solid #d00;"></a>
+		<div class="scrollDiv" style="float: left" id="div1"></div>
+	</div>
+	<div id="sale-goods" style="margin-top:3em;">
+	<div class="am-g goods-item" >
+		<img class='am-u-sm-3' style="height: auto;padding:5dp;margin: 0" src="img/news3.png">
+		<div class="am-u-sm-9">
+			<div>name</div>
+			<div>description</div>
+			<div>price</div>
+			<div>price</div>
+		</div>
+	</div>
+		
+	</div>
+</body>
+
+
+<script type="text/javascript">
+	var isLogin = true;
+
+	var userid = window.localStorage.getItem('userid');
+
+	if (userid == null || userid == "null") {
+		isLogin = false;
+	} else {
+		isLogin = true;
+	}
+	jQuery(document).ready(function() {
+		
+		var html = '<ul class="linene" style="padding-left: 8px; margin-top: 4px;">'
+			+'<li onclick="">{{val.name}}</li>'
+			+'<li onclick="">{{val.name}}</li>'
+			+'<li onclick="">{{val.name}}</li>'
+			+'<li onclick="">{{val.name}}</li>'
+			+'</ul>';
+		$("#div1").html(html);
+    	$(function(){
+    	    //单行应用
+    	    var _wrap=$('ul.linene');//定义滚动区域
+    	    var _interval=3000;//定义滚动间隙时间
+    	    var _moving;//需要清除的动画
+    	    _wrap.hover(function(){
+    	        clearInterval(_moving);//当鼠标在滚动区域中时,停止滚动
+    	    },function(){
+    	        _moving=setInterval(function(){
+    	            var _field=_wrap.find('li:first');//此变量不可放置于函数起始处,li:first取值是变化的
+    	            var _h=_field.height();//取得每次滚动高度
+    	            _field.animate({marginTop:-_h+'px'},600,function(){//通过取负margin值,隐藏第一行
+    	                _field.css('marginTop',0).appendTo(_wrap);//隐藏后,将该行的margin值置零,并插入到最后,实现无缝滚动
+    	            })
+    	        },_interval)//滚动间隔时间取决于_interval
+    	    }).trigger('mouseleave');//函数载入时,模拟执行mouseleave,即自动滚动
+    	});
+	});
+</script>
+</html>

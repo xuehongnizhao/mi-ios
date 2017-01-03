@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="stylesheet" href="comm/amazeui/css/amazeui.min.css" />
+<link rel="stylesheet" href="comm/amazeui/css/app.css">
+<link rel="stylesheet" href="css/mobiscroll.custom-2.5.0.min.css">
+<script src="comm/amazeui/js/jquery.min.js"></script>
+<script src="comm/amazeui/js/amazeui.min.js"></script>
+<script src="comm/js/public.js"></script>
+<script src="comm/js/mobiscroll.custom-2.5.0.min.js"></script>
+<script type="text/javascript" src="cordova.js"></script>    
+
+<title>Insert title here</title>
+<link>
+<style>
+.header {
+	text-align: center;
+}
+
+.header h1 {
+	font-size: 200%;
+	color: #333;
+	margin-top: 30px;
+}
+
+.header p {
+	font-size: 14px;
+}
+</style>
+</head>
+<body
+	style="background: url('img/login2.jpg'); -moz-background-size: 100% 100%; background-size: 100% 100%; background-repeat: no-repeat;">
+
+	
+
+	<script type="text/javascript">
+	var login = 0;
+	jQuery(document).ready(function(){ 
+		$('#code_group').hide();
+		$('#login_type').text("验证码登录");
+		
+	    });
+	
+	$('#login_type').on('click',function(){
+
+		if(login == 0){
+			login = 1;
+			$('#code_group').show();
+			$('#pwd_group').hide();
+			$('#login_type').text("密码登录");
+			
+		}else {
+			login = 0;
+			$('#code_group').hide();
+			$('#pwd_group').show();
+			$('#login_type').text("验证码登录");
+			
+		}
+	});
+	
+	
+	function getCode(){
+		  $.ajax({
+		        type: "post",
+		        url: url("User.validateCode"),
+		        data:{"phone":$('#mobile').val()
+		        },	        
+		        dataType: "jsonp",
+		        jsonp: "callback",
+		        jsonpCallback:"cb",
+		        success: function(data){
+				  var d = data;
+				  if(d != 0){
+					  $("#hq").popover({
+						    content: '验证发送失败'
+					  });
+					  $("#hq").popover("open");
+				  }else{
+					  $("#hq").popover({
+						    content: '验证已发送'
+					  });
+					  $("#hq").popover("open");
+					  
+				  }
+				  setTimeout(function(){
+					  $("#hq").popover("close");
+				  }, 2000);
+			   }
+			});
+	}
+	
+	function submit1(){
+		var info="";
+		if(login == 0){
+			info = $('#passwd').val();
+		}else{
+			info = $('#code').val();
+		}
+		if($('#mobile').val() == ""){
+			$('#errmsg').text("请检查您的输入是否正确");
+			$('#my-alert').modal();
+			return;
+		}
+		
+		if(info == ""){
+			$('#errmsg').text("请检查您的输入是否正确");
+			$('#my-alert').modal();
+			return;
+		}
+		
+		  $.ajax({
+		        type: "post",
+		        url: url("User.login"),
+		        data:{"phone":encodeURIComponent($('#mobile').val()),
+		        	"type":login,
+		        	"info":info
+		        },	        
+		        dataType: "jsonp",
+		        jsonp: "callback",
+		        jsonpCallback:"cb",
+		        success: function(data){
+		        	if(data.ret == "1"){
+		        		$('#errmsg').text("用户未注册，请注册");
+		        		$('#my-alert').modal();
+		        	}else if(data.ret == "2"){
+		        		$('#errmsg').text("验证码不正确，请重新获取");
+		        		$('#my-alert').modal();
+		        	}else if(data.ret == "3"){
+		        		$('#errmsg').text("密码不正确，请重新输入");
+		        		$('#my-alert').modal();
+		        	}else{
+		        		window.localStorage.setItem('userid',data.ret);
+		        		insertPushData();
+		        		window.history.back();
+		        	}
+		        	
+			    },error: function(){
+	        		$('#errmsg').text("网络通讯错误,请稍后重试");
+	        		$('#my-alert').modal();
+		        	
+		        }
+
+			});
+		
+		
+	}
+
+	function insertPushData(){
+		var userid = window.localStorage.getItem('userid');
+		var pushid = window.localStorage.getItem('pushid');
+		if(userid != "" && pushid != ""){
+			 $.ajax({
+			        type: "post",
+			        url: url("User.insertpush"),
+			        data:{"userid":userid,
+			        	"pushid":pushid
+			        },	        
+			        dataType: "jsonp",
+			        jsonp: "callback",
+			        jsonpCallback:"ipush",
+			        success: function(data){
+			        	
+			        	
+				    },error: function(){
+			        	
+			        }
+
+				});
+		}
+	}
+
+	</script>
+
+	
+</body>
+</html>

@@ -1,0 +1,482 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="stylesheet" href="comm/amazeui/css/amazeui.min.css" />
+<link rel="stylesheet" href="comm/amazeui/css/app.css">
+<link rel="stylesheet" href="css/mobiscroll.custom-2.5.0.min.css">
+
+<script src="comm/amazeui/js/jquery.min.js"></script>
+<script src="comm/amazeui/js/amazeui.min.js"></script>
+<script src="comm/js/ar_syscore.js"></script>
+<script src="comm/js/public.js"></script>
+<script src="comm/js/template.js"></script>
+<script src="comm/js/mobiscroll.custom-2.5.0.min.js"></script>
+<style type="text/css">
+.mi-title {
+	background-color: #474240;
+}
+
+.mi-black {
+	color: white;
+	background: #474240;
+	outline: none;
+	border: #474240 1px solid;
+	-moz-border-radius: 3px; /* Gecko browsers */
+	-webkit-border-radius: 3px; /* Webkit browsers */
+	border-radius: 3px; /* W3C syntax */
+}
+</style>
+<title>Insert title here</title>
+<link>
+<link href="css/star-rating.css" media="all" rel="stylesheet"
+	type="text/css">
+<style type="text/css">
+body, html {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	margin: 0px auto;
+}
+
+#bottomDiv {
+	position: fixed;
+	height: 4em;
+	background: #504c4a;
+	bottom: 0px;
+	width: 100%;
+}
+
+.add_sub {
+	color: #1c1c1c;
+	background: white;
+	outline: none;
+	border: 1px solid #d0d0d0;
+	width: 2.5em;
+	height: 2.5em;
+	float: left;
+}
+
+.leftround {
+	-moz-border-radius: 3px 0px 0px 3px; /* Gecko browsers */
+	-webkit-border-radius: 3px 0px 0px 3px; /* Webkit browsers */
+	border-radius: 3px 0px 0px 3px; /* W3C syntax */
+}
+
+.rightround {
+	-moz-border-radius: 0px 3px 3px 0px;
+	-webkit-border-radius: 0px 3px 3px 0px;
+	border-radius: 0px 3px 3px 0px; /* W3C syntax */
+}
+
+.edit_num {
+	color: black;
+	background: white;
+	height: 2.5em;
+	border-left: none;
+	outline: none;
+	border-right: none;
+	border-top: 1px solid #d0d0d0;
+	border-bottom: 1px solid #d0d0d0;
+	width: 50px;
+	text-align: center;
+	float: left;
+}
+
+.line {
+	margin: 0px;
+	padding: 0px;
+	border-top: 1px solid #dddddd;
+}
+.am-accordion-basic .am-accordion-title:before {
+	content: "";
+	line-height: 1.5em;
+	font-size: 1em;
+}
+
+.confirm-class {
+	color: white;
+	background: #e34343;
+	border: #e34343 1px solid;
+	width: 5em;
+	height: 100%;
+	line-height:2em;
+	font-size:1em;
+	outline: none;
+	-moz-border-radius: 3px; /* Gecko browsers */
+	-webkit-border-radius: 3px; /* Webkit browsers */
+	border-radius: 3px; /* W3C syntax */
+}
+</style>
+
+</head>
+<body id="body" class="am-with-fixed-header" >
+
+	<!-- Header -->
+	<header data-am-widget="header"
+		class="am-header am-header-default  am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left">
+ 				<i class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 id="e_title" class="am-header-title"></h1>
+	</header>
+
+	<div class="am-g am-g-collapse" style="margin: 0em;">
+		<div id="e_goodsinfo" style="font-size:1em">
+		<script id="s_goodsinfo" type="text/html">
+			<div class="am-g">
+			<a class="am-u-sm-4" href="riceinfo.html" style="padding:0.5em;">
+				<img style="width:100%" src="{{tg[0].image}}">
+			</a>
+			<div class="am-u-sm-8" style="margin-top:0.5em;">
+				<a style="color:#333333">{{tg[0].introduce}}</a><br><br>
+				<a style="color:#e85b5b;font-size:1.1em" >单价:￥<span id="goodsprice" >{{tg[0].price}}</span></a>
+					
+				<div id="div_off" class="am-align-right am-margin-xs" style="margin-right:4em"></div>
+			</div>
+			</div>
+		</script>
+		</div>
+
+		
+		<div class="am-u-sm-12 line"></div>
+		<div class="am-u-sm-12" align="right"
+			style="font-size: 0.8em; padding-top: 0.5em; padding-bottom: 0.5em;">
+			<div
+				style="float: left; font-size: 1.25em; height: 2em; line-height: 2em; padding-left: 0.5em; color: #666666;">购买数量：</div>
+			<button class="leftround add_sub" style="margin-left: 0.3em"
+				onclick="javascript:Sale_Reduce('1');">
+				<img src="img/erw_14.png" style="width: 1.2em;">
+			</button>
+			<input class="edit_num" id="goodsnum" type="text" value="0"
+				onkeypress="return IsNum(event)" onchange="inputOnChange()">
+			<button style="" class="rightround add_sub"
+				onclick="javascript:Sale_Add('1');">
+				<img src="img/erw_11.png" style="width: 1.2em">
+			</button>
+
+		</div>
+		
+		<div class="am-u-sm-12 line"></div>
+		<div id="e_eval" class="am-u-sm-12" style="">
+		<script id="s_eval" type="text/html">
+		<div data-am-widget="accordion" style="margin:0.5em 0em 0.5em 0em;"
+			 class="am-accordion am-accordion-basic" data-am-accordion='{}'>
+	 	<dl class="am-accordion-item">
+ 		<dt  id="e_evalList" class="am-accordion-title"  style="color: #646464;padding: 0em;margin-left: 0.0em;">
+		<div class="am-g" style="margin:-1.5em 1em 0em 1em;">
+		<div class="am-u-sm-4" style="color: #646464; ">评价晒单</div>
+		<div class="am-u-sm-8" style="color: #646464;" align="right">
+			<span style="color: #aaaaaa">好评：{{tg[0].eve}}%&nbsp;&nbsp;
+			</span><span style="color: #aaaaaa">共{{tg[0].person}}人评论</span>
+			<i class="am-icon-angle-up" style="margin-left: 0.5em;"></i>
+		</div>
+		<div class="am-u-sm-12" hidden>
+			<ul class="am-pagination" style="font-size:0.8em;margin-top:0.9em;margin-bottom:0.2em">
+				<li><a id="e_beval" onclick="bclick()"><</a></li>
+				<li><a id="e_neval" onclick="nclick()">></a></li>
+			</ul>
+		</div>
+	</div>
+	</dt>
+	<dd class="am-accordion-bd am-collapse ">
+      <div class="am-accordion-content" style="padding:0em;">
+		<div class="am-u-sm-12 line"></div>
+		{{if eva}}
+			{{each eva as val i}}
+				<div class="am-g" style="padding:0.3em 0em 0.3em;margin:0em 0em 0em 1em;{{if eva.length != i+1}}border-bottom:1px #dddddd solid;{{/if}}">
+					<div class="am-u-sm-5" style="width:8em;">
+						<div class="rating-container rating-uni" data-content="★★★★★"
+							style="height: 1.5em;">
+							<div style="height: 1.5em; width: {{val.starLevel}}%"
+							data-content="★★★★★" class="rating-stars" >
+						</div>
+					</div>
+				</div>
+				<div class="am-u-sm-3" align="left"
+					style="color: 72777a; font-size: 1em; padding-left: 1.5em; line-height: 2em; height: 2em;">
+					{{val.nickname }}
+				</div>
+				<div class="am-u-sm-4" align="right"
+					style="color: #aaaaaa; font-size: 1em; line-height: 2em; height: 2em; padding-right: 1em">
+					{{val.createtime}}
+				</div>
+				<div class="am-u-sm-12" style="color: #72777a; font-size: 1em;padding-right:1em;">
+					{{val.content}}
+				</div>
+			</div>	
+			
+	{{/each}}
+	{{else }}
+		<div class=“am-g” style="text-align: center; margin-top: 2em"
+			align="center">暂无评价信息</div>
+	{{/if}}
+	</div>
+	</dd>
+	</dl>
+	</section>
+	</script>
+	</div>
+	<div class="am-u-sm-12 line"></div>
+	
+	<div id="bottomDiv">
+		<div class="am-g">
+				<div class="am-u-sm-8" style="padding: 1em; color: white;line-height:2em;" >
+					你需要支付<font color="#ff6060"><span id="countMoney"></span></font>元
+				</div>
+				<div class="am-u-sm-4" style="padding: 1em;" align="center">
+					<button class="confirm-class" onclick="buyandpay()">购买</button>
+				</div>
+			</div>
+	</div>
+
+	
+	</div>
+	
+	
+	<script type="text/javascript">
+		var userid= window.localStorage.getItem('userid');
+		var goodsid = window.localStorage.getItem('buy.goodsid');
+		var saleList;
+		var selectIndex = new Array();
+		var saleUsing = [];
+		
+	
+		var evalpos = 1;
+	
+		
+		jQuery(document).ready(function(){ 
+			if(userid.length< 1){
+				window.location.href="login.html";
+				return;
+			}
+			var token = window.localStorage.getItem('token');
+		    $.ajax({
+		        type: "post",
+		        url: url("BuyGoods.pageInfo&i="+goodsid+"&u="+userid+"&t="+token),
+		        dataType: "jsonp",
+		        jsonp: "callback",
+		        jsonpCallback:"pinfo",
+		        success: function(data){
+		        	if(!checktoken(json)){
+		        		return; 
+		        	}
+		        	try{
+		        	
+		        	var html = template('s_goodsinfo',data);
+		        	$("#e_goodsinfo").html(html);
+				    //
+				    $('#e_title').text(data.tg[0].name)
+				    $('#div_off').html(data.ostr);
+
+		        	}catch(e)
+		        	{
+		        		e.line= $line;
+		        		console.log(e);
+		        		throw e;
+		        	}
+		         },
+		        error: function(){
+		        }
+		        });
+		    
+		    queryEval(evalpos,evalpos+4);
+		    querySale("1");
+		});
+
+		
+		function queryEval(s,e){
+		    $.ajax({
+		        type: "post",
+		        url: url("Eval.query&i="+goodsid+"&s="+s+"&e="+e+""),
+		        dataType: "jsonp",
+		        jsonp: "callback",
+		        jsonpCallback:"eval",
+		        success: function(data){
+		        	try{
+		        	var html = template('s_eval',data);
+		        	$("#e_eval").html(html);
+				    
+				    evalpos = e+1;
+				    if(data.eva.length < 5){
+				    	$('#e_neval').hide();
+				    }else{
+				    	$('#e_neval').show();
+				    }
+
+				    if(evalpos <=6){
+				    	$('#e_beval').hide();
+				    }else{
+				    
+				    	$('#e_beval').show();
+				    }
+				    
+				    $.AMUI.accordion.init();
+					$('#e_evalList').trigger('click');
+
+		        	}catch(e)
+		        	{
+		        		e.line= $line;
+		        		console.log(e);
+		        		throw e;
+		        	}
+		         },
+		        error: function(){
+		        }
+		        });
+			
+		};
+		
+		
+		
+		function bclick(){
+			queryEval(evalpos-10,evalpos -6);
+		};
+		
+		function nclick(){
+			queryEval(evalpos,evalpos+4);
+		};
+		
+
+		function Sale_Add(num) {
+			var id = 'goodsnum';
+			var goodsnum = document.getElementById(id);
+			goodsnum.value = parseInt(goodsnum.value) + parseInt(num);
+			//updateCountMoney();
+			payCount();
+		}
+		function Sale_Reduce(num) {
+			var id = 'goodsnum';
+			var goodsnum = document.getElementById(id);
+			var value = goodsnum.value;
+			if (value > 0) {
+				goodsnum.value = parseInt(goodsnum.value) - parseInt(num);
+			}
+			//updateCountMoney();
+			payCount();
+		}
+		
+		
+		function inputOnChange() {
+			var id = 'goodsnum';
+			var goodsnum = document.getElementById(id);
+			if (!isNumber(goodsnum.value)) {
+				goodsnum.value = 0;
+			}
+			//updateCountMoney();
+			payCount();
+		}
+
+		function isNumber(oNum) {
+			if (!oNum)
+				return false;
+			var strP = /^\-?\d+(\.\d+)?$/;
+			if (!strP.test(oNum))
+				return false;
+
+			try {
+				if (parseFloat(oNum) != oNum)
+					return false;
+			} catch (ex) {
+				return false;
+			}
+			return true;
+		}
+
+		function payCount(){
+			var price = parseFloat($('#goodsprice').text());
+			
+			var num = parseInt($('#goodsnum').val());
+
+			var totle = price * num;
+			
+		
+			
+			$('#countMoney').text(totle);
+			
+			
+			
+			$('#countMoney').text(Math.round(totle));
+
+		}
+		
+		
+
+		//限制输入数字
+		function IsNum(e) {
+			var k = window.event ? e.keyCode : e.which;
+			if (((k >= 48) && (k <= 57)) || k == 8 || k == 0) {
+			} else {
+				if (window.event) {
+					window.event.returnValue = false;
+				} else {
+					e.preventDefault(); //for firefox               
+				}
+			}
+		}
+
+		function buyandpay() {
+			var rs = "";
+			
+			if($('#goodsnum').val() <"1"){
+				alert("请选择购买数量");
+				return;
+			}
+			rs = userid+"|"+goodsid+"|"+$('#goodsnum').val() ;
+			var sales = $('.selSale');
+			
+			for(var i=0;i<sales.length;i++){
+				if(sales[i].checked){
+					rs=rs + "|" + sales[i].getAttribute("sid");
+				}
+			}
+			
+			console.log(rs);
+			
+		    $.ajax({
+		        type: "post",
+		        url: url("BuyGoods.pay&s="+rs+""),
+		        dataType: "jsonp",
+		        jsonp: "callback",
+		        jsonpCallback:"paymonery",
+		        success: function(data){
+		        	alipay(data.ret);
+		         },
+		        error: function(){
+		    		alert("网络错误,请稍后重试");
+
+		        }
+		        });
+
+		}
+		
+		function alipay(paystr){
+       	Alipay.pay(paystr,function(data){
+       		alert(data);
+        		if(data=="succ"){
+    	    		alert("支付完成,请录入收货地址");
+    	    		window.localtion.href=""
+        		}else if(data=="fail"){
+    	    		alert("支付失败");
+        		}else{
+        			
+        		}
+        	},
+        	function(data2){
+	    		alert("网络错误,请稍后重试");
+        	})
+		}
+	</script>
+</body>
+</html>

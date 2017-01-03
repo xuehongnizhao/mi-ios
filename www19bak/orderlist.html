@@ -1,0 +1,502 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<link rel="stylesheet" href="comm/amazeui/css/amazeui.min.css" />
+<link rel="stylesheet" href="comm/amazeui/css/app.css">
+<link rel="stylesheet" href="css/mobiscroll.custom-2.5.0.min.css">
+<script src="comm/amazeui/js/jquery.min.js"></script>
+<script src="comm/amazeui/js/amazeui.min.js"></script>
+<script src="comm/js/ar_syscore.js"></script>
+<script src="comm/js/public.js"></script>
+<script src="comm/js/template.js"></script>
+<script src="comm/js/mobiscroll.custom-2.5.0.min.js"></script>
+<script src="comm/js/star-rating.js"></script>
+<link rel="stylesheet" href="css/star-rating.css">
+
+<style type="text/css">
+.am-header .am-header-title {
+margin: 0 15%;
+}
+.mi-title {
+	background-color: #474240;
+}
+
+.mi-black {
+	color: white;
+	background: #474240;
+	outline: none;
+	border: #474240 1px solid;
+	-moz-border-radius: 3px; /* Gecko browsers */
+	-webkit-border-radius: 3px; /* Webkit browsers */
+	border-radius: 3px; /* W3C syntax */
+}
+</style>
+
+
+<style type="text/css">
+button {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.am-tabs-d2 .am-tabs-nav {
+	background-color: white;
+	border-bottom: 1px solid #dddddd;
+}
+
+.am-tabs-d2 .am-tabs-nav a {
+	line-height: 42px;
+	color: #72777a;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active {
+	position: relative;
+	background-color: #fcfcfc;
+	border-bottom: 1px solid #dddddd;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active:after {
+	position: absolute;
+	width: 50%;
+	height: 0;
+	bottom: 0;
+	left: 28%;
+	border: 1px solid rgb(141,142,137);
+	content: "";
+	z-index: 1;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active a {
+	line-height: 42px;
+	color: #e85b5b;
+	background: #f5f5f5;
+}
+
+.buy-button {
+	background: #e7222b;
+	color: white;
+	width: 100%;
+	border: none;
+	height: 1.7em;
+	font-size: 1.1em;
+	outline: none;
+	margin-top: 0.3em;
+}
+
+.label-sale {
+	background: #e7222b;
+	color: white;
+	border: none;
+	border-radius: 3px;
+	width: 3em;
+	height: 1.5em;
+	line-height: 1.5em;
+	text-align: center;
+	font-size: 0.8em;
+	outline: none;
+}
+
+.Bar, .Bars {
+	position: relative;
+	/* 宽度 */
+	border: 1px solid #e60012;
+	padding: 0px;
+}
+
+.Bar div, .Bars div {
+	display: block;
+	position: relative;
+	background: #f06e6e; /* 进度条背景颜色 */
+	color: #333333;
+	height: 1em; /* 高度 */
+	line-height: 1em; /* 必须和高度一致，文本才能垂直居中 */
+}
+
+.Bars div {
+	background: #090
+}
+
+.Bar div span, .Bars div span {
+	position: absolute;
+	width: 6em; /* 宽度 */
+	text-align: center;
+	font-weight: normal;
+	font-size: 0.8em;
+}
+
+.item {
+	position: relative;
+	border-bottom: 1px solid #dddddd;
+	min-height: 5.5em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+}
+
+.item>div {
+	padding-top: 0em;
+	padding-bottom: 0em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
+
+.item_date {
+	position: absolute;
+	top: 0.5em;
+	right: 1em;
+	font-size: 0.8em;
+	color: #aaaaaa;
+}
+
+.item_head {
+	padding-top: 0em;
+	color: #333333;
+	
+}
+
+.item_context {
+	font-size: 1em;
+	margin-top: 0.3em;
+	color: #72777a;
+}
+.eval_content {
+	width: 100%;
+	border: 1px #ddd solid;
+	resize: none;
+	outline: none;
+}
+.ul-fixed {
+  position: fixed;
+  top: 49px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1010;
+}
+
+</style>
+</head>
+<body bgcolor="#f0f0f0">
+
+	<!-- Header -->
+	<header data-am-widget="header"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="main.html" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title">我的订单</h1>
+	</header>
+
+	<div id="e_listdiv" data-am-widget="tabs" class="am-tabs am-tabs-d2"
+		style="margin: 0px;">
+		<ul class="am-tabs-nav am-cf ul-fixed" style="width: 100%;height:3em;">
+			<li class="am-active" style = "height:3em;"><a href="[data-tab-panel-0]" style = "background:white;height:2em;width:70%; margin:0.5em auto;line-height:2em">未完成</a></li>
+			<div style = "margin:0.5em auto;width:1px;background:rgb(183,183,183);"></div>
+			<li class="" style = "height:3em"><a href="[data-tab-panel-1]" style = "background:white;height:2em;width:70%; margin:0.5em auto;line-height:2em">已完成</a></li>
+		</ul>
+		<div id="t_tab" class="am-tabs-bd" style="border: none;">
+			<div id="e_list0" data-tab-panel-0 class="am-tab-panel am-active "
+				style="margin-top: 3.5em; padding: 0px;">
+			</div>
+			<div id="e_list1" data-tab-panel-1 class="am-tab-panel"
+				style="margin-top: 3.5em; padding: 0px">
+	
+			</div>
+		</div>
+	</div>
+<div class="am-modal am-modal-confirm" tabindex="-1" id="success-sale">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">
+				提示信息 <a href="javascript: void(0)" class="am-close am-close-spin"
+				data-am-modal-close>&times;</a>
+			</div>
+			<div class="am-modal-bd" id="sale-info" style="text-align: left"
+				align="left"></div>
+			<div class="am-modal-footer">
+				<span class="am-modal-btn" data-am-modal-cancel>取消</span> <span
+					class="am-modal-btn" data-am-modal-confirm>确定</span>
+			</div>
+		</div>
+	</div>
+	<div class="am-modal am-modal-confirm" tabindex="-1" id="goods-eval">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">
+				评价 <a href="javascript: void(0)" class="am-close am-close-spin"></a>
+			</div>
+			<div class="am-modal-bd" id="sale-info" style="text-align: left;padding:0px 10px"
+				align="left">
+
+
+				<input id="ge_eval" value="5" type="number" data-symbol="★"
+					class="rating" min=0 max=5 step=0.5 data-size="sm">
+				<div style="margin-bottom: 1em;">
+					<textarea id="ge_content" rows="3" cols="red" placeholder="请输入评价"
+						class="eval_content"></textarea>
+				</div>
+				<div class="am-modal-footer">
+					<span class="am-modal-btn" data-am-modal-cancel>取消</span> <span
+						class="am-modal-btn" data-am-modal-confirm>确定</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script id="s_list0" type="text/html">
+		{{each nover as val i}}
+		<a href="javascript:void(0)" id="{{val.id}}" state="{{val.state}}" style="color: #000000;">
+			<div class="am-g item" style = "padding-top:0.5em;" onclick="fun1('{{val.id}}')">
+			
+			  <div class="am-u-sm-4">
+					<img class="" style="width: 100%;height: 100%" src="{{val.img}}">
+			  </div>
+			  <div class="am-u-sm-8" style="padding-left: 0em;margin-top:0em">
+			    <div class="item_date" style="margin-right:-0.3em;margin-top:-0.5em;font-size:4vw;">
+					{{val.tm}}
+				</div>
+				<div class="item_head" style="font-size:4.6vw;margin-bottom:0vw;" >
+					{{val.goodsname}}
+				</div>
+				<div class="am-u-sm-6" style="margin-left:0em;padding-left:0em;">
+			    	<div class="item_context" style="font-size:4.4vw;" >
+						购买数量{{val.count}}{{val.unit}}
+						<div style="margin-top:-0.2em;">剩余{{val.num}}{{val.unit}}</div>
+						<div style="margin-top:-0.2em;">支付:{{val.payed}}元</div>
+					</div>
+				</div>
+				<div class="am-u-sm-6">
+			    <div class="item_context" style="float: right; margin-right:-0.5em;margin-top:0em">
+				{{if val.state=='1'}}	
+					<div style="height:2em;margin-top:2vw;margin-bottom:1.1vw;
+						font-size:4.6vw;color:#72777a" align="center" 
+						onclick="isDelOrder('{{val.id}}',event)" >
+                                                                           撤销订单					
+					</div>	
+					<a style="color:#e85b5b;margin-left:0.5em;font-size:4.6vw">
+				{{else}}
+					<div style="margin-top:10vw"></div>
+					<a style="color:#4489ce;margin-right:0.5em;font-size:4.6vw">
+				{{/if}}
+					{{val.statname}}</a><br>
+					</div>
+				</div> 	 	
+				</div>
+			</div>		
+		</a>
+		{{/each}}
+	</script>
+	<script id="s_list1" type="text/html">		
+		{{each over as val i}}
+		<a href="{{if val.issale == 1}}saleinfo.html{{else}}javascript:void(0){{/if}}" 
+			id="{{val.id}}" state="{{val.state}}" style="color: #000000;">
+			<div class="am-g item" style = "padding-top:0.5em" 
+				{{if val.issale == 0}} onclick="fun1('{{val.id}}')"{{/if}}>
+				<div class="am-u-sm-4">
+					<img class="" style="width: 100%;height: 100%" src="{{val.img}}">
+				</div>
+				<div class="am-u-sm-8" style="padding-left: 0em;margin-top:0em;">
+			    	<div class="item_date" 
+						style="margin-right:-0.3em;margin-top:-0.5em;font-size:4vw;">
+						{{val.tm}}
+					</div>
+					<div class="item_head" style="font-size:4.6vw;margin-bottom:0vw;" >
+						{{val.goodsname}}
+					</div>
+					<div class="am-u-sm-6" style="margin-left:0em;padding-left:0em;">
+			    		<div class="item_context" style="font-size:4.4vw;" >
+							共计{{val.count}}箱 
+						{{if val.issale== 0}}
+							<div style="margin-top:-0.2em;">已配送{{val.count -val.num}}箱</div>
+							<div style="margin-top:-0.2em;"> 剩余{{val.num}}箱</div>
+						{{else}}
+							<div>
+								<img src="img/misale.png" 
+									style="width:30%;height:auto;margin-top: 0.3em;">
+							</div>
+						{{/if}}
+						</div>
+					</div>
+					<div class="am-u-sm-6">
+						<div class="item_context" 
+							style="float:right;margin-right:-0.5em;margin-top:0em">
+							<div style="margin-top:12vw"></div>
+						{{if val.state=='4'}}	
+						<a style="color:#4489ce;font-size:4.6vw;margin-right:0.5em" 
+							href="javascript:void(0);" 
+							onclick="show_eval('{{val.id}}','{{val.goods_id}}',event)">去评价</a >
+						{{else}}
+						<a style="color:#333333;font-size:4.6vw;margin-right:0.5em">
+							{{val.statname}}</a>
+						{{/if}}
+					</div>
+				</div>
+			</div>		
+			</div>	
+		</a>
+		{{/each}}
+	</script>
+	<script type="text/javascript">
+		var isLogin = true;
+
+		var userid = window.localStorage.getItem('userid');
+
+		if (userid == null) {
+			isLogin = false;
+			window.location.href = "login.html";
+		} else {
+			isLogin = true;
+		}
+
+		jQuery(document).ready(function() {
+			$(".rating").rating();
+
+			var token = window.localStorage.getItem('token');
+
+			$.ajax({
+				type : "post",
+				url : url("OrderList.getList&u=" + userid+"&t="+token),
+				dataType : "jsonp",
+				jsonp : "callback",
+				jsonpCallback : "listinfo",
+				success : function(data) {
+		        	if(!checktoken(data)){
+		        		return; 
+		        	}
+					var html0 = template('s_list0', data);
+					var html1 = template('s_list1', data);
+					$("#e_list0").html(html0);
+					$("#e_list1").html(html1);
+					$("#e_listdiv").tabs();
+
+				},
+				error : function() {
+					alert("网络错误,请稍后重试");
+				}
+			});
+
+		});
+
+		function show_eval(docid, goodsid,e) {
+
+			$("#goods-eval").modal({
+				relatedTarget : this,
+				onConfirm : function(options) {
+					submit_eval(docid, goodsid);
+				},
+				onCancel : function() {
+
+				}
+			});
+			 stopBubble(e);
+		}
+
+		function submit_eval(docid, goodsid) {
+			var token = window.localStorage.getItem('token');
+			var murl = url("Eval.submitEval&u=" + userid + "&t=" + token
+					+ "&docid=" + docid + "&goodsid=" + goodsid);
+			murl += "&content="+getValue("#ge_content");
+			murl += "&eval="+getValue("#ge_eval");
+			murl = encodeURI(murl);
+			murl = encodeURI(murl);
+			$.ajax({
+				type : "post",
+				url : murl,
+				dataType : "jsonp",
+				jsonp : "callback",
+				jsonpCallback : "listinfo",
+				success : function(data) {
+					if (!checktoken(data)) {
+						return;
+					}
+					window.location.reload();
+				},
+				error : function() {
+					alert("网络错误,请稍后重试");
+				}
+			});
+
+		}
+
+		function fun1(did,e) {
+			var elid = "#" + did;
+			var state = $(elid).attr('state');
+			window.localStorage.setItem('orderinfo.docid', did);
+			if (state == '1') { //topay
+				alert("您的订单未付款，请去支付");
+				window.location.href = "payinfo.html";
+			} else if (state == '2') { //to addr
+				window.location.href = "goodsaddr.html";
+			} else if (state == '3') {
+				window.location.href = "goodsaddr.html";
+			} else if (state == '4') {
+				window.location.href = "goodsaddrover.html";
+			} else if (state == '5') {
+				window.location.href = "goodsaddrover.html";
+			}
+			
+
+		}
+		
+		function stopBubble(e)
+		{
+			
+			var evt = e||window.event;
+			evt.stopPropagation?evt.stopPropagation():(evt.cancelBubble = true);
+			
+		   // if (!(e && e.stopPropagation))
+		    //{
+		   // 	alert(e);
+		   // 	e.stopPropagation();
+		   // } 
+		    //else
+		      //  window.event.cancelBubble=true;
+		}
+		
+		function delfun(did){
+			
+			$.ajax({
+				type : "post",
+				url : url("OrderList.delfromList&d=" + did+""),
+				dataType : "jsonp",
+				jsonp : "callback",
+				jsonpCallback : "listinfo",
+				success : function(data) {
+		        	//if(!checktoken(data)){
+		        	//	return; 
+		        	//}
+		        	alert("删除成功");
+		        	window.location.reload();
+				},
+				error : function() {
+					alert("网络错误,请稍后重试");
+				}
+			});
+		}
+		function isDelOrder(docid,e){
+			var html = "是否删除该订单？";
+			var dialogContent = document.getElementById('sale-info');
+			dialogContent.innerHTML = html;
+			$('#success-sale').modal({
+				relatedTarget : this,
+				onConfirm : function(options) {
+					delfun(docid);
+				},
+				onCancel : function() {
+
+				}
+			});
+			stopBubble(e);
+		}
+	</script>
+
+</body>
+</html>

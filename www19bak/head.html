@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="comm/amazeui/css/amazeui.min.css"/>
+<link rel="stylesheet" href="comm/amazeui/css/app.css">
+<link rel="stylesheet" href="css/mobiscroll.custom-2.5.0.min.css">
+<script src="comm/amazeui/js/jquery.min.js"></script>
+<script src="comm/amazeui/js/amazeui.min.js"></script>
+<script src="comm/js/ar_syscore.js"></script>
+<script src="comm/js/public.js"></script>
+<script src="comm/js/mobiscroll.custom-2.5.0.min.js"></script>
+<style type="text/css">
+.am-header .am-header-title {
+margin: 0 15%;
+}
+.mi-title{
+	background-color: #474240;
+}
+
+.mi-black {
+	color: white;
+	background: #474240;
+	outline:none;
+	border: #474240 1px solid;
+	-moz-border-radius: 3px;      /* Gecko browsers */
+    -webkit-border-radius: 3px;   /* Webkit browsers */
+    border-radius:3px;            /* W3C syntax */
+}
+</style>
+
+
+SELECT tg.id,tg.name,tg.surplus,tg.image,tg.price,tg.introduce,((select SUm(count) from t_doc td where td.goods_id=tg.id)+tg.surplus) as total,(select CEIL((tg.surplus/total*100)) from DUAL) as percent FROM t_goods tg WHERE tg.level='1' AND tg.show_type='1';
+

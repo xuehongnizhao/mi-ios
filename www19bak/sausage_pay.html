@@ -1,0 +1,125 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<!-- 
+	红肠页面
+ -->
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<s:include value="head.jsp"></s:include>
+<title>Insert title here</title>
+<link>
+<style type="text/css">
+.am-header .am-header-title {
+margin: 0 15%;
+}
+.btn {
+	background-color: WHITE;
+	border:1px solid #FFFFFF; 
+	border-radius:6px;
+	font-size:1.2em;
+	color:#FFFFFF;
+	font-family:"黑体"
+}
+.add_sub {
+	border:1px solid #000000; 
+	color:#000000;
+	border-radius:3px;
+}
+
+.blue {
+	color: white;
+	background: #0c90d0;
+	border: #0c90d0 1px solid;
+}
+</style>
+<link href="css/star-rating.css" media="all" rel="stylesheet" type="text/css">
+<script>
+function pay(){
+	
+	var itemN = document.getElementsByName("itemname");
+	var itemC = document.getElementsByName("itemcount");
+	var goods = "";
+	var count = 0;
+	for(var i=0;i<itemN.length;i++){
+		goods += itemN[i].value + ":" + itemC[i].value + ";";
+		count += parseInt(itemC[i].value);
+	}
+	var total1 = document.getElementById("total").value;
+	
+	$.ajax({
+		type : "post",
+		url : "saveSausageDoc.action",
+		data : {
+			"total" : total1,
+			"count" : count,
+			"goodsCount" : goods
+		},
+		success : function(callbackdata) {
+			var obj = jQuery.parseJSON(callbackdata);
+			if (obj.res == '1') {
+				alert("支付成功");
+				history.go(-1);
+				//window.location.href = "main.action";
+			} else if(obj.res == '-1') 
+			{
+				alert("没有登录");
+				window.location.href = "login.action";
+			}else{
+				alert("支付失败");
+			}
+		}
+
+	});
+}
+</script>
+</head>
+<body>
+
+	<!-- Header -->
+	<header data-am-widget="header" class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+		    <a href="javascript:mi_exit();" style="text-align: left">
+		      <i class="am-icon-angle-left" style="font-size: 2em;"></i>
+		    </a>
+		</div>
+		<h1 class="am-header-title">红肠专区</h1>
+	</header>
+	<div class="am-g" style="padding-top: 2em;">
+
+		<div class="am-u-sm-6 am-u-sm-centered">
+			
+			<table style="width:100%;border: 1px solid #cccccc;">
+				<s:iterator value="doclist" id="item">
+					<s:if test="#item.Count != 0">
+						<tr>
+							<td><input name="itemname" type="hidden" value="<s:property value="#item.id"/>"><s:property value="#item.name"/></td>
+							<td><input name="itemcount" type="hidden" value="<s:property value="#item.Count"/>"><s:property value="#item.Count"/>斤</td>
+						</tr>
+						
+					</s:if>
+				</s:iterator>
+			</table>
+			<div style="text-align: center;">总价:<s:property value="total"/>元</div>
+			<input id="total" type="hidden" value="<s:property value="total"/>">
+		</div>
+	</div>
+
+	<div class="am-g"
+		style="width: 100%; padding: 3%; background-color: white; position: fixed; bottom: 0px; margin-top: 5%;">
+
+
+		<div class="am-u-sm-12" align="center" style="">
+			<button class="blue" style="width: 100%; height: 50px"
+				onclick="pay()">支付</button>
+		</div>
+	</div>
+</body>
+</html>

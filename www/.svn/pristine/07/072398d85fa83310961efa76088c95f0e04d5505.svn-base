@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<script src="js/include.js"></script>
+<link rel="stylesheet" href="css/basestyle.css">
+<style type="text/css">
+
+body, html {
+	width: 100%;
+	height: 100%;
+}
+
+
+.am-navbar .am-navbar-nav {
+	background-color: #f5f3f4;
+}
+</style>
+</head>
+
+<body>
+	<header data-am-widget="header"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<h1 class="am-header-title" style="font-size: 18px;style="font-size:16px;"">订购</h1>
+	</header>
+	<header id="hid2"
+		class="am-topbar am-topbar-inverse am-topbar-fixed-bottom "
+		style="border-top: 1px #dfdfdf solid">
+		<div data-am-widget="navbar" class="am-navbar  am-navbar-default ">
+			<ul class="am-navbar-nav am-cf am-avg-sm-4">
+				<li><a href="main.html" class=""> <img
+						style="width: 1.7em; height: auto; margin-top: 0.1em;"
+						src="img/shouye1.png"> <span class="am-navbar-label"
+						style="color: #999999; font-size: 12px; margin-top: 0.1em">首页</span>
+				</a></li>
+				<li><a href="javascript:void(0);" class=""> <img
+						style="width: 1.7em; height: auto; margin-top: 0.1em;"
+						src="img/shouye02.png"> <span class="am-navbar-label"
+						style="color: #00b487; font-size: 12px; margin-top: 0.1em">订购</span>
+				</a></li>
+				<li><a href="shopcar.html" class=""> <img
+						style="width: 1.7em; height: auto; margin-top: 0.1em;"
+						src="img/shouye3.png"> <span class="am-navbar-label"
+						style="color: #999999; font-size: 12px; margin-top: 0.1em">购物车</span>
+				</a></li>
+				<li><a href="myinfo.html" class=""> <img
+						style="width: 1.7em; height: auto; margin-top: 0.1em;"
+						src="img/shouye4.png"> <span class="am-navbar-label"
+						style="color: #999999; font-size: 12px; margin-top: 0.1em">我的</span>
+				</a></li>
+			</ul>
+		</div>
+	</header>
+</body>
+
+
+<script type="text/javascript">
+	var isLogin = true;
+
+	var userid = window.localStorage.getItem('userid');
+
+	if (userid == null || userid == "null") {
+		isLogin = false;
+	} else {
+		isLogin = true;
+	}
+	jQuery(document).ready(function() {
+		
+	});
+</script>
+</html>

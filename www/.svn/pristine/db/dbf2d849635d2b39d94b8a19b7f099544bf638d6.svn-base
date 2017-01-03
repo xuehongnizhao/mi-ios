@@ -1,0 +1,588 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<script src="js/include.js"></script>
+<link rel="stylesheet" href="css/basestyle.css">
+<script type="text/javascript">
+	var onDeviceReady = function() {
+		document.addEventListener("backbutton", onBackKeyDown, false);
+		cordova.getAppVersion.getVersionCode(function(version) {
+			checkUpdate(version);
+		});
+		console.log("JPushPlugin:Device ready!")
+		initiateUI();
+	}
+	var onGetRegistradionID = function(data) {
+		try {
+			console.log("JPushPlugin:registrationID is " + data)
+			window.localStorage.setItem('pushid', data);
+			insertPushData();
+		} catch (exception) {
+			console.log(exception);
+		}
+	}
+
+	var onTagsWithAlias = function(event) {
+		try {
+			console.log("onTagsWithAlias");
+			var result = "result code:" + event.resultCode + " ";
+			result += "tags:" + event.tags + " ";
+			result += "alias:" + event.alias + " ";
+			$("#tagAliasResult").html(result);
+		} catch (exception) {
+			console.log(exception)
+		}
+	}
+	var onOpenNotification = function(event) {
+		try {
+			var alertContent = "";
+			if (device.platform == "Android") {
+				alertContent = window.plugins.jPushPlugin.openNotification.alert;
+			} else {
+				alertContent = event.aps.alert;
+			}
+
+		} catch (exception) {
+			console.log("JPushPlugin:onOpenNotification" + exception);
+		}
+	}
+	var onReceiveNotification = function(event) {
+		try {
+			var alert
+			if (device.platform == "Android") {
+				alert = window.plugins.jPushPlugin.receiveNotification.alert;
+			} else {
+				alert = event.aps.alert;
+			}
+			$("#notificationResult").html(alert);
+
+		} catch (exeption) {
+			console.log(exception)
+		}
+	}
+	var onReceiveMessage = function(event) {
+		try {
+
+			var message = "";
+			if (device.platform == "Android") {
+				message = window.plugins.jPushPlugin.receiveMessage.message;
+			} else {
+				message = event.content;
+			}
+			//var extras = window.plugins.jPushPlugin.extras
+
+			$("#messageResult").html(message);
+
+		} catch (exception) {
+			console.log("JPushPlugin:onReceiveMessage-->" + exception);
+		}
+	}
+
+	var initiateUI = function() {
+
+		try {
+			window.plugins.jPushPlugin.init();
+			window.plugins.jPushPlugin.getRegistrationID(onGetRegistradionID);
+
+			if (device.platform != "Android") {
+				window.plugins.jPushPlugin.setDebugModeFromIos();
+				window.plugins.jPushPlugin.setApplicationIconBadgeNumber(0);
+			} else {
+				window.plugins.jPushPlugin.setDebugMode(true);
+			}
+		} catch (exception) {
+			console.log(exception);
+		}
+
+	}
+
+	function insertPushData() {
+		var userid = window.localStorage.getItem('userid');
+		var pushid = window.localStorage.getItem('pushid');
+		if (userid != "" && pushid != "") {
+			$.ajax({
+				type : "post",
+				url : url("User.insertpush"),
+				data : {
+					"userid" : userid,
+					"pushid" : pushid
+				},
+				dataType : "jsonp",
+				jsonp : "callback",
+				jsonpCallback : "ipush",
+				success : function(data) {
+
+				},
+				error : function() {
+
+				}
+
+			});
+		}
+	}
+
+	document.addEventListener("deviceready", onDeviceReady, false);
+	document.addEventListener("jpush.openNotification", onOpenNotification,
+			false);
+	document.addEventListener("jpush.receiveNotification",
+			onReceiveNotification, false);
+	document.addEventListener("jpush.receiveMessage", onReceiveMessage, false);
+
+	function onBackKeyDown() {  
+		new Toast({context : $('body'),message : '再点击一次退出!',top:'75%'}).show();
+        document.removeEventListener("backbutton", onBackKeyDown, false); // 注销返回键  
+        document.addEventListener("backbutton", exitApp, false);//绑定退出事件  
+        // 3秒后重新注册  
+        var intervalID = window.setInterval(function() {  
+            window.clearInterval(intervalID);  
+            document.removeEventListener("backbutton", exitApp, false); // 注销返回键  
+            document.addEventListener("backbutton", onBackKeyDown, false); // 返回键  
+        }, 3000);  
+    }  
+    function exitApp(){  
+        navigator.app.exitApp();  
+    } 
+	
+	//jpush.receiveMessage
+</script>
+<style type="text/css">
+body, html {
+	width: 100%;
+	height: 100%;
+	background-image: url('img/mi_bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.scrollDiv {
+	width: 80%;
+	height: 3em;
+	min-height: 20px;
+	line-height: 25px;
+	overflow: hidden;
+}
+
+.scrollDiv li{
+	padding-top: 5px;
+	color: white;
+	line-height: 20px;
+	font-size: 14px;
+	magin-top: 2px;
+	height: 44px;
+	overflow: hidden; /*自动隐藏文字*/
+	text-overflow: ellipsis;/*文字隐藏后添加省略号*/
+	width: 90%;/*不允许出现半汉字截断*/
+}
+
+
+.goods-item {
+	width: 100%;
+	padding-left: 5dp;
+	padding-right: 5dp;
+}
+
+hr {
+	margin: 0em;
+	margin-left: 1em;
+	padding: 0px;
+	border-top: 2px solid #f2aa3b;
+}
+.mi-xun-icon{
+	height: 2.8em; 
+	width: 2.8em; 
+	float: left; 
+	margin-top: 8px; 
+	margin-left: 8px;
+}
+</style>
+</head>
+
+<body>
+	<header data-am-widget="header"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div id="Scan" class="am-header-left am-header-nav">
+			<img id="scan-img"
+				style="height: 1.6em; width: 1.6em; margin-bottom: 5px;"
+				src="img/homepage_03.png">
+		</div>
+		<h1 class="am-header-title" style="font-size: 18px;style="font-size:16px;"">米</h1>
+		<div id="message" class="am-header-right am-header-nav" onclick="myMessage()">
+			<img style="height: 1.6em; width: 1.6em; margin-bottom: 5px;"
+				src="img/homepage_05.png">
+		</div>
+	</header>
+
+	<div data-am-widget="slider" class="am-slider am-slider-d1"
+		id="mi-advert" data-am-flexslider="{playAfterPaused: 1000}">
+		<ul id="l_gg" class="am-slides">
+
+		</ul>
+	</div>
+	<div class="" style="height: 4em; padding-top: 0.25em">
+		<img class="mi-xun-icon" src="img/homepage_13.png" id="">
+		<div style="background: #f2aa3b; width: 2px; height: 40px; margin-left: 0.5em; float: left; margin-top: 10px;"></div>
+		<div class="scrollDiv" id="mixun">
+			<script id="news-act" type="text/html">
+	           <ul class="linene" style = "padding-left:8px;margin-top: 4px;">    
+                  {{if newslist.length > 0}}
+	              {{each newslist as val i}}
+                     <li onclick="gotoMiMessage('{{val.id}}')">{{val.intro}}</li>   
+                  {{/each}} 
+                  {{else}}
+                     <div style="margin-top: 10px;font-size:15px;color:#646464;">暂无资讯</div> 
+                  {{/if}}   
+               </ul>
+            </script>
+		</div>
+		<div class="am-u-sm-11"
+			style="background: #f2aa3b; height: 2px; margin-left: 12px; margin-top: 10px;"></div>
+	</div>
+	<div id="sale-goods" class="am-u-sm-12" style="">
+		<script id="s_tab" type="text/html">					
+	{{each toplist as val i}}				
+	<div class="am-g" style="font-family: sumsun;background-color: #e1e6d2; margin-top: 10px;border-radius: 4px;" onclick="gotoRiceDetail('{{val.id}}')">
+		<div class="am-u-sm-4"  style="padding: 0em;">
+			<img style="width:100%;height: auto;border-top-left-radius: 4px;border-bottom-left-radius: 4px;" src ="{{val.image}}" >
+		</div>
+		<div class="am-u-sm-8" style="padding: 0em;">
+			<div style="color:#676767;font-size: 1em; height: 1.5em;padding-left: 0.6em;">
+				{{val.name}}
+			</div>
+			<div style="color:#969696;font-size: 0.8em; height: 1.5em; line-height: 1.5em;padding-left: 0.8em;overflow: hidden; text-overflow: ellipsis;white-space: nowrap;width: 95%;">
+				{{val.introduce}}
+			</div>
+			<div style="line-height: 1em;margin-left: 8px;">
+				<span style="text-align: right;font-size: 1em;color:#e74b59;">￥</span><span style="font-size: 1.3em;color:#e74b59;">{{val.price}}</sapn>                                  
+			</div>
+			<div class ="am-u-sm-8" style="line-height: 1em;">
+				<span style="font-size: 0.8em;color:#2c2b31;">原价：<s>￥{{val.origin}}</s></span>													
+				{{if val.surplus == "-1"}}
+					<div style="font-size: 0.8em;color:#92bf64;" >
+				{{else}}
+					<div style="font-size: 0.8em;color:#92bf64;" >剩余：{{val.surplus}}{{val.unit}}
+				{{/if}} 
+					</div>	
+			</div>
+			<div class ="" style="font-size: 14px;float: right;width: 18%;margin-right: 0.5em;background-color: #fd5236;color:white;text-align: center;border-radius: 2px;margin-top: 0.8em;">
+				抢购
+			</div>															
+		</div>
+	</div>
+	{{ /each }}					
+	</script>
+	</div>
+	<div class="am-u-sm-12" style="height: 55px"></div>
+	<header id="hid2"
+		class="am-topbar am-topbar-inverse am-topbar-fixed-bottom "
+		style="border-top: 1px #ffffff solid">
+		<div data-am-widget="navbar" class="am-navbar  am-navbar-default ">
+			<ul class="am-navbar-nav am-cf am-avg-sm-4">
+				<li><a href="javascript:void(0);" class=""> <img
+						src="img/shouye01.png"> <span style="color: #ffcf58;">首页</span>
+				</a></li>
+				<li><a href="buyrice.html" class=""> <img
+						src="img/shouye2.png"> <span>订购</span>
+				</a></li>
+				<li><a href="shopcar.html" class=""> <span
+						style="color: white;" class="mui-badge" id="shopcar-count"></span><img
+						src="img/shouye3.png"> <span>购物车</span>
+				</a></li>
+				<li><a href="myinfo.html" class=""> <img
+						src="img/shouye4.png"> <span>我的</span>
+				</a></li>
+			</ul>
+		</div>
+	</header>
+</body>
+
+
+<script type="text/javascript">
+	var isLogin = true;
+
+	var userid = window.localStorage.getItem('userid');
+
+	if (userid == null || userid == "null") {
+		isLogin = false;
+	} else {
+		isLogin = true;
+	}
+	jQuery(document).ready(function() {
+		if (isLogin) {
+			getMessage();
+		}
+		getMixun();
+		getAdvertList();
+		getTopHomeList();
+		showCarCount();		
+		$('#scan-img').on("click", scanCode);
+	});
+	function getMessage(){
+		var token = window.localStorage.getItem('token');
+		var murl = url("Message.getHomeMessage&u=" + userid+"&t="+token);
+		$.ajax({
+			type : "post",
+			url : murl,
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "msglist",
+			success : function(data) {
+	        	if(!checktoken(data)){
+	        		return; 
+	        	}	
+	        	if(data.msg[0].msgread > 0){
+					$('#message').children('img').attr('src',"img/homepage_06.png");
+				}else{
+					$('#message').children('img').attr('src',"img/homepage_05.png");
+				}
+			},
+			error : function() {
+				alert("网络错误,请稍后重试");
+			}
+
+		});
+		
+	}
+	function getMixun() {
+
+		$.ajax({
+			type : "post",
+			url : url("Home.getMiMessage"),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "aclist",
+			success : function(json) {
+
+				var html = template('news-act', json);
+				$("#mixun").html(html);
+				if (json.newslist.length > 1) {
+					$(function() {
+						//单行应用
+						var _wrap = $('ul.linene');//定义滚动区域
+						var _interval = 3000;//定义滚动间隙时间
+						var _moving;//需要清除的动画
+						_wrap.hover(function() {
+							clearInterval(_moving);//当鼠标在滚动区域中时,停止滚动
+						}, function() {
+							_moving = setInterval(function() {
+								var _field = _wrap.find('li:first');//此变量不可放置于函数起始处,li:first取值是变化的
+								var _h = _field.height();//取得每次滚动高度
+								_field.animate({
+									marginTop : -_h + 'px'
+								}, 600, function() {//通过取负margin值,隐藏第一行
+									_field.css('marginTop', 0).appendTo(_wrap);//隐藏后,将该行的margin值置零,并插入到最后,实现无缝滚动
+								})
+							}, _interval)//滚动间隔时间取决于_interval
+						}).trigger('mouseleave');//函数载入时,模拟执行mouseleave,即自动滚动
+					});
+				}
+			},
+			error : function() {
+			}
+		});
+
+	}
+	function getAdvertList() {
+		var scheight = document.body.clientHeight;
+		$
+				.ajax({
+					type : "post",
+					url : url("Home.getAdvertList"),
+					dataType : "jsonp",
+					jsonp : "callback",
+					jsonpCallback : "ggList",
+					success : function(json) {
+						var width = screen.width;
+						var height = width / 8 * 4;
+						json.advlist
+								.forEach(function(e) {
+									$("#l_gg")
+											.append(
+													"<li style='' onclick=\"gotoRiceDetail('"
+															+ e.goodsid
+															+ "')\"><img src='"+e.image+"' style='width:"+width+"px;height:"+height+"px;' onerror=\"this.src='img/error1.png'\"/></li>");
+								});
+						$('#mi-advert')
+								.flexslider(
+										{
+											directionNav : false,
+											controlNav : false,
+											playAfterPaused : 1000,
+											before : function(slider) {
+												if (slider._pausedTimer) {
+													window
+															.clearTimeout(slider._pausedTimer);
+													slider._pausedTimer = null;
+												}
+											},
+											after : function(slider) {
+												var pauseTime = slider.vars.playAfterPaused;
+												if (pauseTime
+														&& !isNaN(pauseTime)
+														&& !slider.playing) {
+													if (!slider.manualPause
+															&& !slider.manualPlay
+															&& !slider.stopped) {
+														slider._pausedTimer = window
+																.setTimeout(
+																		function() {
+																			slider
+																					.play();
+																		},
+																		pauseTime);
+													}
+												}
+											}
+										// 设置其他参数
+										});
+					},
+					error : function() {
+
+					}
+				});
+	}
+	function getTopHomeList() {
+		$.ajax({
+			type : "post",
+			url : url("Home.getTopGoodsList"),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "acList",
+			success : function(data) {
+				var html = template('s_tab', data);
+				$("#sale-goods").html(html);
+				$("#sale-goods").tabs();
+				var height = $('.am-u-sm-4').css('width').toString();
+				$('.am-u-sm-4 img').css('height', height);
+			},
+			error : function() {
+
+			}
+		});
+	}
+	function gotoRiceDetail(goodsid) {
+		window.location.href = "ricedetail.html?goodsid=" + goodsid;
+	}
+	
+	function gotoMiMessage(id){
+		window.location.href = "mimessage.html?id="+id;
+	}
+	function myMessage(){
+		if (isLogin == false) {
+			window.location.href = "login.html";
+			return;
+		}
+
+		window.location.href = "message.html"
+	}
+	
+	function scanCode() {
+		cordova.plugins.barcodeScanner.scan(function(result) {
+			if (result.cancelled == '0') {
+				checkresult(result.text);
+			}
+		}, function(error) {
+			alert("Scanning failed: " + error);
+		});
+
+	};
+
+	function checkresult(result) {
+
+		$.ajax({
+			type : "post",
+			url : url("SalesInfo.check&i=" + result),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "sinfo",
+			success : function(data) {
+				var ret =data.ret;
+				if(ret =='sale'){
+					var sale = data.sale;
+					if (eval(sale).length == 0) {
+						alert('无效卡券');
+						return;
+					}
+	
+					if (sale[0].status == '2') {
+						alert('此卡券已被绑定');
+						return;
+					}
+	
+					var msg = sale[0].name + ",价值" + sale[0].total + sale[0].unit
+							+ ",要绑定到当前账号吗?";
+					var r = confirm(msg);
+					if (r == true) {
+						bindsale(result);
+					} else {
+	
+					}
+				}else if(ret == 'goods'){
+					var goods = data.goods;
+					if(goods.length <= 0){
+						alert("暂无此商品信息");
+						return;
+					}
+					gtgoodsUrl(goods[0]);
+				}else if(ret == 'waybill'){
+					var waybill = data.waybill;
+					if(waybill.length <= 0){
+						alert("暂无此运单信息");
+						return;
+					}
+					gtgoodsUrl(waybill[0]);
+				}
+			},
+			error : function() {
+				alert("网络错误,请稍后重试");
+			}
+		});
+	}
+
+	function gtgoodsUrl(data){
+		var url = data.url;
+		if(url.length < 1){
+			return;	
+		}
+		window.localStorage.setItem('nextp',JSON.stringify(data));
+		window.location.href=url;
+	}
+	
+	function bindsale(sale) {
+		if (isLogin == false) {
+			window.location.href = "login.html";
+			return;
+		}
+		var token = window.localStorage.getItem('token');
+		$.ajax({
+			type : "post",
+			url : url("SalesInfo.bind&u=" + userid + "&i=" + sale+"&t="+token),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "sbind",
+			success : function(data) {
+	        	if(!checktoken(data)){
+	        		return; 
+	        	}
+				if (data.ret == "1") {
+					alert("账号无效");
+				} else if (data.ret == "2") {
+					alert("卡券无效");
+				} else {
+					alert("绑定完成");
+				}
+			},
+			error : function() {
+				alert("网络错误,请稍后重试");
+			}
+		});
+
+	}
+</script>
+</html>

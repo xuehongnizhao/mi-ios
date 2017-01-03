@@ -1,0 +1,242 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>Insert title here</title>
+<script src="js/include.js"></script>
+<style type="text/css">
+.am-header .am-header-title {
+margin: 0 15%;
+}
+.mi-title {
+	background-color: #474240;
+}
+
+button {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+body html {
+	width: 100%;
+	height: 100%;
+}
+
+.am-tabs-d2 .am-tabs-nav {
+	background-color: white;
+	border-bottom: 1px solid #dddddd;
+}
+
+.am-tabs-d2 .am-tabs-nav a {
+	line-height: 42px;
+	color: #72777a;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active {
+	position: relative;
+	background-color: #fcfcfc;
+	border-bottom: 1px solid #dddddd;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active a {
+	line-height: 42px;
+	color: #72777a;
+	background: #f5f5f5;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active:after {
+	position: absolute;
+	width: 50%;
+	height: 0;
+	bottom: 0;
+	left: 28%;
+	border: 1px solid rgb(141,142,137);
+	content: "";
+	z-index: 1;
+}
+
+.buy-button {
+	background: #e7222b;
+	color: white;
+	width: 100%;
+	border: none;
+	height: 1.5em;
+	font-size: 1.2em;
+	outline: none;
+	margin-top: 0.3em;
+}
+
+.label-sale {
+	background: #e7222b;
+	color: white;
+	border: none;
+	border-radius: 3px;
+	width: 3em;
+	height: 1.5em;
+	line-height: 1.5em;
+	text-align: center;
+	font-size: 0.8em;
+	outline: none;
+}
+
+.Bar, .Bars {
+	position: relative;
+	/* 宽度 */
+	border: 1px solid #e60012;
+	padding: 0px;
+}
+
+.Bar div, .Bars div {
+	display: block;
+	position: relative;
+	background: #f06e6e; /* 进度条背景颜色 */
+	color: #333333;
+	height: 1em; /* 高度 */
+	line-height: 1em; /* 必须和高度一致，文本才能垂直居中 */
+}
+
+.Bars div {
+	background: #090
+}
+
+.Bar div span, .Bars div span {
+	position: absolute;
+	width: 6em; /* 宽度 */
+	text-align: center;
+	font-weight: normal;
+	font-size: 0.8em;
+}
+.ul-fixed {
+  position: fixed;
+  top: 49px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1010;
+}
+</style>
+</head>
+<body style="background: #f0f0f0;">
+	<!-- Header -->
+	<header data-am-widget="header"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title">礼包</h1>
+	</header>
+	<div id="d_tab" data-am-widget="tabs" class="am-tabs am-tabs-d2"
+		style="margin: 0px;">
+		<script id="s_tab" type="text/html">
+			<ul class="am-tabs-nav am-cf ul-fixed" style="width: 100%;height:3em;">
+				<li class="am-active" style = "height:3em"><a href="[data-tab-panel-0]" style = "background:transparent;height:2em;width:70%; margin:0.5em auto;line-height:2em">可用礼包</a></li>
+				<div style = "margin:0.5em auto;width:1px;background:rgb(183,183,183);"></div>
+				<li class="" style = "height:3em"><a href="[data-tab-panel-1]" style = "background:transparent;height:2em;width:70%; margin:0.5em auto;line-height:2em">历史礼包</a></li>
+			</ul>
+			<div class="am-tabs-bd"  style="border: none">
+				<div data-tab-panel-0 class="am-tab-panel am-active" style="margin-top: 3.5em;padding: 0px"  >
+					{{if useablelist.length > 0}}
+					{{each useablelist as val i}}
+					<div class="am-g" style="padding:0em 1em 0em 1em;">
+						<div style="background:white;border-radius:5px;padding:0em;margin: 0em 0em 1em 0em;" class="am-u-sm-12">
+							<div class ="am-u-sm-4" style="margin:0em;padding:0em 0em 0em 0em;" >
+								<img src="img/lb_red.png" style="height:7em;width:auto;float:left" >
+								<div style="font-size: 2em;color:red;line-height: 3em;" align="center">
+									<span style="font-size:0.5em;">￥&nbsp;</span>{{val.total}}
+								</div>
+								
+							</div>
+							<div class ="am-u-sm-8" style="margin:0em;padding:0em;">
+								<img src="img/lb_line.png" style="height:5em;width:1px;float:left;margin-top:1em;" >
+								<div style="font-size: 1em;color:#454545;float: left;padding-top:1em;margin-left:1em">
+									<div style="color:#333333;">{{val.name}}</div>
+									<div style="font-size:0.8em;color:#72777a;margin-top:0.5em;">仅限抵扣米之周支付的订单金额</div>
+									<div style="font-size:0.8em;color:#72777a;">有效期：{{val.stime}}至{{val.etime}}</div>
+								</div>
+								
+							</div>
+						</div>		
+					</div>
+					{{/each}}
+					{{else}}
+					<div class="am-g" style="text-align: center; margin-top: 50%;position:relative;bottom:0em;height:60%;color:#d4d4d4"
+						align="center">
+					<img src="img/nogift.png" width="15%"> <br>
+					<div style="margin-top:0.3em;">暂无礼包</div>
+					</div>
+					{{/if}}
+				</div>
+				<div data-tab-panel-1 class="am-tab-panel am-active" style="margin-top: 3.5em;padding: 0px"  >
+					{{if nolist.length > 0}}
+					{{each nolist as val i}}
+					<div class="am-g" style="padding:0em 1em 0em 1em;">
+						<div style="background:white;border-radius:5px;padding:0em;margin: 0em 0em 1em 0em;" class="am-u-sm-12">
+							<div class ="am-u-sm-4" style="margin:0em;padding:0em 0em 0em 0em;" >
+								<img src="img/lb_grey.png" style="height:7em;width:auto;float:left" >
+								<div style="font-size: 2em;color:#dddddd;line-height: 3em;" align="center">
+									<span style="font-size:0.5em;">￥&nbsp;</span>{{val.total}}
+								</div>
+								
+							</div>
+							<div class ="am-u-sm-8" style="margin:0em;padding:0em;">
+								<img src="img/lb_line.png" style="height:5em;width:1px;float:left;margin-top:1em;" >
+								<div style="font-size: 1em;color:#dddddd;float: left;padding-top:1em;margin-left:1em">
+									<div style="color:#dddddd;">{{val.name}}</div>
+									<div style="font-size:0.8em;color:#dddddd;margin-top:0.5em;">仅限抵扣米之周支付的订单金额</div>
+									<div style="font-size:0.8em;color:#dddddd;">有效期：{{val.stime}}至{{val.etime}}</div>
+								</div>
+								<div style="position: absolute;right: 0px; padding: 0em 0.5em;color:
+									white;font-size: 0.2em;background: #{{if val.value == 0}}89c57f{{else}}ea706f{{/if}}; border-radius: 0px 5px;">
+									{{if val.value == 0}}已使用{{else}}已过期{{/if}}
+								</div>
+							</div>
+						</div>		
+					</div>
+					{{/each}}
+					{{else}}
+					<div class="am-g" style="text-align: center; margin-top: 50%;position:relative;bottom:0em;height:60%;color:#d4d4d4"
+						align="center">
+					<img src="img/nogift.png" width="15%"> <br>
+					<div style="margin-top:0.3em;">暂无历史礼包</div>
+					</div>
+					{{/if}}
+				</div>
+			</div>
+		</script>
+	</div>
+</body>
+
+<script type="text/javascript">
+	var userid = window.localStorage.getItem("userid");
+	var token = window.localStorage.getItem('token');
+	jQuery(document).ready(function() {
+	});
+
+	$.ajax({
+		type : "post",
+		url : url("Activities.queryGift&u=" + userid +"&t="+token),
+		dataType : "jsonp",
+		jsonp : "callback",
+		jsonpCallback : "integral",
+		success : function(json) {
+        	if(!checktoken(json)){
+        		return; 
+        	}
+			var html = template('s_tab', json);
+			$("#d_tab").html(html);
+			$("#d_tab").tabs();
+		},
+		error : function() {
+		}
+	});
+</script>
+</html>

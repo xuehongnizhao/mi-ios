@@ -1,0 +1,324 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<title>推荐</title>
+<script src="js/include.js"></script>
+<script src="js/selcontact.js"></script>
+
+<style type="text/css">
+.am-header .am-header-title {
+margin: 0 15%;
+}
+button {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	background: transparent;
+	border: transparent 1px
+}
+
+body, html {
+	width: 100%;
+	height: 100%
+}
+
+.green {
+	color: white;
+	background: #0c90d0;
+	border: #0c90d0 1px solid;
+}
+
+.blue {
+	color: white;
+	background: #0c90d0;
+	border: #0c90d0 1px solid;
+}
+
+.red {
+	color: white;
+	background: #0c90d0;
+	border: #0c90d0 1px solid;
+}
+
+.mi-title {
+	background-color: #474240;
+}
+
+.mi-black {
+	color: #4489ce;
+	background: white;
+	outline: none;
+	border: white 1px solid;
+	border-top: #dddddd 1px solid;
+}
+
+.select_class {
+	background-color: white;
+	width: 80%;
+	-webkit-appearance: none;
+	border: none;
+	outline: none;
+	height: 2.5em;
+}
+
+.line {
+	border: none;
+	border-top: 1px solid #ddd;
+	height: 1px;
+	width: 100%;
+	margin: 0em
+}
+
+.margin {
+	margin: 0em;
+}
+</style>
+<script type="text/javascript">
+	var isLogin = true;
+
+	var userid = window.localStorage.getItem('userid');
+
+	if (userid == null) {
+		isLogin = false;
+		window.location.href = "login.html";
+	} else {
+		isLogin = true;
+	}
+
+	function isNull(id) {
+		var _value = $(id).val();
+		_value = _value.replace(" ");
+		if (_value == "") {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	function recSubmit() {
+		if (isNull("#contact")) {
+			alert("联系人不能为空!");
+			return;
+		}
+		if (isNull("#phone")) {
+			alert("手机号不能为空!");
+			return;
+		}
+		var reg = /^1\d{10}$/;
+		if(!reg.test($("#phone").val())){
+			alert("请输入正确的手机号！");
+			return;
+		}
+		var murl = url("Recommend.addRec&u=" + userid);
+		
+		murl +="&t=" + window.localStorage.getItem('token');
+		murl += "&phone=" + getValue("#phone");
+		murl += "&contact=" + getValue("#contact");
+		murl += "&email=" + getValue("#email");
+		murl += "&qq=" + getValue("#qq");
+		murl += "&id=" + getValue("#id");
+		murl = encodeURI(murl);
+		murl = encodeURI(murl);
+
+		$.ajax({
+			type : "post",
+			url : murl,
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "update",
+			success : function(json) {
+				if(!checktoken(json)){
+	        		return; 
+	        	}
+				if (json.exist < 1) {
+					if (json.update > 0) {
+						window.history.back();
+					}
+				} else {
+					alert("此电话号码已推荐");
+				}
+			},
+			error : function() {
+			}
+		});
+	}
+
+	jQuery(document).ready(function() {
+		/* var addrid = getParameter("addrid"); */
+		/* $('#id')[0].value=addrid; */
+		/* getAddrInfo(addrid); */
+
+	});
+	function getAddrInfo(addrid) {
+		$.ajax({
+			type : "post",
+			url : url("Addr.getaddrfromid&addrid=" + addrid + "&u=" + userid+"&t="+token),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "addr",
+			success : function(json) {
+				if(!checktoken(json)){
+	        		return; 
+	        	}
+				var html = template('s_area', json)
+
+				$('#prov').val(json.addr[0].prov);
+				$('#city').val(json.addr[0].city);
+				$('#dist').val(json.addr[0].dist);
+				$('#dist').attr("areaid", json.addr[0].areaid);
+
+				$('#d_area').html(html);
+			},
+			error : function() {
+			}
+		});
+	}
+
+	$(function() {
+
+		/* $('#dist').on('click', function(e) {
+			$.ajax({
+				type : "post",
+				url : url("Recommend.recList&u=" + userid),
+				dataType : "jsonp",
+				jsonp : "callback",
+				jsonpCallback : "rec",
+				success : function(json) {
+					var html = template('s_area', json)
+					$('#d_area').html(html);
+					$('#modal_dist').modal();
+				},
+				error : function() {
+				}
+			}); 
+			
+			
+			
+		});*/
+
+	});
+
+	function distitemClick(item) {
+		/* var lastdist = $('#dist').val();
+		$('#dist').val(item.getAttribute("val"));
+		$('#dist').attr("areaid", item.getAttribute("areaid"));
+		$('#modal_dist').modal('close'); */
+	}
+
+	function closemodal(id) {
+		$(id).modal('close');
+	}
+</script>
+</head>
+<body style="background: #f0f0f0">
+
+	<!-- Header -->
+	<header data-am-widget="header"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title">推荐</h1>
+	</header>
+	<div class="am-g"
+		style="border-bottom: 1px solid #ddd; background: white">
+
+		<input type="hidden" id="id" name="id" value="" /> <input
+			type="hidden" id="userid" name="userid" value="" /> <a
+			class="am-u-sm-3 am-u-sm-push-9" href="javascript:void(0);"
+			style="padding: 0px;" onclick="selectContact()">
+			<div align="center" style="margin-top: 1em;">
+				<img width="60%" src="img/address_select.png" style="color: #666;"></img>
+			</div>
+			<div style="font-size: 0.8em; color: #595959; margin-top: 0.5em;"
+				align="center">选择联系人</div>
+		</a>
+
+		<div class="am-u-sm-9 am-u-sm-pull-3"
+			style="padding-left: 0px; padding-right: 0px; padding-top: 0.5em; padding-bottom: 0.5em; border-right: 1px solid #ddd;">
+			<div style="color: #646464; padding-left: 0.5em;">
+				<label for="contact"
+					style="height: 2.5em; text-align: center; line-height: 2.5em; font-weight: normal; color: #262626;">推荐人:</label>
+				<input id="contact" name="contact" type="text"
+					style="height: 2.5em; border: 0px; margin: 0px; background: transparent; border-color: transparent; padding: 0px; outline: none"
+					value="" />
+			</div>
+			<div class="line" style="margin-top: 0.5em; margin-bottom: 0.5em;"></div>
+			<div style="color: #646464; padding-left: 0.5em;">
+				<label for="phone"
+					style="height: 2.5em; text-align: center; line-height: 2.5em; font-weight: normal; color: #262626;">手机号:</label>
+				<input id="phone" name="phone" type="text"
+					style="height: 2.5em; border: 0px; margin: 0px; background: transparent; border-color: transparent; padding: 0px; outline: none"
+					value="" />
+			</div>
+		</div>
+	</div>
+	<div class="am-form-group am-g"
+		style="margin-top: 10px; border: 1px solid #ddd; background: white">
+		<div style="color: #646464; padding-left: 0.5em;padding-top: 0.5em;padding-bottom: 0.5em;">
+			<label for="email"
+				style="height: 2.5em; text-align: center; line-height: 2.5em; font-weight: normal; color: #262626; margin: 0em;">邮箱:</label>
+			<input id="email" name="email" type="text"
+				style="height: 2.5em; border: 0px; margin: 0px; background: transparent; border-color: transparent; padding: 0px; outline: none"
+				value="" />
+		</div>
+		<div class="line" style=""></div>
+		<div style="color: #646464; padding-left: 0.5em;padding-bottom: 0.5em;padding-top: 0.5em;">
+			<label for="qq"
+				style="height: 2.5em; text-align: center; line-height: 2.5em; font-weight: normal; color: #262626; margin: 0em;">QQ:</label>
+			<input id="qq" name="qq" type="tel"
+				style="height: 2.5em; border: 0px; margin: 0px; background: transparent; border-color: transparent; padding: 0px; outline: none"
+				value="" />
+		</div>
+		<span class="am-form-caret"></span>
+	</div>
+	<!-- <div id="d_area">
+		<script id="s_area" type="text/html">
+			<div class="am-modal-actions" id="modal_dist" style="max-height: 80%;overflow:auto;">
+      			<div class="am-modal-actions-group margin">
+				<ul id = "u-dist"class="am-list">
+					{{each reclist as val i}}
+					<li val="{{val.recomtel}}" onclick="distitemClick(this)"> <span>{{val.recomtel}}</span></li>
+					{{/each}}
+	  				<li><button class="am-btn am-btn-secondary am-btn-block" onclick="closemodal('#modal_dist')">取消</button></li>
+				</ul>
+      			</div>
+    		</div>
+			
+			<span class="am-form-caret"></span>
+		</script>
+	</div> -->
+
+	<div style="height: 13%"></div>
+	<div class="am-g"
+		style="width: 100%; padding: 0em; background-color: white; position: fixed; bottom: 0px; margin-top: 5%;">
+
+
+		<div class="am-u-sm-12" align="center"
+			style="padding: 0em; margin: 0em;">
+			<button class="mi-black"
+				style="width: 100%; height: 50px; -webkit-border-radius: 0px; -moz-border-radius: 0px; border-radius: 0px;"
+				onclick="recSubmit()">提交</button>
+		</div>
+	</div>
+
+
+	<!-- <div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default " id="">
+		  <ul class="am-navbar-nav am-cf am-avg-sm-4">
+		    <li>
+		      <button class="am-btn am-btn-default" style="border-radius:1.5em;width: 80%;" onclick="">保存</button>
+		    </li>
+		  </ul>
+		</div> -->
+
+</body>
+</html>

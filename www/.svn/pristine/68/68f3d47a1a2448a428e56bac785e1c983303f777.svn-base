@@ -1,0 +1,309 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>Insert title here</title>
+<script src="js/include.js"></script>
+<link rel="stylesheet" href="css/basestyle.css">
+<link>
+<style type="text/css">
+.am-header .am-header-title {
+	margin: 0 15%;
+}
+
+body, html {
+	width: 100%;
+	background-image: url('img/mi_bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.greenbg {
+	background-color: #e1e6d2;
+}
+
+.mt10 {
+	margin-top: 10px;
+}
+
+.sale-using-num {
+	background: #e74b59;
+	color: white;
+	font-size: 12px;
+	padding: 2px;
+}
+
+.total_price_div {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	color: white;
+	height: 60px;
+	line-height: 60px;
+	color: #333;
+	z-index: 1000;
+	font-family: sumsun;
+}
+
+.build-order {
+	float: right;
+	background: #ff9402;
+	color: #fff;
+	padding: 0 10px;
+	font-size: 1.2em
+}
+
+.am-u-sm-12 {
+	padding: 0;
+}
+
+input[type=checkbox], input[type=radio] {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 30px;
+	height: 30px;
+	margin: 3.5em 0.5em 0 0.5em;
+	cursor: pointer;
+	vertical-align: bottom;
+	background: #fff;
+	border: 1px solid B9BBBE;
+	-webkit-border-radius: 1px;
+	-moz-border-radius: 1px;
+	border-radius: 1px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	position: relative;
+}
+
+input[type=checkbox]:active, input[type=radio]:active {
+	border: none;
+	background: #ebebeb;
+}
+
+input[type=checkbox]:hover {
+	border: none;
+}
+
+input[type=checkbox] {
+	content: url('img/normal_addr.png');
+	background: transparent;
+}
+
+input[type=checkbox]:checked, input[type=radio]:checked {
+	z-index: 100;
+	content: url('img/default_addr.png');
+}
+
+input[type=checkbox]:checked::after {
+	content: url('img/default_addr.png');
+	display: block;
+}
+
+input[type=checkbox]:focus {
+	outline: none;
+	border-color: #4d90fe;
+}
+
+.sale-enable {
+	background-image: url('img/use_sale_bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: #fa9899;
+}
+
+.sale-unable {
+	background-image: url('img/use_sale_un_bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: #afafaf;
+}
+
+.bottomdiv {
+	width: 100%;
+	padding: 15px;
+	background-color: transparent;
+	position: fixed;
+	bottom: 0px;
+	z-index:999;
+}
+</style>
+</head>
+<body style="">
+
+	<!-- Header -->
+	<header data-am-widget="header" style=""
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title"
+			style="font-size: 18px; text-align: left; margin: 0 10%;">选择优惠券</h1>
+	</header>
+	<div id="sale-list" class="sale-list am-g" style="padding: 0 0.5em"></div>
+	<div class="am-g" style="height: 80px; background: transparent;"></div>
+	<div class="am-g bottomdiv">
+
+		<div class="am-u-sm-12" align="center"
+			style="margin: 0em; padding: 0em;">
+			<button class="mi-black"
+				style="color: white; background: #ff3b30; border: none; width: 100%; height: 50px; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px;"
+				onclick="saleConfirm()">确定</button>
+		</div>
+	</div>
+</body>
+<script id="s-sale-list" type="text/html">
+{{each salelist as val i}}				
+	<div class="sale-item am-u-sm-12 sale-enable mt10" style="font-family: sumsun;" >
+		<input class='sale-cb' type="checkbox" goodstype='{{val.goodstype}}' 
+			saleid='{{val.id}}'
+			{{if selectid.indexOf(val.id) != -1}}
+				checked=true
+			{{/if}}
+			style="z-index:800;position:absolute;">			
+		
+		<div class="am-u-sm-6 mt10" style="padding:0;height:8em;">
+			<div  style="font-size:1.2em;margin-left:0.5em;">米券</div>
+			<span style="font-size:1.2em;margin-left:3em;">¥</span>
+			<span style="font-size:3em;">{{val.total}}</span>
+		</div>
+		<div class="am-u-sm-6 mt10" style="padding: 0em;color:#686868;">
+			<div class ="am-u-sm-12 mt10">仅限{{val.gtypename}}品类的大米使用</div>
+			<div class ="am-u-sm-12" >
+				<img src="img/sale_line_icon.png" style="width:80%;height:auto;margin-left:10%">
+			</div>
+			<div class ="am-u-sm-12" style="font-size: 0.8em;text-align:center;">
+				{{val.binddate.substr(0,10)}}
+			</div>
+		</div>
+	</div>
+{{ /each }}	
+</script>
+<script type="text/javascript">
+	var userid = window.localStorage.getItem('userid');
+	var token = window.localStorage.getItem('token');
+	var cart_id = getParameter("cart_id");
+	var selectid = window.localStorage.getItem('selectsaleid');
+	jQuery(document).ready(function() {
+		initBuyGoodsInfo();
+	});
+
+	function initBuyGoodsInfo() {
+		getUsingSale();
+
+	}
+
+	function getUsingSale() {
+		$.ajax({
+			type : "post",
+			url : url("Order.getUsingSale"),
+			dataType : "jsonp",
+			data : {
+				u : userid,
+				t : token,
+				cart_id : cart_id
+			},
+			jsonp : "callback",
+			jsonpCallback : "glist",
+			success : function(json) {
+				json.selectid = selectid;
+				var html = template('s-sale-list', json);
+				$("#sale-list").html(html);
+				$('.sale-cb').on('change', checkboxChangeEvent);
+				valiteUseSale($('.sale-cb')[0])
+			},
+			error : function() {
+			}
+		});
+
+	}
+	function checkboxChangeEvent() {
+		var self = this;
+		valiteUseSale(self)
+	}
+
+	function valiteUseSale(self) {
+		var saleItem = $(self).parents('.sale-item');
+		var goodsType = self.getAttribute('goodstype');
+		var saleid = self.getAttribute('saleid');
+
+		var allcb = $('.sale-cb');
+		var checkedcb = $('.sale-cb:checked');
+		var selectedId = "";
+		for (var a = 0; a < checkedcb.length; a++) {
+			selectedId += checkedcb[a].getAttribute('saleid') + ",";
+
+		}
+		selectedId = selectedId.substring(0, selectedId.length - 1);
+		allcb.prop('disabled', true);
+		$.ajax({
+			type : "post",
+			url : url("Order.valiteSale"),
+			dataType : "jsonp",
+			data : {
+				u : userid,
+				t : token,
+				cart_id : cart_id,
+				sale_id : selectedId
+			},
+			jsonp : "callback",
+			jsonpCallback : "valiteSaleres",
+			success : function(json) {
+				allcb.prop('disabled', false);
+				for (var i = 0; i < json.ret.length; i++) {
+					var gt = json.ret[i].goodstype;
+					var ret = json.ret[i].ret;
+					var m = $('input[goodstype=' + gt + ']');
+					if (ret == 0) {
+						for (var b = 0; b < m.length; b++) {
+							var cb = m[b];
+							if (!cb.checked) {
+								cb.disabled = true;
+								var pardiv = $(
+										'input[saleid='
+												+ cb.getAttribute('saleid')
+												+ ']').parent('.sale-item');
+								pardiv.removeClass("sale-enable");
+								pardiv.addClass("sale-unable");
+							}
+						}
+					} else {
+						for (var b = 0; b < m.length; b++) {
+							var cb = m[b];
+							var pardiv = $(
+									'input[saleid=' + cb.getAttribute('saleid')
+											+ ']').parent('.sale-item');
+							pardiv.removeClass("sale-unable");
+							pardiv.addClass("sale-enable");
+						}
+					}
+				}
+
+			},
+			error : function() {
+				allcb.prop('disabled', false);
+			}
+
+		});
+	}
+	function saleConfirm(){
+		var selectsaleid = "";
+		var checkedcb = $('.sale-cb:checked');
+		for (var b = 0; b < checkedcb.length; b++) {
+			selectsaleid += checkedcb[b].getAttribute('saleid')+",";
+		}
+		selectsaleid = selectsaleid.substring(0, selectsaleid.length - 1);
+		window.localStorage.setItem("selectsaleid",selectsaleid);
+		window.history.back();
+	}
+</script>
+</html>

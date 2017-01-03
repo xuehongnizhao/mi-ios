@@ -1,0 +1,347 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>Insert title here</title>
+
+<script src="js/include.js"></script>
+<link rel="stylesheet" href="css/basestyle.css">
+<link>
+<style type="text/css">
+body, html {
+	width: 100%;
+	background-image: url('img/mi_bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.am-header .am-header-title {
+margin: 0 15%;
+}
+.mi-title {
+	background-color: #5b3914;
+}
+button {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.am-tabs-d2 .am-tabs-nav {
+	background-color: #fbfef1;
+	border-bottom: 1px solid white;
+}
+
+.am-tabs-d2 .am-tabs-nav a {
+	line-height: 42px;
+	color: #72777a;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active {
+	position: relative;
+	background-color: #fbfef1;
+	border-bottom: 1px solid #fbfef1;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active:after {
+	position: absolute;
+	width: 50%;
+	height: 0;
+	bottom: 0;
+	left: 28%;
+	border: 1px solid #e85b5b;
+	content: "";
+	z-index: 1;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active a {
+	line-height: 42px;
+	color: #e85b5b;
+	background: #fbfef1;
+}
+
+.ul-fixed {
+  position: fixed;
+  top: 49px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1010;
+}
+
+.mi-black {
+	color: white;
+	background: #474240;
+	outline: none;
+	border: #474240 1px solid;
+	-moz-border-radius: 3px; /* Gecko browsers */
+	-webkit-border-radius: 3px; /* Webkit browsers */
+	border-radius: 3px; /* W3C syntax */
+}
+
+hr {
+	margin: 0em;
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+	padding: 0px;
+	border-top: 1px solid #b4b4b4;
+}
+
+.item {
+	margin-left: 6.25%; '
+	margin-right: 6.25%;
+	margin-top: 1em;
+	width: 87.5%;
+	height: 9em;
+}
+
+.small {
+	font-size: 1em;
+	padding-left: 1.5em;
+	color: #7a7a7a;
+	line-height: 2em;
+}
+
+.sale-enable {
+	background-image: url('img/use_sale_bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: #fa9899;
+}
+
+.sale-unable {
+	background-image: url('img/use_sale_un_bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: #afafaf;
+}
+
+.bottomdiv {
+	width: 100%;
+	padding: 15px;
+	background-color: transparent;
+	position: fixed;
+	bottom: 0px;
+	z-index:999;
+}
+#card:foucs{
+	outline: none;
+}
+#card {
+    display: block;
+    width: 100%;
+    padding: .625em;
+    font-size: 1.6rem;
+    line-height: 1.2;
+    color: #555;
+    vertical-align: middle;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 0;
+}
+</style>
+</head>
+<body>
+
+	<header data-am-widget="header" style="background: #5b3914;"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title"
+			style="font-size: 18px; text-align: left; margin: 0 10%;">绑定新卡</h1>
+	</header>
+	
+	<div class=""
+		style="padding-left: 0em; padding-right: 0em; margin-top: 1em;background-color: #fbfef1;">
+		<div style="padding:10px">
+		<div style="color: #676767">
+		请输入新卡卡号：
+		</div>
+		<div id="card-bingding" class="am-form-group" style="height:3.5em;margin-bottom: 1em;margin-top: 1em">
+			<input style="background-color:transparent;height: 3em;outline: none" 
+				name="card" id="card" placeholder="请输入卡号" value="" maxlength="15" onkeyup="this.value=this.value.replace(/\D/g,'')" />
+		</div>	
+		</div>		
+	</div>
+	<div style=" margin: 0em; padding: 0 2em;margin-top: 2em;"
+			class="am-u-sm-12">
+			<input type="button" name="" value="绑定" onclick="checkresult()"
+				class="am-btn am-btn-sm am-fl"
+				style="border-radius: 3px;border: none;width: 100%;height: 3em; font-size: 1em; color: #fdf7f2; outline: none;background-color:#ff3b30;background-size: cover;background-repeat: no-repeat;">
+	</div>
+	
+	<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">错误</div>
+			<div class="am-modal-bd">
+				<a id="errmsg"></a>
+			</div>
+			<div class="am-modal-footer">
+				<span class="am-modal-btn">确定</span>
+			</div>
+		</div>
+	</div>
+	<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert1" >
+		<div class="am-modal-dialog">
+			<div class="sale-item am-u-sm-12 sale-enable" style="font-family: sumsun;" >		
+		<div class="am-u-sm-6 " style="padding:0;height:8em;">
+			<div  style="font-size:1.2em;margin-left:0.5em;margin-top: 1em;">米券</div>
+			<span style="font-size:1.2em;margin-left:1em;">¥</span>
+			<span style="font-size:3em;" id="price"></span>
+		</div>
+			<div class="am-u-sm-6 " style="padding: 0em;color:#686868;margin-top: 1em;">
+				<div class ="am-u-sm-12 "><span id="title"></span></div>
+				<div class ="am-u-sm-12" >
+				<img src="img/sale_line_icon.png" style="width:80%;height:auto;margin-left:10%">
+				</div>
+				</div>
+			</div>
+			<div class="am-modal-footer" style="background-color: #e1e6d2">
+				<span class="am-modal-btn" style="color: #676767;">此卡已被绑定过</span>
+			</div>
+			
+		</div>
+	</div>
+	
+	<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert2" >
+		<div class="am-modal-dialog">
+			<div class="sale-item am-u-sm-12 sale-enable " style="font-family: sumsun;" >		
+		<div class="am-u-sm-6 " style="padding:0;height:8em;">
+			<div  style="font-size:1.2em;margin-left:0.5em;margin-top: 1em;">米券</div>
+			<span style="font-size:1.2em;margin-left:1em;">¥</span>
+			<span style="font-size:3em;" id="price1"></span>
+		</div>
+			<div class="am-u-sm-6 " style="padding: 0em;color:#686868;margin-top: 1em;">
+				<div class ="am-u-sm-12 "><span id="title1"></span></div>
+				<div class ="am-u-sm-12" >
+				<img src="img/sale_line_icon.png" style="width:80%;height:auto;margin-left:10%">
+				</div>
+				</div>
+			</div>
+			<div class="am-modal-footer" style="background-color: #e1e6d2">
+      			<span class="am-modal-btn" style="color:white;background-color: #ff3b30" data-am-modal-cancel>取消绑定</span>
+      			<span class="am-modal-btn" style="color:white;background-color: #92bf64" data-am-modal-confirm>确认绑定</span>
+   	 		</div>
+		</div>
+	</div>
+	
+	
+	
+	
+		
+	<script type="text/javascript">
+	var userid = window.localStorage.getItem("userid");
+	var token = window.localStorage.getItem('token');
+	jQuery(document).ready(function(){
+		
+	});
+
+	function checkresult() {
+	var card = $('#card').val();
+	if ($('#card').val() == "") {
+		$('#errmsg').text("请检查您的输入是否正确");
+		$('#my-alert').modal();
+		return;
+	}
+		$.ajax({
+			type : "post",
+			url : url("SalesInfo.check&i=" + card),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "sinfo",
+			success : function(data) {
+				var ret =data.ret;
+				if(ret =='sale'){
+					var sale = data.sale;
+					var m_name = data.sale[0].tname;
+					var m_sale = data.sale[0].total;
+					if (eval(sale).length == 0) {
+						$('#errmsg').text("无效卡券");
+						$('#my-alert').modal();
+						return;
+					}
+	
+					if (sale[0].status == '2') {
+						$('#my-alert1').modal();
+						$('#title').html('仅限'+m_name+"品类的大米使用");
+						$('#price').html(m_sale);
+						return;
+					}
+					
+					$('#title1').html('仅限'+m_name+"品类的大米使用");
+					$('#price1').html(m_sale);
+					$('#my-alert2').modal({
+				        relatedTarget: this,
+				        onConfirm: function(options) {
+				         	bindsale(card);
+				        },
+				        // closeOnConfirm: false,
+				        onCancel: function() {
+				          
+				        }
+				      });
+					
+					
+				}else if(ret == 'goods'){
+					var goods = data.goods;
+					if(goods.length <= 0){
+						alert("暂无此商品信息");
+						return;
+					}
+					gtgoodsUrl(goods[0]);
+				}else if(ret == 'waybill'){
+					var waybill = data.waybill;
+					if(waybill.length <= 0){
+						alert("暂无此运单信息");
+						return;
+					}
+					gtgoodsUrl(waybill[0]);
+				}
+			},
+			error : function() {
+				alert("网络错误,请稍后重试");
+			}
+		});
+	}
+	
+	function bindsale(sale) {
+		
+		$.ajax({
+			type : "post",
+			url : url("SalesInfo.bind&u=" + userid + "&i=" + sale+"&t="+token),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "sbind",
+			success : function(data) {
+	        	if(!checktoken(data)){
+	        		return; 
+	        	}
+				if (data.ret == "1") {
+					alert("账号无效");
+				} else if (data.ret == "2") {
+					alert("卡券无效");
+				} else {
+					alert("绑定完成");
+				}
+			},
+			error : function() {
+				alert("网络错误,请稍后重试");
+			}
+		});
+
+	}
+	
+	
+	
+	</script>
+</body>
+</html>

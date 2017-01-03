@@ -1,0 +1,254 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<script src="js/include.js"></script>
+<title>Insert title here</title>
+<link>
+<style type="text/css">
+.am-header .am-header-title {
+margin: 0 15%;
+}
+.item {
+	position: relative;
+	border-bottom: 1px solid #dcdcdc;
+	min-height: 2em;
+	padding:.5em;
+}
+
+.item>div {
+	padding-top: 0.3em;
+	padding-bottom: 0.3em;
+	margin-left: 0em;
+	margin-right: 0em;
+}
+
+.item_date {
+	position: relative;
+	font-size: 1em;
+	color: #aaaaaa;
+	line-height: 2em;
+}
+
+.item_head {
+	padding-top: 0.5em;
+}
+
+.item_context {
+	font-size: 1em;
+	line-height: 2em;
+	padding-left: 0.5em;
+}
+
+.mi-title {
+	background-color: #474240;
+}
+
+.mi-black {
+	color: white;
+	background: #474240;
+	outline: none;
+	border: #474240 1px solid;
+	-moz-border-radius: 3px; /* Gecko browsers */
+	-webkit-border-radius: 3px; /* Webkit browsers */
+	border-radius: 3px; /* W3C syntax */
+}
+
+.am-accordion-basic .am-accordion-title:before {
+	content: "";
+	line-height: 1.5em;
+	font-size: 1em;
+}
+
+html body {
+	width: 100%;
+	height: 100%;
+}
+
+
+.div1{ 
+width:100%;  
+} 
+.div1 span{ 
+white-space:nowrap; 
+text-overflow:ellipsis; /* for internet explorer */ 
+overflow:hidden; 
+width:100%; 
+display:block; 
+float:left; 
+} 
+
+
+
+</style>
+</head>
+<body style="">
+
+	<!-- Header -->
+	<header data-am-widget="header"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title">我的消息</h1>
+	</header>
+
+	<div id="m_list" style="margin-top: 0.5em; padding: 0px">
+
+
+		<script id="s_list" type="text/html">
+	{{if msg.length > 0}}
+		<section data-am-widget="accordion" class="am-accordion am-accordion-basic" data-am-accordion='{}' style="margin:0em;padding:0em;">
+	 	<dl class="am-accordion-item">
+ 		<dt  id="e_evalList" class="am-accordion-title" style="padding-left:0.5em;" >
+		<div class="am-g" style="align:right;margin-left:1em;margin-top:-3em;width:90%">
+			<ul class="am-pagination" style="font-size:0.8em;margin-top:0.9em;margin-bottom:0.2em;float:right">
+				<li><a id="e_beval" onclick="bclick()"><</a></li>
+				<li><a id="e_neval" onclick="nclick()">></a></li>
+			</ul>
+	</div>
+	</dt>
+	<dd class="am-accordion-bd am-collapse ">
+      <div class="am-accordion-content" style="margin:0em;padding:0em;">
+		<div class="am-u-sm-12 line"></div>
+		
+		{{each msg as val i}}
+			<div class="am-g item am-u-sm-12" onclick = "toDetail('{{val.id}}');">
+			<div class="am-u-sm-2" style="margin:0em;padding:0em;">
+				{{if val.type == 1}}
+					<img src="img/news_06.png" style="width:80%;height:auto">
+				{{else if val.type == 2}}
+					<img src="img/news_10.png" style="width:80%;height:auto">
+				{{else if val.type == 3}}
+					<img src="img/news_03.png" style="width:80%;height:auto">
+				{{else}}
+					<img src="img/news_06.png" style="width:80%;height:auto">
+				{{/if}}
+			</div>
+			<div class="am-u-sm-9" style="margin:0;padding:0">
+			<div class="am-u-sm-6" style="color:#333333;font-size:1.1em;margin:0;padding:0">
+				{{if val.type == 1}}
+					系统通知
+				{{else if val.type == 2}}
+					交易消息
+				{{else if val.type == 3}}
+					物流消息
+				{{else}}
+					系统通知
+				{{/if}}
+			</div>
+			<div class="am-u-sm-6" align="right" style="color: #aaaaaa;margin:0;padding:0">{{val.ptime}}</div>				
+			<div class="am-u-sm-12 div1" style="margin:0;padding:0" >
+				<span>{{val.content}}</span>
+			</div>
+			</div>
+			<div class="am-u-sm-1" style="height:100%" align="right">
+				 <i class="am-icon-angle-right am-fr" style="line-height:2em;width: 3em;text-align: right; font-size: 1.0em;color:#cccccc"></i>
+			</div>
+			</div>	
+		{{/each}}
+	</div>
+	</dd>
+	</dl>
+	</section>
+	{{else }}
+		<div class="am-g" style="text-align: center; margin-top: 2em;position:fixed;bottom:0em;height:60%;color:#d4d4d4"
+			align="center">
+				<img src="img/nomessage.png" width="15%"> <br>
+				<div style="margin-top:0.3em;">暂无消息</div>
+		</div>
+	{{/if}}
+	
+		</script>
+
+	</div>
+	
+</body>
+<script type="text/javascript">
+	var isLogin = true;
+
+	var userid = window.localStorage.getItem('userid');
+
+	if (userid == null) {
+		isLogin = false;
+		window.location.href = "login.html";
+	} else {
+		isLogin = true;
+	}
+	var evalpos = 1;
+	jQuery(document).ready(function() {
+
+		queryMsg(evalpos, evalpos + 9);
+
+	});
+
+	function queryMsg(s, e) {
+		var token = window.localStorage.getItem('token');
+		var murl = url("Message.getMessage&u=" + userid + "&s=" + s + "&e=" + e
+				+ ""+"&t="+token);
+		$.ajax({
+			type : "post",
+			url : murl,
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "msglist",
+			success : function(data) {
+	        	if(!checktoken(data)){
+	        		return; 
+	        	}
+				try {
+					var html = template('s_list', data);
+					$("#m_list").html(html);
+
+					evalpos = e + 1;
+					if (data.msg.length < 10) {
+						$('#e_neval').hide();
+					} else {
+						$('#e_neval').show();
+					}
+
+					if (evalpos <= 11) {
+						$('#e_beval').hide();
+					} else {
+
+						$('#e_beval').show();
+					}
+
+					$.AMUI.accordion.init();
+					$('#e_evalList').trigger('click');
+
+				} catch (e) {
+					console.log(e);
+					throw e;
+				}
+
+			},
+			error : function() {
+				alert("网络错误,请稍后重试");
+			}
+
+		});
+	}
+
+	function bclick() {
+		queryMsg(evalpos - 20, evalpos - 11);
+	};
+
+	function nclick() {
+		queryMsg(evalpos, evalpos + 9);
+	};
+	
+	function toDetail(mid){
+		window.location.href = "msgdetail.html?mid="+mid;
+	}
+	
+</script>
+</html>
