@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="css/basestyle.css">
 <script type="text/javascript">
 	var onDeviceReady = function() {
+		
 		console.log("JPushPlugin:Device ready!")
 		initiateUI();
 	}
@@ -129,7 +130,8 @@
 			false);
 	document.addEventListener("jpush.receiveNotification",
 			onReceiveNotification, false);
-	document.addEventListener("jpush.receiveMessage", onReceiveMessage, false);	
+	document.addEventListener("jpush.receiveMessage", onReceiveMessage, false);
+
 	//jpush.receiveMessage
 </script>
 <style type="text/css">
@@ -259,6 +261,18 @@ hr {
 	</script>
 	</div>
 	<div class="am-u-sm-12" style="height: 55px"></div>
+	<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">提示</div>
+			<div class="am-modal-bd">
+				无效卡券
+			</div>
+			<div class="am-modal-footer">
+				<span class="am-modal-btn" style="color:#7cc5a7;" data-am-modal-cancel>再试一次</span>
+      			<span class="am-modal-btn" style="color:#7cc5a7;" data-am-modal-confirm>手动输入</span>
+			</div>
+		</div>
+	</div>
 	<header id="hid2"
 		class="am-topbar am-topbar-inverse am-topbar-fixed-bottom "
 		style="border-top: 1px #ffffff solid">
@@ -487,10 +501,19 @@ hr {
 				if(ret =='sale'){
 					var sale = data.sale;
 					if (eval(sale).length == 0) {
-						alert('无效卡券');
+						$('#my-alert').modal({
+					        relatedTarget: this,
+					        onConfirm: function(options) {
+					        	binding();				        	
+					        },
+					        // closeOnConfirm: false,
+					        onCancel: function() {
+					        	scanCode();
+					        }
+					      });
 						return;
 					}
-	
+					
 					if (sale[0].status == '2') {
 						alert('此卡券已被绑定');
 						return;
@@ -564,6 +587,9 @@ hr {
 			}
 		});
 
+	}
+	function binding(){
+		window.location.href = "binding.html";
 	}
 </script>
 </html>

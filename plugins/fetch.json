@@ -123,8 +123,8 @@
     },
     "cordova-plugin-barcodescanner": {
         "source": {
-            "type": "registry",
-            "id": "cordova-plugin-barcodescanner"
+            "type": "local",
+            "path": "/Users/zq/Desktop/cordova-plugin-barcodescanner"
         },
         "is_top_level": true,
         "variables": {}
