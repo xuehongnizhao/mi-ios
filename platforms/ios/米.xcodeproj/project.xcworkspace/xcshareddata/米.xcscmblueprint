@@ -1,20 +1,28 @@
 {
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "CB01F60FE3988DCE4031B0941F5D99C43DD798BF",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
     "dfebe470-d540-11e5-90f8-1190a075a1c5++5735" : {
 
     }
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "dfebe470-d540-11e5-90f8-1190a075a1c5++5735" : 9223372036854775807
+    "dfebe470-d540-11e5-90f8-1190a075a1c5++5735" : 9223372036854775807,
+    "CB01F60FE3988DCE4031B0941F5D99C43DD798BF" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "46A8A68C-A3FE-48A9-B7A1-16112023762E",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "dfebe470-d540-11e5-90f8-1190a075a1c5++5735" : "mi-ios\/www\/"
+    "dfebe470-d540-11e5-90f8-1190a075a1c5++5735" : "mi-ios\/www\/",
+    "CB01F60FE3988DCE4031B0941F5D99C43DD798BF" : "mi-ios\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "米",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "platforms\/ios\/米.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/xuehongnizhao\/mi-ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CB01F60FE3988DCE4031B0941F5D99C43DD798BF"
+    },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/172.16.1.163",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
