@@ -1,0 +1,422 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<script src="js/include.js"></script>
+<link rel="stylesheet" href="css/basestyle.css">
+
+<style type="text/css">
+body, html {
+	width: 100%;
+	background-image: url('img/mi_bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.am-header .am-header-title {
+	margin: 0 15%;
+}
+
+.mi-title {
+	background-color: #5b3914;
+}
+
+button {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.am-tabs-d2 .am-tabs-nav {
+	background-color: #fbfef1;
+	border-bottom: 1px solid white;
+}
+
+.am-tabs-d2 .am-tabs-nav a {
+	line-height: 42px;
+	color: #72777a;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active {
+	position: relative;
+	background-color: #fbfef1;
+	border-bottom: 1px solid #fbfef1;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active:after {
+	position: absolute;
+	width: 50%;
+	height: 0;
+	bottom: 0;
+	left: 28%;
+	border: 1px solid #e85b5b;
+	content: "";
+	z-index: 1;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active a {
+	line-height: 42px;
+	color: #e85b5b;
+	background: #fbfef1;
+}
+
+.buy-button {
+	background: #e7222b;
+	color: white;
+	width: 100%;
+	border: none;
+	height: 1.7em;
+	font-size: 1.1em;
+	outline: none;
+	margin-top: 0.3em;
+}
+
+.label-sale {
+	background: #e7222b;
+	color: white;
+	border: none;
+	border-radius: 3px;
+	width: 3em;
+	height: 1.5em;
+	line-height: 1.5em;
+	text-align: center;
+	font-size: 0.8em;
+	outline: none;
+}
+
+.Bar, .Bars {
+	position: relative;
+	/* 宽度 */
+	border: 1px solid #e60012;
+	padding: 0px;
+}
+
+.Bar div, .Bars div {
+	display: block;
+	position: relative;
+	background: #f06e6e; /* 进度条背景颜色 */
+	color: #333333;
+	height: 1em; /* 高度 */
+	line-height: 1em; /* 必须和高度一致，文本才能垂直居中 */
+}
+
+.Bars div {
+	background: #090
+}
+
+.Bar div span, .Bars div span {
+	position: absolute;
+	width: 6em; /* 宽度 */
+	text-align: center;
+	font-weight: normal;
+	font-size: 0.8em;
+}
+
+.item {
+	position: relative;
+	min-height: 5.5em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+}
+
+.item>div {
+	padding-top: 0em;
+	padding-bottom: 0em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
+
+.item_date {
+	position: absolute;
+	top: 0.5em;
+	right: 1em;
+	font-size: 0.8em;
+	color: #aaaaaa;
+}
+
+.item_head {
+	padding-top: 0em;
+	color: #676767;
+}
+
+.item_content {
+	font-size: 14px;
+	color: #969696;
+}
+
+.item_btn {
+	background: transparent;
+	border: 1px solid #fcfff4;
+	text-align: center;
+	right: 0px;
+	float: right;
+	line-height: 32px;
+	height: 32px;
+	color: #e74b59;
+	padding: 0 5px;
+}
+
+.eval-content {
+	background: #fbfef1;
+	width: 100%;
+	outline: none;
+	resize: none;
+	padding: 5px 0.5em;
+}
+
+.line {
+	margin: 0px;
+	padding: 0px;
+	border-top: 1px solid #dddddd;
+}
+
+input[type=checkbox], input[type=radio] {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 13px;
+	height: 13px;
+	margin:2px 0;
+	cursor: pointer;
+	vertical-align: bottom;
+	background: #fff;
+	border: 1px solid B9BBBE;
+	-webkit-border-radius: 1px;
+	-moz-border-radius: 1px;
+	border-radius: 1px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+input[type=radio]:active, input[type=radio]:active {
+	border: none;
+	background: #ebebeb;
+}
+
+input[type=radio]:hover {
+	border: none;
+}
+
+input[type=radio] {
+	width: 20px;
+	height: 20px;
+	content: url('img/normal_addr.png');
+	background: transparent;
+}
+input[type=checkbox]:checked, input[type=radio]:checked {
+	z-index: 100;
+	width: 20px;
+	height: 20px;
+	content: url('img/default_addr.png');
+}
+
+input[type=radio]:checked::after {
+	width: 20px;
+	height: 20px;
+	content: url('img/default_addr.png');
+	display: block;
+}
+input[type=radio]:focus {
+	width: 20px;
+	height: 20px;
+	outline: none;
+	border-color: #4d90fe;
+}
+
+input[value=good] {
+	content: url('img/eval_good_nor.png');
+}
+input[value=good]:checked {
+	content: url('img/eval_good_sel.png');
+}
+input[value=normal] {
+	content: url('img/eval_normal_nor.png');
+}
+input[value=normal]:checked {
+	content: url('img/eval_normal_sel.png');
+}
+input[value=bad] {
+	content: url('img/eval_bad_nor.png');
+}
+input[value=bad]:checked {
+	content: url('img/eval_bad_sel.png');
+}
+</style>
+</head>
+<body>
+	<header data-am-widget="header" style="background: #5b3914;"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title"
+			style="font-size: 18px; text-align: left; margin: 0 10%;">评价晒单</h1>
+		<div class="am-header-right am-header-nav">
+			<a href="javascript:void(0);" onclick="evaluationgoods()"
+				style="text-align: left">提交 </a>
+		</div>
+	</header>
+
+	<div id="goodslist" style="border: none;"></div>
+	<div id='eval-div' class="am-g" style="margin:5px 0;padding:15px 0;border: none; background: #fbfef1;color:#969696">
+		<div class="am-u-sm-4" style="text-align: center;color:#ff0600;">
+			<input type="radio" name="eval" value="good" checked > 好评
+		</div>
+		<div class="am-u-sm-4" style="text-align: center">
+			<input type="radio" name="eval" value="normal" > 中评
+		</div>
+		<div class="am-u-sm-4" style="text-align: center">
+			<input type="radio"name="eval" value="bad"> 差评
+		</div>
+	</div>
+	<div class="" style="border: none; background: #e1e6d2;">
+		<textarea class="eval-content" maxlength="100" rows="6"
+			placeholder="请填写评价信息,100字以内"></textarea>
+	</div>
+	<div id="eval-sale" hidden style="border: none; margin-top: 5px;"></div>
+	<script id="s-goods-list" type="text/html">
+		{{each goodslist as goods i}}
+		<div class="am-g item" style = "padding:0px;border:none;" tdgid={{goods.id}}>
+			<div class="am-u-sm-12" style="background-color: #e1e6d2;">
+				<div class="am-u-sm-4" style=" padding-top: 10px;padding-bottom: 10px;">
+					<img class="" style="width: 100%;height: 100%" src="{{goods.image}}">
+			  	</div>
+              	<div class="am-u-sm-8" style="padding:6px 0;">
+					<div class="item_head" >
+					{{goods.name}}
+					</div>
+ 					<div class="item_content" >
+					{{goods.introduce}}
+					</div>
+     		  	</div>
+             </div>
+		</div>
+		{{/each}}
+	</script>
+	<script id="s-eval-sale" type="text/html">
+		{{each evalsale as val i}}
+		<div class="am-g item" style = "padding:5px;border:none;background-color: #e1e6d2;" >
+			<div class="am-u-sm-12" style="">
+				<span style="border-radius: 4px;padding:2px;color:white;background:#e74b59">好礼相送</span>
+            </div>
+			<div class="am-u-sm-12" style="color:#e74b59">
+				在{{val.stime}}日至{{val.etime}}日之间，评价内容字数超过{{val.worldnum}}，赠送{{val.name}}类商品优惠券{{val.money}}元。
+            </div>
+		</div>
+		{{/each}}
+	</script>
+	<script type="text/javascript">
+		var isLogin = true;
+		var userid = window.localStorage.getItem('userid');
+		var token = window.localStorage.getItem('token');
+		var docid = getParameter("docid");
+		var goodsid = getParameter("goodsid");
+		var eval = "5";
+		jQuery(document).ready(function() {
+			getGoodsInfo();
+			$('input[name="eval"]').on('change',radioChange);
+		});
+		function getGoodsInfo() {
+
+			$.ajax({
+				type : "post",
+				url : url("Order.getGoodsInfoByDocidAndGoodsid&docid=" + docid
+						+ "&goodsid=" + goodsid + "&u=" + userid + "&t="
+						+ token),
+				dataType : "jsonp",
+				jsonp : "callback",
+				success : function(data) {
+					if (!checktoken(data)) {
+						return;
+					}
+					var html = template('s-goods-list', data);
+					$("#goodslist").html(html);
+					var ghtml = template('s-eval-sale', data);
+					if (data.evalsale.length > 0) {
+						$("#eval-sale").html(ghtml);
+						$("#eval-sale").show();
+					} else {
+						$("#eval-sale").hide();
+					}
+
+				},
+				error : function() {
+					alert("网络错误,请稍后重试");
+				}
+			});
+
+		}
+		function evaluationgoods() {
+			var tdgid = $('.item').attr('tdgid');
+			var content = $('.eval-content').val();
+			content = encodeURI(content);
+			if (typeof (content) == "undefined" || content == "") {
+				alert('评论内容不能为空');
+				return;
+			}
+			$.ajax({
+				type : "post",
+				url : url("Eval.evaluationGoods"),
+				dataType : "jsonp",
+				data : {
+					u : userid,
+					t : token,
+					goodsid : goodsid,
+					docid : docid,
+					tdgid : tdgid,
+					eval : eval,
+					content : content
+				},
+				jsonp : "callback",
+				success : function(data) {
+					if (!checktoken(data)) {
+						return;
+					}
+					if (data.ret == 3) {
+						alert(date.error);
+					}
+					if (data.ret == 0) {
+						window.history.back();
+					}
+				},
+				error : function() {
+					alert("网络错误,请稍后重试");
+				}
+			});
+		}
+		
+		function radioChange() {
+			var self = this;
+			var allRd = $('input[name="eval"]');
+			for (var i = 0; i < allRd.length; i++) {
+				var rd = allRd[i];
+				if(rd.checked){
+					if(rd.value== 'good'){
+						eval = "5";
+					}
+					if(rd.value== 'normal'){
+						eval = "3";
+					}
+					if(rd.value== 'bad'){
+						eval = "1";
+					}
+					rd.parentElement.style.color = "#ff0600";
+				}else{
+					rd.parentElement.style.color = "";
+				}
+				
+			}
+		}
+	</script>
+</body>
+</html>

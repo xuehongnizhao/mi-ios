@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<script src="js/include.js"></script>
+<link rel="stylesheet" href="css/basestyle.css">
+<style type="text/css">
+body, html {
+	width: 100%;
+	height: 100%;
+	background-image: url('img/mi_bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+</style>
+</head>
+
+<body>
+	<header data-am-widget="header"
+		class="am-header am-header-default am-header-fixed mi-title"
+		style="background-color: transparent;">
+		<div id="message" class="am-header-right am-header-nav" onclick="editinfo()">
+			<img id="scan-img"
+				style="height: 1.6em; width: 1.6em; margin-bottom: 5px;"
+				src="img/Afterloggingin_03.png">
+		</div>
+	</header>
+
+	<div class="am-u-sm-12" style="height: 13em;">
+		<div class="am-u-sm-12" id="v_login" 
+			style="line-height: 1.5em; font-size: 1em; color: #333333; padding: 0em;">
+			<div class="am-u-sm-4"></div>
+			<div  class="am-u-sm-8"
+				style="text-align: left; margin-top: 1.5em;">
+				<span id="s_user_name" style="color: white;"></span> <img
+					id="sexIcon" src=""
+					style="height: auto; width: 15px; margin-bottom: 0.3em;"> <br>
+				<img id="iphone" src="img/Afterloggingin_15.png"
+					style="width: 16px;"> <span id="userPhone"
+					style="color: white;"></span>
+			</div>
+
+		</div>
+		<div class="am-u-sm-12" id="v_unlogin" onclick="window.location.href='login.html'"
+			style="line-height: 3em; font-size: 1em; color: #333333;">
+			<div class="am-u-sm-12" align="center">
+				<span style="color: white">登录/注册</span>
+			</div>
+		</div>
+
+		<div class="am-u-sm-12" style="margin-top: 0.5em">
+			<div class="am-u-sm-4 am-u-sm-offset-4" style="padding: 0">
+			<img id="userIcon" src="" onerror="this.src='img/myinfo1.png'"
+				style="width: 100%; border-radius: 50%"></div>
+		</div>
+
+
+
+	</div>
+
+	<div class="am-u-sm-12">
+		<div class="am-u-sm-4" align="center" style="float: left;"
+			onclick="addrList()">
+			<img id="img_id1" src="img/Afterloggingin_19.png" style="width: 90%;">
+
+		</div>
+		<div class="am-u-sm-4" align="center" style="float: left;"
+			onclick="sale()">
+			<img id="img_id1" src="img/Afterloggingin_22.png" style="width: 90%;">
+		</div>
+		<div class="am-u-sm-4" align="center" style="float: left;"
+			onclick="setUp()">
+			<img id="img_id1" src="img/Afterloggingin_24.png" style="width: 90%;">
+		</div>
+	</div>
+	<div class="am-u-sm-12" style="margin-top: 1em;">
+		<div class="am-u-sm-4" align="center" style="float: left;"
+			onclick="order()">
+			<img id="img_id1" src="img/Afterloggingin_29.png" style="width: 90%;">
+
+		</div>
+		<div class="am-u-sm-4" align="center" style="float: left;"
+			onclick="aboutapp()">
+			<img id="img_id1" src="img/Afterloggingin_30.png" style="width: 90%;">
+		</div>
+		<div class="am-u-sm-4" align="center" style="float: left;"
+			onclick="quitlogin();">
+			<img id="img_id1" src="img/Afterloggingin_31.png" style="width: 90%;">
+		</div>
+	</div>
+
+	<header id="hid2"
+		class="am-topbar am-topbar-inverse am-topbar-fixed-bottom "
+		style="border-top: 1px #ffffff solid">
+		<div data-am-widget="navbar" class="am-navbar  am-navbar-default ">
+			<ul class="am-navbar-nav am-cf am-avg-sm-4">
+				<li><a href="main.html" class=""> <img
+						src="img/shouye1.png"> <span>首页</span>
+				</a></li>
+				<li><a href="buyrice.html" class=""> <img
+						src="img/shouye2.png"> <span>订购</span>
+				</a></li>
+				<li><a href="shopcar.html" class=""> <span
+						style="color: #fff;" class="mui-badge" id="shopcar-count"></span> <img
+						src="img/shouye3.png"> <span>购物车</span>
+				</a></li>
+				<li><a href="javascript:void(0);" class=""> <img
+						src="img/shouye04.png"> <span style="color: #ffcf58">我的</span>
+				</a></li>
+			</ul>
+		</div>
+	</header>
+</body>
+
+
+<script type="text/javascript">
+	var isLogin = true;
+	var isPartner =false;
+	var userid = window.localStorage.getItem('userid');
+
+	if (userid == null || userid == "null") {
+		isLogin = false;
+	} else {
+		isLogin = true;
+	}
+	jQuery(document).ready(function() {
+		document.addEventListener("backbutton", onBackKeyDownMain, false);
+		if (isLogin) {
+			$("#v_login").show();
+			$("#v_unlogin").hide();
+			getUserInfo(userid);
+		} else {
+			$("#v_login").hide();
+			$("#v_unlogin").show();
+
+		}
+		showCarCount();
+	});
+
+	function getUserInfo() {
+		var token = window.localStorage.getItem('token');
+		$.ajax({
+			type : "post",
+			url : url("MyPage.myInfo&u=" + userid + "&t=" + token),
+			dataType : "jsonp",
+			jsonp : "callback",
+			jsonpCallback : "uinfo",
+			success : function(json) {
+				if (json.loge != 0) {
+					$("#v_login").hide();
+					$("#v_unlogin").show();
+					return;
+				}
+				if(json.uinfo[0].vipidentity == 3){
+					isPartner = true;
+				}
+				$('#userIcon').attr('src', json.uinfo[0].icon);
+				$('#s_user_name')[0].textContent = json.uinfo[0].nickname
+						.replace(/<br>/gi, "\n");
+				var sex = json.uinfo[0].sex;
+				if (sex == '男') {
+					$('#sexIcon').attr('src', "img/Afterloggingin_14.png");
+				} else if (sex == '女') {
+					$('#sexIcon').attr('src', "img/Afterloggingin_11.png");
+				}
+				$('#userPhone')[0].textContent = json.uinfo[0].mobile;
+
+			},
+			error : function() {
+			}
+		});
+	}
+	function setUp() {
+		if (isLogin == true) {
+			window.location.href = "setup.html";
+		} else {
+			window.location.href = "login.html";
+		}
+	}
+	function editinfo() {
+		if (isLogin == true) {
+			window.location.href = "edituserinfo.html";
+		} else {
+			window.location.href = "login.html";
+		}
+	}
+	function quitlogin() {
+		window.localStorage.setItem('userid', null);
+		window.localStorage.setItem('token', null);
+		window.location.href = "login.html";
+	}
+	function addrList() {
+		if (isLogin) {
+			window.location.href = "addrlist.html";
+		} else {
+			window.location.href = "login.html";
+		}
+	}
+	function order(){
+		if (isLogin) {
+			window.location.href = "orderlist.html";
+		} else {
+			window.location.href = "login.html";
+		}
+	}
+	function sale(){
+		if (isLogin) {
+			if(isPartner){
+				window.location.href = "partnersaleinfo.html";	
+			}else{
+				window.location.href = "saleinfo.html";
+			}
+		} else {
+			window.location.href = "login.html";
+		}
+	}
+	function aboutapp(){
+		if (isLogin) {
+			window.location.href = "aboutapp.html";
+		} else {
+			window.location.href = "login.html";
+		}
+	}
+</script>
+</html>

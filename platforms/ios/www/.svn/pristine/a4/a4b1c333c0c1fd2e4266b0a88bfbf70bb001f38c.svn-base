@@ -1,0 +1,292 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<script src="js/include.js"></script>
+<link rel="stylesheet" href="css/basestyle.css">
+
+<title>Insert title here</title>
+<link>
+<style>
+.am-header .am-header-title {
+margin: 0 15%;
+}
+.header {
+	text-align: center;
+}
+
+.header h1 {
+	font-size: 200%;
+	color: #333;
+	margin-top: 30px;
+}
+
+.header p {
+	font-size: 14px;
+}
+
+.img-icon {
+	width: 1.3em;
+	margin-left: 2em;
+}
+
+body, html {
+	width: 100%;
+	height: 100%
+}
+
+.am-form-group{
+	margin-bottom: 0em;
+}
+body, html {
+	width: 100%;
+	height: 100%;
+	background-image: url('img/mi_bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+</style>
+</head>
+<body>
+
+	<!-- Header -->
+	
+	<header data-am-widget="header" style="background: transparent;"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title"
+			style="font-size: 18px; text-align: left; margin: 0 10%;">登录</h1>
+	</header>
+	<div class="am-g">
+		<div class="am-u-lg-6 am-u-sm-centered" style="padding-top: 0em;"
+			align="center">
+			<img alt="" src="img/login_04.png" style="width: 30%;">
+		</div>
+	</div>
+	<br>
+	<br>
+	<div class=""
+		style="padding-left: 0em; padding-right: 0em; margin-top: 1em; margin: 0em;">
+
+		<div id="mobile_group" class="am-form-group" style="height:3.5em">
+			<img alt="" src="img/login_08.png" class="img-icon" /> <input
+				type="text" style="border: 1px solid transparent;height: 3.5em;line-height: 3em;outline: none;background: transparent;width:80%;color: white" class="am-radius"
+				name="mobile" id="mobile" placeholder="用户名/手机号" value="" />
+		</div>
+		<div class="am-u-sm-10" style="background:#d0b5a1;height:1px;margin-left:2em;"></div>
+		<div id="pwd_group" class="am-form-group" style="height: 3em;height:3.5em">
+			<img alt="" src="img/login_11.png" class="img-icon" /> <input
+				type="password" style="border: 1px solid transparent; height: 3.5em;line-height: 3em;outline: none;background: transparent;width:80%;color: white"
+				class="am-radius" id="passwd" placeholder="密码" value="" />
+		</div>
+		<div class="am-u-sm-10" style="background:#d0b5a1;height:1px;margin-left:2em;"></div>
+
+		<div id="code_group" class="am-form-group" style="height: 3.5em;" >
+			<img alt="" src="img/login_56_04.png" class="img-icon" /> <input
+				type="text" id="code" class="am-radius" name="code" value=""
+				style="display: inline; width: 50%; height: 3.5em; border: 1px solid transparent;outline: none;background-color: transparent;"
+				placeholder="验证码">
+			<div
+				style="float: right; width: 28%; text-align: center; line-height: 3.5em; height: 3.5em; "
+				align="center">
+				<input type="button" onclick="getCode()" class=""
+					style="border: 1px solid transparent;background-color: transparent; color: #fdf7f2;"
+					value="获取验证码" id="hq">
+			</div>
+			<div class="am-u-sm-10" style="background:#d0b5a1;height:1px;margin-left:2em;"></div>
+		</div>
+		<div style=" margin: 0em; padding: 0 1em;margin-top: 2.5em;"
+			class="am-u-sm-12">
+			<input type="button" name="" value="登 录" onclick="submit1()"
+				class="am-btn am-btn-sm am-fl"
+				style="border-radius: 6px;border: none;width: 100%;height: 3em; font-size: 1em; color: #fdf7f2; outline: none;background-image: url('img/login_14.png');background-size: cover;background-repeat: no-repeat;">
+		</div>
+		<div class="am-g" style="padding-top: 3em;margin: 0em;">
+			<div class="am-u-sm-6"style="padding: 1em;">
+				<a style="color: #fdf7f2;" id="login_type" >密码登录</a>
+
+			</div>
+			<div class="am-u-sm-6 am-u-sm-righted" align="right" style="padding: 1em;">
+				<a href="register.html" style="align: right; color: #fdf7f2;">注
+					册</a>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+		<div class="am-modal-dialog">
+			<div class="am-modal-hd">错误</div>
+			<div class="am-modal-bd">
+				<a id="errmsg"></a>
+			</div>
+			<div class="am-modal-footer">
+				<span class="am-modal-btn">确定</span>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		var login = 0;
+		jQuery(document).ready(function() {
+			$('#code_group').hide(); 
+			$('#login_type').text("验证码登录");
+			log();
+
+		});
+
+		$('#login_type').on('click', function() {
+
+			if (login == 0) {
+				login = 1;
+				$('#code_group').show();
+				$('#pwd_group').hide();
+				$('#login_type').text("密码登录");
+
+			} else {
+				login = 0;
+				$('#code_group').hide();
+				$('#pwd_group').show();
+				$('#login_type').text("验证码登录");
+
+			}
+		});
+
+		function getCode() {
+			$.ajax({
+				type : "post",
+				url : url("User.validateCode"),
+				data : {
+					"phone" : $('#mobile').val(),
+					"type" : "2"
+				},
+				dataType : "jsonp",
+				jsonp : "callback",
+				jsonpCallback : "cb",
+				success : function(data) {
+					var d = data;
+					if (d != 0) {
+						$("#hq").popover({
+							content : '验证发送失败'
+						});
+						$("#hq").popover("open");
+					} else {
+						$("#hq").popover({
+							content : '验证已发送'
+						});
+						$("#hq").popover("open");
+
+					}
+					setTimeout(function() {
+						$("#hq").popover("close");
+					}, 2000);
+				}
+			});
+		}
+
+		function submit1() {
+			var info = "";
+			if (login == 0) {
+				info = $('#passwd').val();
+			} else {
+				info = $('#code').val();
+			}
+			if ($('#mobile').val() == "") {
+				$('#errmsg').text("请检查您的输入是否正确");
+				$('#my-alert').modal();
+				return;
+			}
+
+			if (info == "") {
+				$('#errmsg').text("请检查您的输入是否正确");
+				$('#my-alert').modal();
+				return;
+			}
+
+			$.ajax({
+				type : "post",
+				url : url("Login.login"),
+				data : {
+					"phone" : encodeURIComponent($('#mobile').val()),
+					"type" : login,
+					"info" : info
+				},
+				dataType : "jsonp",
+				jsonp : "callback",
+				jsonpCallback : "cb",
+				success : function(data) {
+					if (data.ret == "1") {
+						$('#errmsg').text("用户未注册，请注册");
+						$('#my-alert').modal();
+					} else if (data.ret == "2") {
+						$('#errmsg').text("验证码不正确，请重新获取");
+						$('#my-alert').modal();
+					} else if (data.ret == "3") {
+						$('#errmsg').text("密码不正确，请重新输入");
+						$('#my-alert').modal();
+					} else {
+						
+						window.localStorage.setItem('userid', data.ret.split(",")[0]);
+						window.localStorage.setItem('token', data.ret.split(",")[1]);
+						window.localStorage.setItem('mobile', $('#mobile').val() );					
+						insertPushData();
+						mi_exit(-1);
+					}
+
+				},
+				error : function() {
+					$('#errmsg').text("网络通讯错误,请稍后重试");
+					$('#my-alert').modal();
+
+				}
+
+			});
+
+		}
+
+		function insertPushData() {
+			var userid = window.localStorage.getItem('userid');
+			var pushid = window.localStorage.getItem('pushid');
+			if (userid != "" && pushid != "") {
+				$.ajax({
+					type : "post",
+					url : url("User.insertpush"),
+					data : {
+						"userid" : userid,
+						"pushid" : pushid
+					},
+					dataType : "jsonp",
+					jsonp : "callback",
+					jsonpCallback : "ipush",
+					success : function(data) {
+
+					},
+					error : function() {
+
+					}
+
+				});
+			}
+		}
+		function log(){
+			var mobile = window.localStorage.getItem('mobile');
+			if(mobile != "" && mobile != null){				
+				$('#mobile').val(mobile);
+		   }
+
+		}
+	</script>
+
+
+</body>
+</html>

@@ -548,7 +548,11 @@
 				LastUpgradeCheck = 510;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
+<<<<<<< HEAD
 						DevelopmentTeam = 9XKTWYH63W;
+=======
+						DevelopmentTeam = L4TEBNF8E5;
+>>>>>>> fe849e9844dd12bdf843e339be7081838fc39aa3
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -718,7 +722,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+<<<<<<< HEAD
 				DEVELOPMENT_TEAM = 9XKTWYH63W;
+=======
+				DEVELOPMENT_TEAM = L4TEBNF8E5;
+>>>>>>> fe849e9844dd12bdf843e339be7081838fc39aa3
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -746,7 +754,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/米",
 					"$(SRCROOT)",
-					"$(PROJECT_DIR)/米/ZBarSDK",
 					"\"$(SRCROOT)/米/Plugins/cn.jpush.phonegap.JPushPlugin\"",
 					"\"$(SRCROOT)/米/Plugins/xu.li.cordova.wechat\"",
 				);
@@ -784,7 +791,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+<<<<<<< HEAD
 				DEVELOPMENT_TEAM = 9XKTWYH63W;
+=======
+				DEVELOPMENT_TEAM = L4TEBNF8E5;
+>>>>>>> fe849e9844dd12bdf843e339be7081838fc39aa3
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -811,7 +822,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/米",
 					"$(SRCROOT)",
-					"$(PROJECT_DIR)/米/ZBarSDK",
 					"\"$(SRCROOT)/米/Plugins/cn.jpush.phonegap.JPushPlugin\"",
 					"\"$(SRCROOT)/米/Plugins/xu.li.cordova.wechat\"",
 				);

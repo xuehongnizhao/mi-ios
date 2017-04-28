@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>Insert title here</title>
+
+<script src="js/include.js"></script>
+<link>
+<style type="text/css">
+body, html {
+	width: 100%;
+	background-image: url('img/mi_bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.am-header .am-header-title {
+margin: 0 15%;
+}
+.mi-title {
+	background-color: #5b3914;
+}
+button {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.am-tabs-d2 .am-tabs-nav {
+	background-color: #fbfef1;
+	border-bottom: 1px solid white;
+}
+
+.am-tabs-d2 .am-tabs-nav a {
+	line-height: 42px;
+	color: #72777a;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active {
+	position: relative;
+	background-color: #fbfef1;
+	border-bottom: 1px solid #fbfef1;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active:after {
+	position: absolute;
+	width: 50%;
+	height: 0;
+	bottom: 0;
+	left: 28%;
+	border: 1px solid #e85b5b;
+	content: "";
+	z-index: 1;
+}
+
+.am-tabs-d2 .am-tabs-nav>.am-active a {
+	line-height: 42px;
+	color: #e85b5b;
+	background: #fbfef1;
+}
+
+.ul-fixed {
+  position: fixed;
+  top: 49px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1010;
+}
+
+.mi-black {
+	color: white;
+	background: #474240;
+	outline: none;
+	border: #474240 1px solid;
+	-moz-border-radius: 3px; /* Gecko browsers */
+	-webkit-border-radius: 3px; /* Webkit browsers */
+	border-radius: 3px; /* W3C syntax */
+}
+
+hr {
+	margin: 0em;
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+	padding: 0px;
+	border-top: 1px solid #b4b4b4;
+}
+
+.item {
+	margin-left: 6.25%; '
+	margin-right: 6.25%;
+	margin-top: 1em;
+	width: 87.5%;
+	height: 9em;
+}
+
+.small {
+	font-size: 1em;
+	padding-left: 1.5em;
+	color: #7a7a7a;
+	line-height: 2em;
+}
+
+.sale-enable {
+	background-image: url('img/use_sale_bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: #fa9899;
+}
+
+.sale-unable {
+	background-image: url('img/use_sale_un_bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: #afafaf;
+}
+
+.bottomdiv {
+	width: 100%;
+	padding: 15px;
+	background-color: transparent;
+	position: fixed;
+	bottom: 0px;
+	z-index:999;
+}
+</style>
+</head>
+<body>
+
+	<header data-am-widget="header" style="background: #5b3914;"
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title"
+			style="font-size: 18px; text-align: left; margin: 0 10%;">优惠券</h1>
+	</header>
+<div id="tabs11" data-am-widget="tabs" class="am-tabs am-tabs-d2" data-am-tabs-noswipe="1" style="margin: 0px;">
+		<ul class="am-tabs-nav am-cf ul-fixed" style="width:100%;height:3em">
+			<li class="am-active" style = "height:3em;"><a href="[data-tab-panel-0]" style = "background: transparent;height:2em;width:70%; margin:0.5em auto;line-height:2em;">未使用</a></li>
+			<div style = "margin:0.5em auto;width:1px;background:rgb(183,183,183);"></div>
+			<li class="" style = "height:3em;"><a href="[data-tab-panel-1]" style = "background: transparent;height:2em;width:70%; margin:0.5em auto;line-height:2em;">已使用</a></li>
+		</ul>
+		
+		<div  class="am-tabs-bd"  style="border: none">
+		
+		<div id="d-sale" data-tab-panel-0 class="am-tab-panel am-active" style="margin-top: 3.5em;padding: 0px;" >
+		<script id="s-sale" type="text/html">
+		{{if allList.length > 0}}
+		{{each allList as val i}}				
+	<div class="sale-item am-u-sm-12 sale-enable mt10" style="font-family: sumsun;" >		
+		<div class="am-u-sm-6 mt10" style="padding:0;height:8em;">
+			<div  style="font-size:1.2em;margin-left:0.5em;margin-top: 1em;">米券</div>
+			<span style="font-size:1.2em;margin-left:1em;">¥</span>
+			<span style="font-size:3em;">{{val.total}}</span>
+		</div>
+			<div class="am-u-sm-6 mt10" style="padding: 0em;color:#686868;margin-top: 1em;">
+				<div class ="am-u-sm-12 mt10">仅限{{val.gtypename}}品类的大米使用</div>
+				<div class ="am-u-sm-12" >
+				<img src="img/sale_line_icon.png" style="width:80%;height:auto;margin-left:10%">
+				</div>
+				<div class ="am-u-sm-12" style="font-size: 0.8em;text-align:center;">
+				{{val.binddate.substr(0,10)}}
+				</div>
+				</div>
+			</div>
+		{{ /each }}	
+		{{else}}
+		<div class="am-g" style="text-align: center; margin-top: 50%;position:relative;bottom:0em;height:60%;color:#d4d4d4"
+			align="center">
+				<div style="margin-top:0.3em;">暂无优惠券</div>
+		</div>
+		{{/if}}
+		</script>
+		</div>
+		
+		<div id="d-sale1" data-tab-panel-1 class="am-tab-panel am-active" style="margin-top: 3.5em;padding: 0px;" >
+		<script id="s-sale1" type="text/html">
+		{{if noList.length > 0}}
+		{{each noList as val i}}
+		<div class="sale-item am-u-sm-12 sale-unable mt10" style="font-family: sumsun;" >		
+		<div class="am-u-sm-6 mt10" style="padding:0;height:8em;">
+			<div  style="font-size:1.2em;margin-left:0.5em;margin-top: 1em;">米券</div>
+			<span style="font-size:1.2em;margin-left:1em;">¥</span>
+			<span style="font-size:3em;">{{val.total}}</span>
+		</div>
+			<div class="am-u-sm-6 mt10" style="padding: 0em;color:#686868;margin-top: 1em;">
+				<div class ="am-u-sm-12 mt10">仅限{{val.gtypename}}品类的大米使用</div>
+				<div class ="am-u-sm-12" >
+				<img src="img/sale_line_icon.png" style="width:80%;height:auto;margin-left:10%">
+				</div>
+				<div class ="am-u-sm-12" style="font-size: 0.8em;text-align:center;">
+				{{val.binddate.substr(0,10)}}
+				</div>
+				</div>
+			</div>
+		{{/each}}
+		{{else}}
+		<div class="am-g" style="text-align: center; margin-top: 50%;position:relative;bottom:0em;height:60%;color:#d4d4d4"
+			align="center">
+				<div style="margin-top:0.3em;">暂无优惠券</div>
+		</div>
+		{{/if}}
+		</script>
+		</div>
+				
+		</div>
+	</div>
+	
+	
+	<script type="text/javascript">
+	var userid = window.localStorage.getItem("userid");
+	var token = window.localStorage.getItem('token');
+	jQuery(document).ready(function(){
+		
+	});
+
+	$.ajax({
+        type: "post",
+        url: url("SalesInfo.queryinfo&u="+userid+"&t="+token),
+        dataType: "jsonp",
+        jsonp: "callback",
+        jsonpCallback:"sale",
+        success: function(json){
+        	if(!checktoken(json)){
+        		return; 
+        	}
+        	var html = template('s-sale',json);
+        	$("#d-sale").html(html);
+        	var html1 = template('s-sale1',json);
+        	$("#d-sale1").html(html1);
+         },
+        error: function(){
+        }
+	});
+	
+	
+	</script>
+</body>
+</html>

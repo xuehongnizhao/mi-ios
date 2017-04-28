@@ -1,0 +1,315 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<script src="js/include.js"></script>
+<link rel="stylesheet" href="css/basestyle.css">
+<title>Insert title here</title>
+
+<style type="text/css">
+.am-header .am-header-title {
+margin: 0 15%;
+}
+.mi-title {
+	background-color: #5b3914;
+}
+
+.doc-pannel {
+	width: 100%;
+	border-top: 1px solid #dddddd;
+	height: 3em;
+	line-height: 3em;
+}
+
+.doc-pannel span {
+	border: none;
+	width: 5em;
+}
+
+.doc-group {
+	border-top-right-radius: 0;
+	border-top-left-radius: 0;
+	padding: 0em;
+}
+
+.doc-group:after {
+	content: '';
+	display: table;
+	clear: both
+}
+
+.doc-group:before {
+	display: block;
+	color: #bbb;
+	text-transform: uppercase;
+	margin: 0 -15px 15px;
+	padding: 4px 10px;
+	font-size: 12px
+}
+
+body, html {
+	width: 100%;
+}
+
+body, html {
+	width: 100%;
+	background-image: url('img/mi_bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+hr {
+	margin: 0em;
+	margin-left: 1em;
+	padding: 0px;
+	border-top: 1px solid #e8e8e8;
+}
+
+ /* COMPONENT.CSS */
+
+ /* Made with <a href="http://icomoon.io/">http://icomoon.io/</a> */
+
+ .cbp_tmtimeline{
+ margin: 10px 0 0 0;
+ padding: 0;
+ list-style: none;
+ position: relative;
+ }
+
+ /* The line */
+ .cbp_tmtimeline:before{
+ content: '';
+ position: absolute;
+ top: 15px;
+ bottom: 0;
+ width: 2px;
+ background: #969696;
+ left: 2%;
+ margin-left: 2px;
+ }
+
+ .cbp_tmtimeline > li{
+ position: relative;
+ }
+
+
+
+ /* Right content */
+ .cbp_tmtimeline > li .cbp_tmlabel{
+ margin: 0 0 15px 6%;
+ background: transparent;
+ color: #fff;
+ padding: 1em;
+ font-size: 1.2em;
+ font-weight: 300;
+ line-height: 1.4;
+ position: relative;
+ border-radius: 5px;
+ }
+
+ .cbp_tmtimeline > li:nth-child(odd) .cbp_tmlabel{
+ background: #6cbfee;
+ }
+
+ /* The icons */
+ .cbp_tmtimeline > li .cbp_tmicon{
+ width: 6px;
+ height: 6px;
+ font-family: 'ecoico';
+ speak: none;
+ font-style: normal;
+ font-weight: normal;
+ font-variant: normal;
+ text-transform: none;
+ font-size: 1.4em;
+ line-height: 40px;
+ -webkit-font-smoothing: antialiased;
+ position: absolute;
+ color: #969696;
+ background: #969696;
+ border-radius: 50%;
+ box-shadow: 0 0 0 3px #969696;
+ text-align: center;
+ left: 2%;
+ top: 15px;
+ margin: 0 0 0 0px;
+ }
+
+
+ .cbp_tmtimeline > li .cbp_tmlabel{
+ padding: 10px;
+ font-weight: 400;
+ font-size: 95%;
+ }
+
+ .cbp_tmtimeline > li .cbp_tmlabel:after{
+ right: auto;
+ left: 5px;
+ border-right-color: transparent;
+ border-bottom-color: #3594cb;
+ top: 0px;
+ }
+
+ .cbp_tmtimeline > li:nth-child(odd) .cbp_tmlabel:after{
+ border-right-color: transparent;
+ border-bottom-color: #6cbfee;
+ }
+
+ .cbp_tmtimeline > li .cbp_tmicon{
+ position: relative;
+ float: left;
+ }
+ .images-content{ 
+position: absolute; 
+z-index: 1; 
+bottom:0; 
+width: 80%; 
+color: #fff; 
+background: rgba(0,0,0,.7); 
+height: 20px; 
+line-height: 20px; 
+overflow: hidden; 
+margin-bottom: 10px;
+text-align: center;
+}
+.line {
+	margin: 0px;
+	padding: 0px;
+	border-top: 1px solid #dddddd;
+}
+ 
+</style>
+</head>
+<body style="">
+
+	<!-- Header -->
+	<header data-am-widget="header" style=""
+		class="am-header am-header-default am-header-fixed mi-title">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:mi_exit(-1);" style="text-align: left"> <i
+				class="am-icon-angle-left" style="font-size: 2em;"></i>
+			</a>
+		</div>
+		<h1 class="am-header-title"
+			style="font-size: 18px; text-align: left; margin: 0 10%;">物流详情</h1>
+	</header>
+	
+	
+	<div id="com_info" class= "am-g">
+	
+	</div>
+	
+	<script id="com_info0" type="text/html">
+		{{each comp as val i}}
+			<div class="am-g item" style = "padding-top:5px;" >
+              {{each val.goodslist as mmm e }}
+			 <div class="am-u-sm-12" style="background-color: #e1e6d2;">
+			  <div class="am-u-sm-4" style=" padding-top: 10px;padding-bottom: 10px;position:relative; ">
+					<img class="" style="width: 100%;height: 100%" src="{{mmm.image}}">
+					<div class="images-content"> 
+					{{mmm.number}}件商品
+					</div> 
+			  </div>
+              <div class="am-u-sm-8" style="padding-left: 0em;padding-top: 6px;">
+					<div class="item_head" style="font-size:4.6vw;margin-bottom:0vw;color: #969696;" >
+					{{mmm.name}}
+					</div>
+ 					<div class="" style="font-size:12px;margin-bottom:0vw;color: #969696;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"  >
+					{{mmm.introduce}}
+					</div>
+					<div style="font-size:12px;margin-bottom:0vw;color: #969696;margin-top: 2px;">
+						承运公司:<span>{{mmm.companyname}}</span>
+					</div>
+					<div style="font-size:12px;margin-bottom:0vw;color: #969696;margin-top: 2px;">
+						运单编号:<span>{{val.express_code}}</span>
+					</div>					
+     		  </div>
+             </div>
+             <div class="am-u-sm-12 line"></div>	
+             {{/each}}
+			<div class="am-u-sm-12" style="background-color: #fbfef1;margin-top: 10px;">
+             <div class="am-u-sm-12" style="height: 3em;">
+				<div class="am-u-sm-9" style="margin-top: 10px;">
+			    订单号：<span>{{val.docno}}</span>
+ 				</div>
+				<div class=""  style="margin-top: 10px;">
+			    	<span style="color:#e74b59">物流状态</span>
+ 				</div>
+			 </div>
+			<div class="am-u-sm-12 line"></div>
+			<div class="am-u-sm-12">				
+			<ul class="cbp_tmtimeline">
+				{{if val.expressinfo.message == "ok"}}
+					{{each val.expressinfo.data as da d}}			
+ 					<li>
+					 <div class="cbp_tmicon cbp_tmicon-mail"></div>
+ 						<div class="cbp_tmlabel" style="background-color: transparent;">							
+							<div style="color:#969696">{{da.context}}</div>
+							<div style="color:#969696">{{da.time}}</div>												
+ 						</div>
+ 					</li>
+					{{/each}}
+				{{else}}
+					<li>
+					 <div class="cbp_tmicon cbp_tmicon-mail"></div>
+ 						<div class="cbp_tmlabel" style="background-color: transparent;">
+							<span style="color:black">{{val.expressinfo.message}}</span>												
+ 						</div>
+ 					</li>
+				{{/if}}
+			</ul>
+			</div>	
+			</div>			 	 	
+				</div>
+			</div>		
+		{{/each}}
+	</script>
+		
+
+
+	<script type="text/javascript">
+	var userid = window.localStorage.getItem('userid');
+	var did = getParameter("did");
+		jQuery(document).ready(function() {
+			getcompany();
+		});
+		
+		
+		function getcompany(){
+			$.ajax({
+				type : "post",
+				url : url("AllOrder.getcompanyInfo&did=" + did),
+				dataType : "jsonp",
+				jsonp : "callback",
+				jsonpCallback : "listinfo",
+				success : function(json) {
+					var comp = json.comp;
+					for (var a = 0; a < comp.length; a++) {
+						var m = comp[a].expressinfo;
+						comp[a].expressinfo = eval('('+m+')');
+						
+					}
+					json.comp = comp;
+					var html0 = template('com_info0', json);				
+					$("#com_info").html(html0);	
+					
+				},
+				error : function() {
+					alert("网络错误,请稍后重试");
+				}
+			});
+			
+		}
+		
+		
+
+		
+	</script>
+
+</body>
+</html>
